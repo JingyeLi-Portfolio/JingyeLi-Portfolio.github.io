@@ -946,6 +946,16 @@ html[data-theme="dark"] .facts dd.ok { color: #4ade80; }
 }
 .case-meta dd { font-size: .92rem; font-weight: 540; }
 
+.case-repo {
+  margin-top: 26px;
+  font-size: .82rem;
+  color: var(--text-faint);
+  word-break: break-all;
+}
+.case-repo .prompt { color: var(--accent); margin-right: 4px; }
+.case-repo a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+.case-repo a:hover { border-bottom-color: var(--accent); }
+
 .container-narrow { max-width: 780px; }
 
 /* --- 正文与提示块 --- */
