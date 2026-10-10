@@ -4,16 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-<!-- ============================================================
-     白盒 Demo 详情页模板
-     用法：复制本文件为 work-blockout-02.html，替换文案与图片即可。
-     所有图片位置都用 .fig-placeholder 占位，替换方式见每处注释。
-     ============================================================ -->
+<title>Borgo · 关卡设计拆解 | 李敬业</title>
+<meta name="description" content="CS 炸弹拆除模式双包点白盒关卡《Borgo》的设计拆解：新旧交界的概念、消极空间动线与攻防均衡。" />
 
-<title>废弃设施 · 关卡设计拆解 | 你的名字</title>
-<meta name="description" content="FPS 白盒关卡《废弃设施》的完整设计拆解：设计目标、动线分析、关键节点与迭代记录。" />
-
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232b5cff'/%3E%3Ctext x='50' y='70' font-size='60' font-family='monospace' font-weight='700' fill='white' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232b5cff'/%3E%3Ctext x='50' y='70' font-size='60' font-family='monospace' font-weight='700' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
 <link rel="stylesheet" href="assets/css/style.css" />
 
 <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
@@ -38,8 +32,8 @@
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a class="brand" href="index.html" aria-label="返回作品集首页">
-      <span class="brand-mark" aria-hidden="true">Y</span>
-      <span class="brand-text">你的名字</span>
+      <span class="brand-mark" aria-hidden="true">L</span>
+      <span class="brand-text">李敬业</span>
     </a>
     <div class="header-actions">
       <a class="btn btn-ghost btn-sm back-link" href="index.html">
@@ -61,56 +55,61 @@
 
 <main id="main">
 
-  <!-- ================= 项目标题区 ================= -->
   <section class="case-hero">
     <div class="container">
-      <p class="eyebrow mono reveal"><span class="prompt">$</span> FPS · 白盒关卡 · Unreal Engine 5</p>
-      <h1 class="case-title reveal">废弃设施</h1>
+      <p class="eyebrow mono reveal"><span class="prompt">$</span> CS 炸弹拆除模式 · 双包点白盒 · 5v5 竞技</p>
+      <h1 class="case-title reveal">Borgo</h1>
       <p class="case-lede reveal">
-        用一条不断收窄又放开的路径，把玩家从开阔区的安全感，逐步推向室内近战的压迫感。
+        新旧交界，空间驱动玩法。让传统城区的紧凑尺度与现代建筑的开放形态形成对比，
+        使建筑风格不止承担视觉表达，同时参与塑造玩家的移动路线与战斗节奏。
       </p>
 
       <dl class="case-meta reveal">
-        <div><dt>项目类型</dt><dd>FPS 单关卡设计</dd></div>
-        <div><dt>引擎</dt><dd>Unreal Engine 5</dd></div>
-        <div><dt>制作周期</dt><dd>3 周</dd></div>
-        <div><dt>预计流程</dt><dd>约 15 分钟</dd></div>
-        <div><dt>我的角色</dt><dd>关卡设计 · 白盒搭建 · 文档</dd></div>
-        <div><dt>完成时间</dt><dd>2026 年 6 月</dd></div>
+        <div><dt>项目类型</dt><dd>CS 炸弹拆除模式 · 双包点</dd></div>
+        <div><dt>定位</dt><dd>竞技向 5v5 对战关卡</dd></div>
+        <div><dt>引擎</dt><dd>Unreal Engine 5 · 白盒</dd></div>
+        <div><dt>完成时间</dt><dd>2026 年 9 月</dd></div>
+        <div><dt>我的角色</dt><dd>关卡设计 · 白盒搭建</dd></div>
+        <div><dt>关键词</dt><dd>空间过渡 · 多路径 · 视线控制</dd></div>
       </dl>
     </div>
   </section>
 
-  <!-- ================= 01 设计目标 ================= -->
+  <!-- ================= 01 设计概念 ================= -->
   <section class="section section-alt">
     <div class="container container-narrow">
       <header class="section-head reveal">
         <span class="section-index mono">01</span>
-        <h2>设计目标与约束</h2>
+        <h2>设计概念</h2>
       </header>
 
       <div class="prose reveal">
         <p>
-          这是一张<strong>以节奏变化为唯一核心</strong>的短流程关卡。我希望玩家在 15 分钟里，
-          完整经历一次「放松 → 警觉 → 紧张 → 释放」的情绪曲线，而不是从头到尾保持同一种紧张度。
+          Borgo 的设计灵感来自<strong>欧洲传统城区与现代城市开发的交界区域</strong>。
+          Borgo 一词源自意大利语，与英语的自治市镇、德语 Burg、法语 bourg 同源，
+          现在通常指「老城墙外生长出来的新城镇」——这个语义本身就是一次空间新旧交替。
         </p>
         <p>
-          空间手段上，我选择用<strong>通道净宽</strong>作为控制变量：开场区域给到 30 米以上的开阔视野，
-          中段压缩到 6 米，终段收进 3 米的室内走廊。玩家未必会意识到宽度在变，
-          但体感上会明显感到「越来越挤」。
+          我把这种「交界」直接做成了玩法：传统建筑提供<strong>紧凑的空间尺度</strong>，
+          现代建筑提供<strong>开放的空间形态</strong>。两种空间风格分别落在 A、B 两个包点，
+          让玩家在进攻 A 点和进攻 B 点时，面对的是两套完全不同的交战逻辑。
         </p>
       </div>
 
       <div class="callout reveal">
         <div class="callout-item">
-          <span class="mono">设计约束</span>
-          <p>仅使用引擎自带素材，不制作任何新美术资源；单人开发，总工时压缩在 3 周内。</p>
+          <span class="mono">工作顺序</span>
+          <p>草图阶段只考虑空间的节奏与尺度；游戏均衡性的考量，放在基本空间形态形成之后。</p>
         </div>
         <div class="callout-item">
-          <span class="mono">验收标准</span>
-          <p>找 3 名测试者试玩，至少 2 人能主动说出「越往里走越压抑」——即节奏变化被感知到。</p>
+          <span class="mono">三条原则</span>
+          <p>① 保证 AB 两点空间风格的差异；② 避免过大尺度的线性空间；③ 强化两点之间的链接，为 CT 回防与 T 转点预留空间。</p>
         </div>
       </div>
+      <figure class="figure-block reveal" style="margin-top: 28px;">
+        <img src="assets/img/borgo-sketch.jpg" alt="Borgo 草图阶段的空间关系推敲" />
+        <figcaption>草图阶段：只用纸笔推敲紧凑与开放空间的衔接关系，此时还不涉及数值与均衡。</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -119,146 +118,219 @@
     <div class="container">
       <header class="section-head reveal">
         <span class="section-index mono">02</span>
-        <h2>平面布局与动线分析</h2>
-        <p class="section-desc">整张关卡是一条带岔路的线性路径，主路径约 180 米，共 3 个战斗空间。</p>
+        <h2>平面布局与动线</h2>
+        <p class="section-desc">紧凑空间负责「制造冲突」，开放空间负责「释放节奏」。</p>
       </header>
 
-      <!-- 替换：把 .fig-placeholder 换成 <img src="assets/img/plan.jpg" alt="关卡俯视平面图" /> -->
       <figure class="figure-block reveal">
-        <div class="fig-placeholder mono">此处放：关卡俯视平面图（建议导出引擎 top view 或手绘平面）</div>
+        <img src="assets/img/borgo-plan.jpg" alt="Borgo 平面图与动线规划" />
         <figcaption>
-          俯视平面：A 出生点 · B 开阔战斗区 · C 收窄通道 · D 垂直中庭 · E 撤离区
+          平面图与动线规划：A 点（压缩空间）、B 点（开放空间）、CT 与 T 出生区，以及贯穿全场的进攻动线。
         </figcaption>
       </figure>
 
-      <ul class="legend reveal">
-        <li><span class="lg lg-1"></span>主路径（引导玩家前进）</li>
-        <li><span class="lg lg-2"></span>侧翼岔路（提供绕后与风险选择）</li>
-        <li><span class="lg lg-3"></span>视线通廊（可提前观察战场）</li>
-        <li><span class="lg lg-4"></span>资源点（弹药的争夺目标）</li>
-      </ul>
+      <figure class="figure-block reveal" style="margin-top: 22px;">
+        <img src="assets/img/borgo-routes.jpg" alt="Borgo 三条抽象主线" />
+        <figcaption>
+          全场三条抽象主线：① T—A—CT 主线 ② 中路消极空间（促使 T 选择夹 A 或夹 B）③ T—B—CT 主线
+        </figcaption>
+      </figure>
 
       <div class="prose reveal">
         <p>
-          动线设计上我刻意让<strong>主路径和侧翼岔路在三个位置交汇</strong>。
-          这样玩家无论走哪条，都会在下一个战斗空间重新汇合——既保留了选择感，
-          又不会因为走错路而完全错过内容。
+          动线设计的理论支点是<strong>「消极空间」</strong>——芦原义信在《外部空间设计》中提出，
+          指建筑、城市或视觉设计中未被主体功能占据的「留白」区域，如建筑间隙、高架桥下。
+          我认为消极空间在关卡里具有<strong>心理驱动性</strong>：它本身没有功能，
+          但玩家会本能地用它来判断「哪里能走、哪里危险」。
+        </p>
+        <p>
+          这张图的中路就是一个被刻意放大的消极空间。它不是任何一方的必争之地，
+          但它的存在让 T 方始终握着「夹 A 或夹 B」的选项——防守方不得不分兵关注它，
+          进攻方围绕它组织转点。
         </p>
       </div>
     </div>
   </section>
 
-  <!-- ================= 03 节奏曲线 ================= -->
+  <!-- ================= 03 空间策略 ================= -->
   <section class="section section-alt">
     <div class="container">
       <header class="section-head reveal">
         <span class="section-index mono">03</span>
-        <h2>节奏曲线</h2>
-        <p class="section-desc">横轴是玩家推进路径，纵轴是设计意图上的紧张度。</p>
+        <h2>空间策略：用空间属性控制交战方式</h2>
+        <p class="section-desc">
+          战斗空间不是单纯堆掩体堆出来的，而是通过视线、遮挡、空间尺度与路线关系，
+          共同控制玩家的暴露程度。
+        </p>
       </header>
 
-      <figure class="figure-block reveal">
+      <ul class="mapping mapping-compact">
+        <li class="map-row reveal">
+          <div class="map-from">
+            <span class="mono">空间属性</span>
+            <p>压缩空间</p>
+          </div>
+          <span class="map-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+          </span>
+          <div class="map-to">
+            <span class="mono">交战结果</span>
+            <p>近距离交战 · 战术性打法</p>
+          </div>
+        </li>
+        <li class="map-row reveal">
+          <div class="map-from">
+            <span class="mono">空间属性</span>
+            <p>开放空间</p>
+          </div>
+          <span class="map-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+          </span>
+          <div class="map-to">
+            <span class="mono">交战结果</span>
+            <p>中远距离对枪 · 更短遭遇时间</p>
+          </div>
+        </li>
+        <li class="map-row reveal">
+          <div class="map-from">
+            <span class="mono">空间属性</span>
+            <p>建筑开口</p>
+          </div>
+          <span class="map-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+          </span>
+          <div class="map-to">
+            <span class="mono">交战结果</span>
+            <p>视线控制 · 信息投放</p>
+          </div>
+        </li>
+        <li class="map-row reveal">
+          <div class="map-from">
+            <span class="mono">空间属性</span>
+            <p>空间节点</p>
+          </div>
+          <span class="map-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+          </span>
+          <div class="map-to">
+            <span class="mono">交战结果</span>
+            <p>玩家决策点 · 转点与包夹</p>
+          </div>
+        </li>
+      </ul>
+
+      <figure class="figure-block reveal" style="margin-top: 28px;">
         <div class="curve-wrap">
-          <svg viewBox="0 0 640 260" role="img" aria-label="关卡紧张度曲线">
-            <title>关卡紧张度随时间的变化曲线</title>
-            <desc>曲线在开场平缓，中段两次抬升，末端达到峰值后快速回落。</desc>
+          <svg viewBox="0 0 640 260" role="img" aria-label="A、B 两条进攻路径的节奏对比">
+            <title>两条进攻路径的节奏对比</title>
+            <desc>A 点路径压缩、缓慢抬升；B 点路径开放、快速冲高。</desc>
 
             <line x1="60" y1="210" x2="610" y2="210" stroke="#d3d7de" stroke-width="1" />
             <line x1="60" y1="30" x2="60" y2="210" stroke="#d3d7de" stroke-width="1" />
 
-            <text x="60" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">出生</text>
-            <text x="196" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">战斗区 B</text>
-            <text x="340" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">通道 C</text>
-            <text x="470" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">中庭 D</text>
-            <text x="600" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">撤离</text>
+            <text x="60"  y="232" font-size="12" fill="#8a92a0" text-anchor="middle">T 出生</text>
+            <text x="250" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">中路决策</text>
+            <text x="440" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">进点交火</text>
+            <text x="600" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">下包</text>
 
-            <path d="M60 196 L120 190 L196 130 L260 165 L340 95 L400 120 L470 45 L540 60 L600 185"
+            <path class="line-a" d="M60 205 L140 198 L250 180 L340 155 L440 110 L520 78 L600 60"
                   fill="none" stroke="#2b5cff" stroke-width="2.5"
                   stroke-linecap="round" stroke-linejoin="round" />
+            <path class="line-b" d="M60 205 L140 195 L250 150 L340 100 L440 70 L520 55 L600 50"
+                  fill="none" stroke="#d97706" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round" />
 
-            <circle cx="196" cy="130" r="4.5" fill="#2b5cff" />
-            <circle cx="340" cy="95"  r="4.5" fill="#2b5cff" />
-            <circle cx="470" cy="45"  r="4.5" fill="#2b5cff" />
+            <circle cx="440" cy="110" r="4.5" fill="#2b5cff" />
+            <circle class="c-b" cx="440" cy="70" r="4.5" fill="#d97706" />
+
+            <text class="t-a" x="500" y="72" font-size="12" fill="#2b5cff">A 路径 · 压缩</text>
+            <text class="t-b" x="500" y="38" font-size="12" fill="#d97706">B 路径 · 开放</text>
           </svg>
         </div>
         <figcaption>
-          三个峰值分别对应开阔区的遭遇战、收窄通道的伏击、以及中庭的垂直交战。
-          每两次峰值之间保留一段回落，让玩家有喘息和整理资源的时间。
+          两条进攻路径的节奏差异：A 路径被压缩空间拉长，交战被拆成多个小规模接触，适合战术慢打；
+          B 路径在开放空间里快速接近，遭遇时间短，适合提速 rush。同一张图里同时保留两种节奏，
+          是这张地图给进攻方的核心选择。
         </figcaption>
       </figure>
 
-      <div class="prose reveal">
-        <p>
-          我刻意<strong>没有让曲线一路上扬</strong>。中段通道 C 之后有一段明显的回落，
-          这段空间没有任何敌人，只有弹药和一条可选的侧翼路线——作用是让玩家在进入最高强度区域前，
-          有机会重新建立心理准备。
-        </p>
+      <div class="callout reveal">
+        <div class="callout-item">
+          <span class="mono">T 方优势</span>
+          <p>中路有两条路线，转点成本相对低，包夹方式丰富；在弥补信息不足的同时，除去一个自由人之外也能组织起强劲的进攻。</p>
+        </div>
+        <div class="callout-item">
+          <span class="mono">CT 方优势</span>
+          <p>采用 2-1-2 防守模式保持均衡；弱势区域可以增援，人员分散、信息优势明显；回防路线充足、回防时间短。</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= 04 关键节点拆解 ================= -->
+  <!-- ================= 04 关键节点 ================= -->
   <section class="section">
     <div class="container">
       <header class="section-head reveal">
         <span class="section-index mono">04</span>
         <h2>关键节点拆解</h2>
-        <p class="section-desc">挑三个最影响体验的空间，说明设计意图与验证结果。</p>
       </header>
 
       <div class="nodes">
 
         <article class="node-card reveal">
           <div class="node-media">
-            <!-- 替换：<img src="assets/img/node-a.jpg" alt="入口框景" /> -->
-            <div class="fig-placeholder mono">节点 A 截图</div>
+            <!-- 替换：<img src="assets/img/borgo-node-a.jpg" alt="A 点压缩空间" /> -->
+            <div class="fig-placeholder mono">A 点截图</div>
           </div>
           <div class="node-body">
-            <span class="node-index mono">节点 A · 入口框景</span>
-            <h3>先让玩家看见战场，再让他走进去</h3>
+            <span class="node-index mono">节点 A · A 点压缩空间</span>
+            <h3>把 A 点的进攻路径做成 T 的瓶颈</h3>
             <p>
-              在进入开阔战斗区之前，路径经过一条 8 米长的窄廊，尽头正对战场。
-              玩家在廊道里是安全的，但能完整观察到战场布局与敌人分布。
+              A 点位于传统城区一侧，进攻路径穿过紧凑的室内空间。
+              狭窄通道天然限制 T 方展开队形，把强攻变成逐段推进。
             </p>
             <p class="node-why">
               <span class="mono">为什么这么做</span>
-              无预警遭遇会让玩家感到被惩罚，而不是被挑战。提前给信息，遭遇战就变成了「我准备好了」。
+              v1 测试里 T 的动线过于顺畅，rush 成本太低。用紧凑室内空间人为制造瓶颈，
+              让进攻 A 点必须付出时间与道具成本。
             </p>
           </div>
         </article>
 
         <article class="node-card reveal">
           <div class="node-media">
-            <div class="fig-placeholder mono">节点 B 截图</div>
+            <div class="fig-placeholder mono">B 点截图</div>
           </div>
           <div class="node-body">
-            <span class="node-index mono">节点 B · 收窄通道</span>
-            <h3>用净宽压缩制造体感压力</h3>
+            <span class="node-index mono">节点 B · B 点开放空间</span>
+            <h3>把 B 点的进攻路径做成暴露点</h3>
             <p>
-              中段通道从 12 米逐段收窄到 6 米，同时抬高两侧墙体 1.5 米。
-              玩家在这里无法横向展开，只能沿轴线推进。
+              B 点位于现代建筑一侧，路径开放、视野通透。
+              T 方接近包点的速度很快，但全程暴露在 CT 的中远距离枪线下。
             </p>
             <p class="node-why">
               <span class="mono">为什么这么做</span>
-              这是建筑学里的空间感知手法：不需要加敌人，仅靠尺度变化就能让玩家变紧张。
+              与 A 点形成对照：A 是「慢但相对安全」，B 是「快但全程暴露」。
+              两种节奏没有绝对优劣，进攻方要根据回合局势做选择。
             </p>
           </div>
         </article>
 
         <article class="node-card reveal">
           <div class="node-media">
-            <div class="fig-placeholder mono">节点 C 截图</div>
+            <div class="fig-placeholder mono">中路截图</div>
           </div>
           <div class="node-body">
-            <span class="node-index mono">节点 C · 垂直中庭</span>
-            <h3>把「绕后」变成一个需要权衡的决定</h3>
+            <span class="node-index mono">节点 C · 中路消极空间</span>
+            <h3>让「留白」成为双方的决策核心</h3>
             <p>
-              终段是一个两层中庭，二层回廊可以直接俯视一层主战场。
-              走回廊更安全、视野更好，但会错过一层的弹药补给。
+              中路本身不是必争之地，但它连接 AB 两点、且有两条分支路线。
+              谁控制中路，谁就拥有转点与包夹的主动权。
             </p>
             <p class="node-why">
               <span class="mono">为什么这么做</span>
-              让最优解不存在，玩家必须做取舍——这是我认为关卡设计里最有效的决策压力来源。
+              消极空间的心理驱动性让双方都意识到它的价值，但任何一方都不愿为其投入全部兵力——
+              这种「想做又不敢做满」的张力，正是中场博弈的来源。
             </p>
           </div>
         </article>
@@ -273,32 +345,40 @@
       <header class="section-head reveal">
         <span class="section-index mono">05</span>
         <h2>迭代记录</h2>
-        <p class="section-desc">每一轮改动都来自测试反馈，而不是我自己的判断。</p>
+        <p class="section-desc">从「建筑空间」走向「游戏关卡」时暴露的两类问题。</p>
       </header>
 
       <ol class="timeline">
         <li class="tl-item reveal">
           <span class="tl-dot" aria-hidden="true"></span>
-          <div class="tl-meta mono">v1 · 第 1 周</div>
+          <div class="tl-meta mono">问题一</div>
           <div class="tl-body">
-            <h3>问题：玩家绕过了核心战斗区</h3>
-            <p>首版开阔区给得太大，测试中 3 人里有 2 人选择从边缘绕行，完全跳过了中央遭遇战。节奏曲线的第一个峰值没有生效。</p>
+            <h3>T 动线过于顺畅，rush 成本太低</h3>
+            <p>初版从空间设计出发，T 的进攻路径太顺，导致进攻时间过短——建筑学视角下「好用」的动线，在竞技关卡里反而失衡。</p>
           </div>
         </li>
         <li class="tl-item reveal">
           <span class="tl-dot" aria-hidden="true"></span>
-          <div class="tl-meta mono">v2 · 第 2 周</div>
+          <div class="tl-meta mono">解决</div>
           <div class="tl-body">
-            <h3>改动：收窄绕行路线，增加侧翼代价</h3>
-            <p>把边缘通道净宽从 10 米压缩到 4 米，并在其中放置高价值补给。绕行从「更省事」变成了「更冒险但收益更高」，两个选择都有了存在意义。</p>
+            <h3>紧凑空间设瓶颈，开放空间设暴露点</h3>
+            <p>在 A 点利用紧凑室内空间设置 T 的瓶颈点，拖慢推进速度；在 B 点利用开放空间设置暴露点，让提速必须付出代价。两条路径从此各有风险。</p>
           </div>
         </li>
         <li class="tl-item reveal">
           <span class="tl-dot" aria-hidden="true"></span>
-          <div class="tl-meta mono">v3 · 第 3 周</div>
+          <div class="tl-meta mono">问题二</div>
           <div class="tl-body">
-            <h3>改动：加入垂直落差，强化终局决策</h3>
-            <p>终段中庭增加二层回廊，并在回廊尽头设置撤离点。玩家面对「安全但错过资源」和「危险但补给充足」的取舍，测试反馈这一段的讨论度最高。</p>
+            <h3>建筑尺度与消极空间的尺度过大</h3>
+            <p>建筑构件与消极空间按真实建筑尺度做，结果开放区过于宏大，玩家找不到重点。</p>
+          </div>
+        </li>
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">解决</div>
+          <div class="tl-body">
+            <h3>调整比例，让消极空间服务于驱动性</h3>
+            <p>调整建筑的比例与构件尺度，把消极空间重新用在玩家的空间驱动性上，而不是当作单纯的形式表达——空间必须先好玩，再好看。</p>
           </div>
         </li>
       </ol>
@@ -317,17 +397,17 @@
         <div class="review-col">
           <h3 class="mono ok">做得好的</h3>
           <ul class="highlights">
-            <li>净宽作为节奏控制变量，成本极低但测试者可感知</li>
-            <li>用视线通廊替代 UI 指引，玩家没有迷路过</li>
-            <li>三个战斗空间的掩体密度与通道宽度正相关，战斗风格自然分化</li>
+            <li>先空间节奏、后游戏均衡的工作顺序，避免了被数值绑架而失去空间特色</li>
+            <li>消极空间理论的运用，让中路在没有功能设计的情况下自然产生博弈</li>
+            <li>AB 两点的空间风格分化清晰，两条进攻路径节奏差异可被玩家感知</li>
           </ul>
         </div>
         <div class="review-col">
           <h3 class="mono warn">待改进的</h3>
           <ul class="highlights">
-            <li>开场引导仍依赖一次显式的地面标识，不够优雅</li>
-            <li>通道 C 的空窗期偏长，第二次测试中有人误以为走错路</li>
-            <li>二层回廊的护栏高度遮挡了部分射击视线，需要再调</li>
+            <li>包点内部的掩体密度与投掷物点位还没经过实测验证</li>
+            <li>CT 出生点到两个包点的回防时间差需要量化实测，而不只是凭空间感觉</li>
+            <li>目前只有白盒验证，缺少多轮真人 5v5 的完整对局数据</li>
           </ul>
         </div>
       </div>
@@ -340,7 +420,7 @@
       <header class="section-head reveal">
         <span class="section-index mono">07</span>
         <h2>实机演示</h2>
-        <p class="section-desc">完整走位流程与三个战斗空间的实测录像。</p>
+        <p class="section-desc">白盒走位与两条进攻路径的实测。</p>
       </header>
 
       <!-- 替换：把下面的 div 换成 B 站 iframe
@@ -355,12 +435,11 @@
     </div>
   </section>
 
-  <!-- ================= 下一个作品 ================= -->
   <section class="section">
     <div class="container">
       <a class="next-work reveal" href="work-blockout-02.html">
         <span class="mono">下一个关卡</span>
-        <h2>垂直中庭</h2>
+        <h2>Dam · 垂直双包点</h2>
         <span class="next-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
         </span>
@@ -372,7 +451,7 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p class="mono">© <span id="year">2026</span> 你的名字 · 关卡策划作品集</p>
+    <p class="mono">© <span id="year">2026</span> 李敬业 · 关卡策划作品集</p>
     <p class="mono"><a href="index.html">返回首页</a></p>
   </div>
 </footer>

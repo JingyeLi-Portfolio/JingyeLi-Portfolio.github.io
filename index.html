@@ -4,27 +4,17 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-<!-- ============================================================
-     待替换的占位内容（全局搜索即可定位）：
-     「你的名字」            -> 你的真实姓名
-     you@example.com         -> 你的邮箱
-     space.bilibili.com/xxx  -> 你的 B 站主页（放 demo 视频）
-     username.github.io      -> 你的站点地址
-     assets/resume.pdf       -> 放入简历文件
-     城市占位 / 项目名称占位  -> 你的真实信息
-     ============================================================ -->
-
-<title>你的名字 · 关卡策划作品集</title>
-<meta name="description" content="建筑学出身的关卡策划求职作品集 —— 两个 FPS 白盒关卡 Demo 与空间设计作品。" />
-<meta name="author" content="你的名字" />
+<title>李敬业 · 关卡策划作品集</title>
+<meta name="description" content="建筑学出身的关卡策划求职作品集 —— 两个 CS 竞技白盒关卡（Borgo / Dam）与空间设计作品。" />
+<meta name="author" content="李敬业" />
 
 <meta property="og:type" content="website" />
-<meta property="og:title" content="你的名字 · 关卡策划作品集" />
-<meta property="og:description" content="建筑学出身的关卡策划求职作品集 —— 两个 FPS 白盒关卡 Demo 与空间设计作品。" />
-<meta property="og:url" content="https://username.github.io/" />
+<meta property="og:title" content="李敬业 · 关卡策划作品集" />
+<meta property="og:description" content="建筑学出身的关卡策划求职作品集 —— 两个 CS 竞技白盒关卡（Borgo / Dam）与空间设计作品。" />
+<meta property="og:url" content="https://lijingye.github.io/" />
 <meta name="twitter:card" content="summary_large_image" />
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232b5cff'/%3E%3Ctext x='50' y='70' font-size='60' font-family='monospace' font-weight='700' fill='white' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232b5cff'/%3E%3Ctext x='50' y='70' font-size='60' font-family='monospace' font-weight='700' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
 <link rel="stylesheet" href="assets/css/style.css" />
 
 <!-- 若浏览器禁用了 JS，跳过入场动画，保证内容始终可见 -->
@@ -53,13 +43,14 @@
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a class="brand" href="#top" aria-label="回到顶部">
-      <span class="brand-mark" aria-hidden="true">Y</span>
-      <span class="brand-text">你的名字</span>
+      <span class="brand-mark" aria-hidden="true">L</span>
+      <span class="brand-text">李敬业</span>
     </a>
 
     <nav class="nav" id="nav" aria-label="主导航">
       <a href="#transfer">能力迁移</a>
       <a href="#works">白盒 Demo</a>
+      <a href="#experience">经历</a>
       <a href="#architecture">建筑作品</a>
       <a href="#skills">技能</a>
       <a href="#contact">联系</a>
@@ -93,8 +84,9 @@
       <h1 class="hero-title reveal">建筑学出身，<br />用<span class="hl">空间思维</span>做关卡</h1>
 
       <p class="hero-sub reveal">
-        五年建筑学训练让我习惯先想清楚「人在这里怎么走、看到什么、感受到什么」，再去搭建空间。
-        现在我把这套思维用在关卡设计上——从一个白盒开始，反复走位、验证节奏，直到它真的好玩。
+        郑州大学建筑学五年制，100+ 个空间项目的实战训练，让我习惯先想清楚
+        「人在这里怎么走、看到什么、感受到什么」，再去搭建空间。
+        现在我把这套思维用在 CS 竞技关卡上——从白盒开始，反复走位、验证节奏，直到它真的好玩。
       </p>
 
       <div class="hero-actions reveal">
@@ -105,19 +97,18 @@
         <a class="btn btn-ghost" href="assets/resume.pdf" download>下载简历</a>
       </div>
 
-      <!-- 关键数字：请替换为你的真实数据 -->
       <ul class="stats reveal">
         <li>
           <span class="stat-num">2</span>
-          <span class="stat-label">个 FPS 白盒关卡</span>
+          <span class="stat-label">个 CS 竞技白盒关卡</span>
         </li>
         <li>
           <span class="stat-num">5</span>
           <span class="stat-label">年建筑学空间训练</span>
         </li>
         <li>
-          <span class="stat-num">30+</span>
-          <span class="stat-label">件设计与出图作品</span>
+          <span class="stat-num">100+</span>
+          <span class="stat-label">个空间项目实战经验</span>
         </li>
       </ul>
     </div>
@@ -230,8 +221,8 @@
         <span class="section-index mono">02</span>
         <h2>白盒关卡 Demo</h2>
         <p class="section-desc">
-          两个 FPS 关卡的完整设计过程。每个都包含设计目标、平面动线分析、
-          关键节点拆解与迭代记录——不只有成品录屏。
+          两张 CS 炸弹拆除模式的双包点竞技地图。每张都包含设计概念、动线分析、
+          关键节点拆解与迭代记录——不只有白盒录屏。
         </p>
       </header>
 
@@ -240,23 +231,22 @@
         <article class="work-card reveal">
           <a class="work-link" href="work-blockout-01.html">
             <div class="work-cover">
-              <span class="cover-pill mono">FPS · 白盒</span>
-              <!-- 替换：删掉 span.cover-holder，改放 <img src="assets/img/xxx.jpg" alt="关卡俯视平面图" /> -->
-              <span class="cover-holder mono">封面：关卡俯视平面图</span>
+              <span class="cover-pill mono">CS · 5v5 · 白盒</span>
+              <img src="assets/img/borgo-plan.jpg" alt="Borgo 平面图与动线规划" />
             </div>
             <div class="work-body">
-              <h3>关卡一 · 废弃设施</h3>
-              <p class="work-meta mono">Unreal Engine 5 · 单人项目 · 3 周 · 约 15 分钟流程</p>
+              <h3>Borgo · 新旧交界</h3>
+              <p class="work-meta mono">Unreal Engine 5 · 竞技 5v5 · 2026.09</p>
 
               <p class="work-goal">
                 <span class="mono">设计目标</span>
-                用一条不断收窄又放开的路径，把玩家从开阔区的安全感逐步推向室内近战的压迫感。
+                用传统城区的紧凑尺度与现代建筑的开放形态形成对比，让建筑风格参与塑造玩家的移动路线与战斗节奏。
               </p>
 
               <ul class="highlights">
-                <li>三个战斗空间按「宽 → 窄 → 垂直」递进，节奏逐段收紧</li>
-                <li>用建筑框景手法在进入每个区域前预告战场，避免无预警遭遇</li>
-                <li>关键岔路用光照差与材质对比引导，不依赖 UI 指示</li>
+                <li>消极空间理论驱动动线设计，中路留白成为双方博弈核心</li>
+                <li>A 点压缩空间打战术，B 点开放空间打速攻，两条路径节奏分化</li>
+                <li>不靠堆掩体，用视线、遮挡与尺度共同控制玩家暴露程度</li>
               </ul>
 
               <span class="more">
@@ -270,22 +260,22 @@
         <article class="work-card reveal">
           <a class="work-link" href="work-blockout-02.html">
             <div class="work-cover">
-              <span class="cover-pill mono">FPS · 白盒</span>
-              <span class="cover-holder mono">封面：关卡俯视平面图</span>
+              <span class="cover-pill mono">CS · 5v5 · 白盒</span>
+              <img src="assets/img/dam-section.jpg" alt="Dam 垂直结构轴测图" />
             </div>
             <div class="work-body">
-              <h3>关卡二 · 垂直中庭</h3>
-              <p class="work-meta mono">Unreal Engine 5 · 单人项目 · 4 周 · 约 20 分钟流程</p>
+              <h3>Dam · 垂直双包点</h3>
+              <p class="work-meta mono">Unreal Engine 5 · 竞技 5v5 · 2026.09</p>
 
               <p class="work-goal">
                 <span class="mono">设计目标</span>
-                围绕一个多层中庭做立体战斗，让玩家的每一次上下移动都改变战场信息。
+                以高低差与垂直交通为核心构建多层次战场，让玩家的每一次换层都改变视线与位置优势。
               </p>
 
               <ul class="highlights">
-                <li>中央通高空间作为视觉锚点，玩家始终能建立方位感</li>
-                <li>三条高度不同的动线互相可射、可绕、可退，形成立体博弈</li>
-                <li>用剖面图推敲每一层的视线遮挡关系，控制信息差</li>
+                <li>内场垂直三层结构：地面 / 空中控制连廊 / 梁结构</li>
+                <li>玻璃、门等可破坏结构，让战场在交火中动态变形</li>
+                <li>AB 两点分层布局，管道斜坡连接上下，换层成为战术</li>
               </ul>
 
               <span class="more">
@@ -300,11 +290,57 @@
     </div>
   </section>
 
-  <!-- ================= 03 建筑作品 ================= -->
-  <section class="section section-alt" id="architecture">
+  <!-- ================= 03 经历 ================= -->
+  <section class="section section-alt" id="experience">
     <div class="container">
       <header class="section-head reveal">
         <span class="section-index mono">03</span>
+        <h2>经历</h2>
+        <p class="section-desc">工作、项目与教育的完整轨迹。</p>
+      </header>
+
+      <ol class="timeline">
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">2024.08 — 2026.02</div>
+          <div class="tl-body">
+            <h3>设计工作室 · 设计师</h3>
+            <p>核心服务海内外建筑专业留学生，独立完成 100+ 个项目的 3D 场景全流程制作，覆盖场地规划、建筑建模、材质灯光到渲染出图。对接抽象设计需求、跟进多轮改稿，适配不同海外院校的设计标准，项目均准时或提前交付。</p>
+          </div>
+        </li>
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">2024.09 — 2024.11</div>
+          <div class="tl-body">
+            <h3>嵩阳书院古建筑数字化测绘</h3>
+            <p>通过无人机扫描采集道统祠的点云数据，完成高精度三维场景构建与还原，勘测数据被学院收录为教学案例，成果可直接导入 UE5 引擎场景使用。</p>
+          </div>
+        </li>
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">2024.05</div>
+          <div class="tl-body">
+            <h3>郑州大学搭建大赛 · 三等奖</h3>
+            <p>主导团队完成从概念设计到实体搭建的全流程落地，具备空间方案从设计到执行的完整闭环能力。</p>
+          </div>
+        </li>
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">2022.09 — 2027.06</div>
+          <div class="tl-body">
+            <h3>郑州大学 · 建筑学本科（在读）</h3>
+            <p>GPA 3.40/4.0，专业排名 19/67。建筑学院美术素描、色彩、摄影实习获 A 等级（最高级）。</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= 04 建筑作品 ================= -->
+  <section class="section" id="architecture">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">04</span>
         <h2>空间设计作品</h2>
         <p class="section-desc">
           建筑学期间与接单完成的设计、建模与出图作品。
@@ -314,50 +350,50 @@
 
       <div class="gallery">
         <figure class="g-item reveal">
-          <div class="g-thumb"><span class="mono">渲染图</span></div>
+          <div class="g-thumb"><span class="mono">待补充</span></div>
           <figcaption>
-            <h3>项目名称占位</h3>
-            <p class="mono">公共建筑 · 2024 · 方案设计 + 出图</p>
+            <h3>建筑作品 · 占位</h3>
+            <p class="mono">类型 · 年份 · 工作内容</p>
           </figcaption>
         </figure>
 
         <figure class="g-item reveal">
-          <div class="g-thumb"><span class="mono">效果图</span></div>
+          <div class="g-thumb"><span class="mono">待补充</span></div>
           <figcaption>
-            <h3>项目名称占位</h3>
-            <p class="mono">住宅空间 · 2024 · 建模 + 渲染</p>
+            <h3>建筑作品 · 占位</h3>
+            <p class="mono">类型 · 年份 · 工作内容</p>
           </figcaption>
         </figure>
 
         <figure class="g-item reveal">
-          <div class="g-thumb"><span class="mono">鸟瞰图</span></div>
+          <div class="g-thumb"><span class="mono">待补充</span></div>
           <figcaption>
-            <h3>项目名称占位</h3>
-            <p class="mono">景观规划 · 2023 · 概念方案</p>
+            <h3>建筑作品 · 占位</h3>
+            <p class="mono">类型 · 年份 · 工作内容</p>
           </figcaption>
         </figure>
 
         <figure class="g-item reveal">
-          <div class="g-thumb"><span class="mono">室内效果</span></div>
+          <div class="g-thumb"><span class="mono">待补充</span></div>
           <figcaption>
-            <h3>项目名称占位</h3>
-            <p class="mono">室内设计 · 2023 · 接单作品</p>
+            <h3>建筑作品 · 占位</h3>
+            <p class="mono">类型 · 年份 · 工作内容</p>
           </figcaption>
         </figure>
 
         <figure class="g-item reveal">
-          <div class="g-thumb"><span class="mono">分析图</span></div>
+          <div class="g-thumb"><span class="mono">待补充</span></div>
           <figcaption>
-            <h3>项目名称占位</h3>
-            <p class="mono">空间分析 · 2023 · 动线与视线分析</p>
+            <h3>建筑作品 · 占位</h3>
+            <p class="mono">类型 · 年份 · 工作内容</p>
           </figcaption>
         </figure>
 
         <figure class="g-item reveal">
-          <div class="g-thumb"><span class="mono">技术图纸</span></div>
+          <div class="g-thumb"><span class="mono">待补充</span></div>
           <figcaption>
-            <h3>项目名称占位</h3>
-            <p class="mono">施工图 · 2022 · 平立剖绘制</p>
+            <h3>建筑作品 · 占位</h3>
+            <p class="mono">类型 · 年份 · 工作内容</p>
           </figcaption>
         </figure>
       </div>
@@ -366,11 +402,11 @@
     </div>
   </section>
 
-  <!-- ================= 04 技能与工具 ================= -->
-  <section class="section" id="skills">
+  <!-- ================= 05 技能与工具 ================= -->
+  <section class="section section-alt" id="skills">
     <div class="container">
       <header class="section-head reveal">
-        <span class="section-index mono">04</span>
+        <span class="section-index mono">05</span>
         <h2>技能与工具</h2>
         <p class="section-desc">按能力维度分组，只列真正能独立交付的部分。</p>
       </header>
@@ -379,64 +415,65 @@
         <div class="skill-group reveal">
           <h3 class="mono">关卡设计</h3>
           <ul class="tags">
-            <li>白盒搭建</li><li>动线规划</li><li>节奏设计</li>
-            <li>战斗空间设计</li><li>难度曲线</li><li>可玩性测试</li>
+            <li>白盒搭建</li><li>动线规划</li><li>空间节奏</li>
+            <li>视线控制</li><li>攻防均衡</li><li>可玩性验证</li>
           </ul>
         </div>
         <div class="skill-group reveal">
           <h3 class="mono">引擎与建模</h3>
           <ul class="tags">
-            <li>Unreal Engine 5</li><li>Unity</li><li>Blender</li>
-            <li>SketchUp</li><li>Rhino</li><li>3ds Max</li>
+            <li>Unreal Engine 5</li><li>Unity</li><li>Rhino</li>
+            <li>SketchUp</li><li>Blender</li><li>参数化建模</li>
           </ul>
         </div>
         <div class="skill-group reveal">
-          <h3 class="mono">出图与表达</h3>
+          <h3 class="mono">渲染与出图</h3>
           <ul class="tags">
-            <li>Photoshop</li><li>Illustrator</li><li>V-Ray</li>
-            <li>Enscape</li><li>Lumion</li><li>AutoCAD</li>
+            <li>V-Ray</li><li>D5 渲染器</li><li>Lumion</li>
+            <li>Photoshop</li><li>InDesign</li><li>轴测／爆炸图</li>
           </ul>
         </div>
         <div class="skill-group reveal">
-          <h3 class="mono">文档与协作</h3>
+          <h3 class="mono">效率与协作</h3>
           <ul class="tags">
-            <li>关卡设计文档</li><li>动线与视线分析图</li><li>平面／剖面表达</li>
-            <li>Notion</li><li>Git</li><li>版本管理</li>
+            <li>AIGC 生图</li><li>Agent 工具</li><li>点云数据处理</li>
+            <li>关卡交互脚本初编</li><li>英语工作语言</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= 05 求职信息 ================= -->
-  <section class="section section-alt" id="contact">
+  <!-- ================= 06 求职信息 ================= -->
+  <section class="section" id="contact">
     <div class="container">
       <header class="section-head reveal">
-        <span class="section-index mono">05</span>
+        <span class="section-index mono">06</span>
         <h2>求职信息</h2>
       </header>
 
       <div class="job-grid">
         <dl class="job-card reveal">
-          <div><dt>目标岗位</dt><dd>关卡策划 / Level Designer</dd></div>
-          <div><dt>期望城市</dt><dd>城市占位</dd></div>
-          <div><dt>到岗时间</dt><dd>随时到岗</dd></div>
-          <div><dt>岗位类型</dt><dd>全职 · 应届 / 实习均可</dd></div>
+          <div><dt>目标岗位</dt><dd>关卡策划 · 3D 场景设计</dd></div>
+          <div><dt>期望城市</dt><dd>郑州（可接受异地）</dd></div>
+          <div><dt>到岗时间</dt><dd>实习随时 · 2027.06 全职</dd></div>
+          <div><dt>岗位类型</dt><dd>实习 / 应届均可</dd></div>
         </dl>
 
         <div class="contact-card reveal">
           <h3>聊聊看？</h3>
-          <p>作品集里没放完的过程文件、设计笔记和 demo 视频，都可以随时发给你。</p>
+          <p>作品集里没放完的过程文件、草图与白盒录屏，都可以随时发给你。通常 24 小时内回复。</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="mailto:you@example.com">
+            <a class="btn btn-primary" href="mailto:18836047668@163.com">
               发邮件给我
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
             </a>
             <a class="btn btn-ghost" href="assets/resume.pdf" download>下载简历</a>
           </div>
           <ul class="contact-links">
-            <li><span class="mono">邮箱</span> you@example.com</li>
-            <li><span class="mono">B 站</span> space.bilibili.com/xxx</li>
+            <li><span class="mono">邮箱</span> 18836047668@163.com</li>
+            <li><span class="mono">微信</span> Songs_Anga2</li>
+            <li><span class="mono">电话</span> 18836047668</li>
           </ul>
         </div>
       </div>
@@ -447,7 +484,7 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p class="mono">© <span id="year">2026</span> 你的名字 · 关卡策划作品集</p>
+    <p class="mono">© <span id="year">2026</span> 李敬业 · 关卡策划作品集</p>
     <p class="mono">由 GitHub Pages 托管</p>
   </div>
 </footer>

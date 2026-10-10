@@ -4,15 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-<!-- ============================================================
-     白盒 Demo 详情页 · 第二个作品
-     结构与 work-blockout-01.html 完全一致，替换文案与图片即可。
-     ============================================================ -->
+<title>Dam · 关卡设计拆解 | 李敬业</title>
+<meta name="description" content="CS 炸弹拆除模式双包点白盒关卡《Dam》的设计拆解：以垂直空间关系为核心，构建多层次战斗空间。" />
 
-<title>垂直中庭 · 关卡设计拆解 | 你的名字</title>
-<meta name="description" content="FPS 白盒关卡《垂直中庭》的完整设计拆解：立体动线、视线控制与关键节点。" />
-
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232b5cff'/%3E%3Ctext x='50' y='70' font-size='60' font-family='monospace' font-weight='700' fill='white' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232b5cff'/%3E%3Ctext x='50' y='70' font-size='60' font-family='monospace' font-weight='700' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
 <link rel="stylesheet" href="assets/css/style.css" />
 
 <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
@@ -37,8 +32,8 @@
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a class="brand" href="index.html" aria-label="返回作品集首页">
-      <span class="brand-mark" aria-hidden="true">Y</span>
-      <span class="brand-text">你的名字</span>
+      <span class="brand-mark" aria-hidden="true">L</span>
+      <span class="brand-text">李敬业</span>
     </a>
     <div class="header-actions">
       <a class="btn btn-ghost btn-sm back-link" href="index.html">
@@ -62,124 +57,149 @@
 
   <section class="case-hero">
     <div class="container">
-      <p class="eyebrow mono reveal"><span class="prompt">$</span> FPS · 白盒关卡 · Unreal Engine 5</p>
-      <h1 class="case-title reveal">垂直中庭</h1>
+      <p class="eyebrow mono reveal"><span class="prompt">$</span> CS 炸弹拆除模式 · 双包点白盒 · 5v5 竞技</p>
+      <h1 class="case-title reveal">Dam</h1>
       <p class="case-lede reveal">
-        围绕一个多层中庭做立体战斗，让玩家的每一次上下移动，都改变他掌握的战场信息。
+        以垂直空间关系为核心的双包点关卡。用高低差与垂直交通构建多层次战斗空间，
+        让玩家在不同高度之间的每一次穿梭，都改变他的视线与位置优势。
       </p>
 
       <dl class="case-meta reveal">
-        <div><dt>项目类型</dt><dd>FPS 单关卡设计</dd></div>
-        <div><dt>引擎</dt><dd>Unreal Engine 5</dd></div>
-        <div><dt>制作周期</dt><dd>4 周</dd></div>
-        <div><dt>预计流程</dt><dd>约 20 分钟</dd></div>
-        <div><dt>我的角色</dt><dd>关卡设计 · 白盒搭建 · 文档</dd></div>
-        <div><dt>完成时间</dt><dd>2026 年 8 月</dd></div>
+        <div><dt>项目类型</dt><dd>CS 炸弹拆除模式 · 双包点</dd></div>
+        <div><dt>定位</dt><dd>竞技向 5v5 对战关卡</dd></div>
+        <div><dt>引擎</dt><dd>Unreal Engine 5 · 白盒</dd></div>
+        <div><dt>完成时间</dt><dd>2026 年 9 月</dd></div>
+        <div><dt>我的角色</dt><dd>关卡设计 · 白盒搭建</dd></div>
+        <div><dt>关键词</dt><dd>垂直性 · 空间衔接 · 环境破坏</dd></div>
       </dl>
     </div>
   </section>
 
+  <!-- ================= 01 设计概念 ================= -->
   <section class="section section-alt">
     <div class="container container-narrow">
       <header class="section-head reveal">
         <span class="section-index mono">01</span>
-        <h2>设计目标与约束</h2>
+        <h2>设计概念</h2>
       </header>
 
       <div class="prose reveal">
         <p>
-          这张关卡要验证一个假设：<strong>在 FPS 里，高度差本身就是一种信息优势</strong>。
-          站在高处的人能看到更多，但也更容易暴露自己。我想让玩家在「占高地」和「藏起来」之间反复权衡。
+          与 Borgo 用「新旧空间的水平对比」驱动玩法不同，Dam 把核心变量换成了<strong>高度</strong>。
+          整张地图围绕一座大坝展开，A、B 两个包点分别位于<strong>不同层级</strong>，
+          通过管道、斜坡等垂直交通连接上下空间。
         </p>
         <p>
-          为此我把整张关卡的战斗全部围绕一个<strong>通高 18 米的中庭</strong>展开。
-          三层动线在平面上互相重叠，但在剖面上错开——玩家抬头能看到另一层的人，却不一定打得中。
+          高度在 FPS 里从来不只是「站得高」——它直接改写<strong>视线关系和位置优势</strong>。
+          同时我加入了玻璃、门等<strong>可破坏性结构</strong>，
+          让环境本身会在交火中发生变化，进一步动态地影响玩家的视线与路线选择。
         </p>
       </div>
 
       <div class="callout reveal">
         <div class="callout-item">
-          <span class="mono">设计约束</span>
-          <p>全部战斗必须发生在这个中庭的视线范围内，不设独立房间；单人开发 4 周。</p>
+          <span class="mono">核心变量</span>
+          <p>高低差与垂直交通。玩家在不同高度之间穿梭与转点，是这张图区别于平面双包点地图的根本。</p>
         </div>
         <div class="callout-item">
-          <span class="mono">验收标准</span>
-          <p>测试者应能仅凭空间关系判断敌方大概位置，而不需要额外的音效或 UI 提示。</p>
+          <span class="mono">动态要素</span>
+          <p>可破坏结构（玻璃、门）。环境不是静态背景，而是会被交火改变、反过来影响战局的变量。</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ================= 02 空间结构 ================= -->
   <section class="section">
     <div class="container">
       <header class="section-head reveal">
         <span class="section-index mono">02</span>
-        <h2>平面布局与剖面关系</h2>
-        <p class="section-desc">三层动线在平面投影上互相交叠，实际高差分别为 0 米、6 米、12 米。</p>
+        <h2>空间结构</h2>
+        <p class="section-desc">这张图的剖面比平面更重要——三层结构在垂直方向上互相咬合。</p>
       </header>
 
       <figure class="figure-block reveal">
-        <div class="fig-placeholder mono">此处放：平面图 + 剖面图并排（剖面图是关键）</div>
+        <img src="assets/img/dam-section.jpg" alt="Dam 垂直空间结构轴测图" />
         <figcaption>
-          平面：三层动线叠加投影 · 剖面：L1 主战场 / L2 回廊 / L3 狙击平台 / 中央通高空间
+          垂直结构轴测：内场垂直方向三层——地面层、空中控制连廊、梁结构；标注 T / CT 出生点与垂直交通
         </figcaption>
       </figure>
 
-      <ul class="legend reveal">
-        <li><span class="lg lg-1"></span>L1 主战场（开阔，掩体密集）</li>
-        <li><span class="lg lg-2"></span>L2 回廊（可绕行，视野受限）</li>
-        <li><span class="lg lg-3"></span>L3 平台（视野最好，暴露最多）</li>
-        <li><span class="lg lg-4"></span>垂直连通（楼梯／竖井，交火高发点）</li>
-      </ul>
+      <figure class="figure-block reveal" style="margin-top: 22px;">
+        <img src="assets/img/dam-layout.jpg" alt="Dam 平面布局" />
+        <figcaption>
+          平面布局：一层为内场 A 点，底层为 B 点；上下层之间通过管道、斜坡转移，玩家能根据战况换层
+        </figcaption>
+      </figure>
 
       <div class="prose reveal">
         <p>
-          剖面是这张关卡的<strong>主要设计工具</strong>。我在纸上反复调整每一层挑檐的出挑长度，
-          目的是让「从 L1 能否看到 L3」这个问题的答案，在不同位置给出不同的结果。
+          开间方向上则是<strong>两层结构：主战场与侧道</strong>。
+          垂直三层与地面两层叠加后，玩家在任何时刻面对的都不是一个平面战场，
+          而是一个立体的、上下左右都可能有威胁的空间。
         </p>
       </div>
     </div>
   </section>
 
+  <!-- ================= 03 三大机制 ================= -->
   <section class="section section-alt">
     <div class="container">
       <header class="section-head reveal">
         <span class="section-index mono">03</span>
-        <h2>节奏曲线</h2>
-        <p class="section-desc">与线性关卡不同，这里的强度由「高度差」而非推进距离驱动。</p>
+        <h2>三个机制如何塑造玩法</h2>
       </header>
 
-      <figure class="figure-block reveal">
-        <div class="curve-wrap">
-          <svg viewBox="0 0 640 260" role="img" aria-label="关卡紧张度曲线">
-            <title>垂直中庭的紧张度曲线</title>
-            <desc>曲线在进入中庭后迅速抬升，中段保持高位波动，末段回落。</desc>
+      <ul class="mapping">
+        <li class="map-row reveal">
+          <div class="map-from">
+            <span class="mono">机制</span>
+            <p>高度差</p>
+          </div>
+          <span class="map-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+          </span>
+          <div class="map-to">
+            <span class="mono">玩法效果</span>
+            <p>改变视线与位置优势，让站位本身成为决策</p>
+          </div>
+        </li>
+        <li class="map-row reveal">
+          <div class="map-from">
+            <span class="mono">机制</span>
+            <p>垂直交通</p>
+          </div>
+          <span class="map-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+          </span>
+          <div class="map-to">
+            <span class="mono">玩法效果</span>
+            <p>增加路线选择与转点方式，换层成为一种战术</p>
+          </div>
+        </li>
+        <li class="map-row reveal">
+          <div class="map-from">
+            <span class="mono">机制</span>
+            <p>环境破坏</p>
+          </div>
+          <span class="map-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+          </span>
+          <div class="map-to">
+            <span class="mono">玩法效果</span>
+            <p>动态改变视线与通行，战场随交火实时变化</p>
+          </div>
+        </li>
+      </ul>
 
-            <line x1="60" y1="210" x2="610" y2="210" stroke="#d3d7de" stroke-width="1" />
-            <line x1="60" y1="30" x2="60" y2="210" stroke="#d3d7de" stroke-width="1" />
-
-            <text x="60"  y="232" font-size="12" fill="#8a92a0" text-anchor="middle">进入</text>
-            <text x="190" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">L1 遭遇</text>
-            <text x="320" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">L2 绕行</text>
-            <text x="450" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">L3 争夺</text>
-            <text x="590" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">撤离</text>
-
-            <path d="M60 200 L100 175 L190 88 L260 105 L320 128 L390 62 L450 40 L520 78 L590 190"
-                  fill="none" stroke="#2b5cff" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round" />
-
-            <circle cx="190" cy="88" r="4.5" fill="#2b5cff" />
-            <circle cx="450" cy="40" r="4.5" fill="#2b5cff" />
-          </svg>
-        </div>
-        <figcaption>
-          进入中庭后迅速抬升，中段刻意保持在高位并小幅波动——玩家始终处在需要观察上方的状态，
-          而不是像线性关卡那样有明显的喘息段落。
-        </figcaption>
+      <figure class="figure-block reveal" style="margin-top: 28px;">
+        <img src="assets/img/dam-structure.jpg" alt="Dam 内场与底层空间结构" />
+        <figcaption>内场空间结构与底层空间结构的轴测关系。</figcaption>
       </figure>
     </div>
   </section>
 
+  <!-- ================= 04 关键节点 ================= -->
   <section class="section">
     <div class="container">
       <header class="section-head reveal">
@@ -191,54 +211,55 @@
 
         <article class="node-card reveal">
           <div class="node-media">
-            <div class="fig-placeholder mono">节点 A 截图</div>
+            <!-- 替换：<img src="assets/img/dam-node-corridor.jpg" alt="空中控制连廊" /> -->
+            <div class="fig-placeholder mono">连廊截图</div>
           </div>
           <div class="node-body">
-            <span class="node-index mono">节点 A · 中庭入口</span>
-            <h3>用通高空间先建立方位感</h3>
+            <span class="node-index mono">节点 A · 空中控制连廊</span>
+            <h3>中层连廊是全场信息密度最高的位置</h3>
             <p>
-              玩家从一条低矮的入口通道进入中庭，视线在走出通道的瞬间被垂直打开，
-              一眼能看清三层结构的大致轮廓。
+              连廊位于地面与梁结构之间，是垂直三层的中层。
+              站在这里可以同时观察到内场主战场和侧道的动向。
             </p>
             <p class="node-why">
               <span class="mono">为什么这么做</span>
-              立体关卡最容易让人迷路。给一个可以反复参照的空间锚点，玩家之后每次抬头都能重新定位自己。
+              给防守方一个信息支点，但连廊本身暴露、缺少掩体——信息优势必须冒着被打的风险去换。
             </p>
           </div>
         </article>
 
         <article class="node-card reveal">
           <div class="node-media">
-            <div class="fig-placeholder mono">节点 B 截图</div>
+            <div class="fig-placeholder mono">梁结构截图</div>
           </div>
           <div class="node-body">
-            <span class="node-index mono">节点 B · 挑檐与遮挡</span>
-            <h3>让高度优势带着代价</h3>
+            <span class="node-index mono">节点 B · 梁结构</span>
+            <h3>最高的位置，也是最危险的位置</h3>
             <p>
-              L2 回廊的挑檐出挑 2.4 米，正好遮住 L1 玩家抬头时的部分视野；
-              而 L3 平台没有任何遮挡，站上去视野全开，但也全程暴露。
+              梁结构位于内场最高层，视野最好，但落脚点窄、几乎没有遮蔽。
+              它是一个典型的「高收益、高风险」站位。
             </p>
             <p class="node-why">
               <span class="mono">为什么这么做</span>
-              如果高处永远最好，玩家就会一直往上爬，战斗会退化成抢楼梯。遮挡关系让每一层都有各自的活法。
+              避免制高点变成无解的狙击位——站得最高的人，也最容易被全场集火。
             </p>
           </div>
         </article>
 
         <article class="node-card reveal">
           <div class="node-media">
-            <div class="fig-placeholder mono">节点 C 截图</div>
+            <div class="fig-placeholder mono">可破坏结构截图</div>
           </div>
           <div class="node-body">
-            <span class="node-index mono">节点 C · 竖井交火</span>
-            <h3>把最危险的位置放在必经之路上</h3>
+            <span class="node-index mono">节点 C · 可破坏结构</span>
+            <h3>让战场在交火中「变形」</h3>
             <p>
-              三层之间的连通全靠两个竖井式楼梯，站位狭窄且上下贯通。
-              玩家在通过时必须决定是快速冲过还是先探头观察。
+              玻璃与门分布在几条关键视线上。它们开局时提供遮蔽，
+              但会在交火中被打碎——原本的掩体可能突然失效，原本的死角可能突然贯通。
             </p>
             <p class="node-why">
               <span class="mono">为什么这么做</span>
-              立体关卡需要几个「所有人都必须经过」的紧张点，否则各层玩家会各自为战，缺少交汇。
+              玩家不能死记硬背站位，必须根据环境的实时状态重新判断——这让同一回合内也充满变化。
             </p>
           </div>
         </article>
@@ -247,42 +268,45 @@
     </div>
   </section>
 
+  <!-- ================= 05 迭代记录 ================= -->
   <section class="section section-alt">
     <div class="container container-narrow">
       <header class="section-head reveal">
         <span class="section-index mono">05</span>
         <h2>迭代记录</h2>
+        <p class="section-desc">垂直关系带来的主要问题与调整。</p>
       </header>
 
       <ol class="timeline">
         <li class="tl-item reveal">
           <span class="tl-dot" aria-hidden="true"></span>
-          <div class="tl-meta mono">v1 · 第 1 周</div>
+          <div class="tl-meta mono">问题</div>
           <div class="tl-body">
-            <h3>问题：三层完全对通，高处碾压一切</h3>
-            <p>最初三层之间没有任何遮挡，测试者一旦抢占 L3 就几乎无法被击落，其余两层形同虚设。</p>
+            <h3>高处优势需要被制衡</h3>
+            <p>垂直多层结构天然会让高处占优。如果没有任何制衡，战斗会退化成「谁先到高层谁赢」，地面层的空间就失去意义。</p>
           </div>
         </li>
         <li class="tl-item reveal">
           <span class="tl-dot" aria-hidden="true"></span>
-          <div class="tl-meta mono">v2 · 第 2—3 周</div>
+          <div class="tl-meta mono">调整</div>
           <div class="tl-body">
-            <h3>改动：加入挑檐与遮挡，重新分配视野</h3>
-            <p>L2 挑檐出挑 2.4 米，L3 平台边缘加设低矮胸墙。L3 视野依然最好，但不再是单向屠杀，L1 玩家有了贴近的路径。</p>
+            <h3>让高度优势自带代价</h3>
+            <p>通过挑檐、窄落脚点与暴露面，让视野越好的位置越缺乏遮蔽——高处的信息优势必须用生存风险来换，三个层级各自都有存在的理由。</p>
           </div>
         </li>
         <li class="tl-item reveal">
           <span class="tl-dot" aria-hidden="true"></span>
-          <div class="tl-meta mono">v3 · 第 4 周</div>
+          <div class="tl-meta mono">待补充</div>
           <div class="tl-body">
-            <h3>改动：压缩竖井宽度，制造必经的紧张点</h3>
-            <p>把两处楼梯从 4 米压缩到 2.5 米并贯通上下视线。测试反馈显示，竖井交火成为了整张关卡被提及最多的片段。</p>
+            <h3>更多实测迭代记录</h3>
+            <p>这部分留白：上下层转移的时间成本、可破坏结构对节奏的实际影响，需要多轮实测后补充具体数据。</p>
           </div>
         </li>
       </ol>
     </div>
   </section>
 
+  <!-- ================= 06 复盘 ================= -->
   <section class="section">
     <div class="container container-narrow">
       <header class="section-head reveal">
@@ -294,29 +318,30 @@
         <div class="review-col">
           <h3 class="mono ok">做得好的</h3>
           <ul class="highlights">
-            <li>剖面先行的设计方法，让视线关系可以提前推敲而不是靠试错</li>
-            <li>三层各有明确的最优场景，没有出现一层独大</li>
-            <li>中央通高空间作为锚点，全程无人迷路</li>
+            <li>用剖面作为主要设计工具，垂直视线关系可以提前推敲而不是靠试错</li>
+            <li>三个层级各有明确的定位与代价，没有出现一层独大</li>
+            <li>可破坏结构让战场具备动态性，同一回合内也存在变化</li>
           </ul>
         </div>
         <div class="review-col">
           <h3 class="mono warn">待改进的</h3>
           <ul class="highlights">
-            <li>L3 平台边缘的胸墙高度偏矮，仍有一定的单向优势</li>
-            <li>竖井内的战斗受地形限制，走位空间不足，容易变成对枪</li>
-            <li>入口通道略长，重新进入中庭时的节奏有点拖</li>
+            <li>上下层转移的时间成本尚未量化，可能影响转点的实际可行性</li>
+            <li>可破坏结构的数量与位置需要实测收敛，避免过度破碎导致信息过载</li>
+            <li>与 Borgo 相比，这张图更依赖实测数据来验证均衡性</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ================= 07 Demo 视频 ================= -->
   <section class="section section-alt">
     <div class="container">
       <header class="section-head reveal">
         <span class="section-index mono">07</span>
         <h2>实机演示</h2>
-        <p class="section-desc">三层动线的完整走位，以及竖井交火的实测录像。</p>
+        <p class="section-desc">三层垂直动线的走位与环境破坏实测。</p>
       </header>
 
       <!-- 替换：把下面的 div 换成 B 站 iframe
@@ -335,7 +360,7 @@
     <div class="container">
       <a class="next-work reveal" href="work-blockout-01.html">
         <span class="mono">下一个关卡</span>
-        <h2>废弃设施</h2>
+        <h2>Borgo · 新旧交界</h2>
         <span class="next-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
         </span>
@@ -347,7 +372,7 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p class="mono">© <span id="year">2026</span> 你的名字 · 关卡策划作品集</p>
+    <p class="mono">© <span id="year">2026</span> 李敬业 · 关卡策划作品集</p>
     <p class="mono"><a href="index.html">返回首页</a></p>
   </div>
 </footer>

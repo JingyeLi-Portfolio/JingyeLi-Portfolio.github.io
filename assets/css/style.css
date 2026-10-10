@@ -1023,6 +1023,10 @@ html[data-theme="dark"] .facts dd.ok { color: #4ade80; }
 .curve-wrap text { fill: var(--text-faint); }
 .curve-wrap path { stroke: var(--accent); }
 .curve-wrap circle { fill: var(--accent); }
+.curve-wrap path.line-b { stroke: #d97706; }
+.curve-wrap circle.c-b { fill: #d97706; }
+.curve-wrap text.t-a { fill: var(--accent); }
+.curve-wrap text.t-b { fill: #d97706; }
 
 /* --- 关键节点卡片 --- */
 .nodes { display: grid; gap: 22px; }
