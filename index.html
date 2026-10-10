@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+<!-- ============================================================
+     替换清单（搜索这些标记即可定位）：
+     「你的名字」        -> 改成你的真实姓名
+     you@example.com     -> 改成你的邮箱
+     username.github.io  -> 改成你的 GitHub Pages 地址
+     assets/resume.pdf   -> 放入同名简历文件，或删掉该按钮
+     #github #linkedin   -> 改成你的社交主页链接
+     ============================================================ -->
+
+<title>你的名字 · 作品集</title>
+<meta name="description" content="全栈开发者作品集 —— 把复杂需求变成清晰、快速、可靠的 Web 产品。" />
+<meta name="author" content="你的名字" />
+
+<!-- 分享卡片（发到微信 / 社交平台时的预览） -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="你的名字 · 作品集" />
+<meta property="og:description" content="全栈开发者作品集 —— 把复杂需求变成清晰、快速、可靠的 Web 产品。" />
+<meta property="og:url" content="https://username.github.io/" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232b5cff'/%3E%3Ctext x='50' y='70' font-size='60' font-family='monospace' font-weight='700' fill='white' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E" />
+<link rel="stylesheet" href="assets/css/style.css" />
+
+<script>
+  /* 在首屏渲染前应用主题，避免明暗闪烁 */
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ================= 顶栏 ================= -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="#top" aria-label="回到顶部">
+      <span class="brand-mark" aria-hidden="true">Y</span>
+      <span class="brand-text">你的名字</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="主导航">
+      <a href="#about">关于</a>
+      <a href="#skills">技术</a>
+      <a href="#projects">项目</a>
+      <a href="#experience">经历</a>
+      <a href="#contact">联系</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="切换深色模式">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" />
+          <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6" />
+        </svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 14.3A8.6 8.6 0 1 1 9.7 3.5a6.9 6.9 0 0 0 10.8 10.8Z" />
+        </svg>
+      </button>
+
+      <button class="icon-btn menu-toggle" id="menuToggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= Hero ================= -->
+  <section class="hero" id="top">
+    <div class="container">
+      <p class="eyebrow mono reveal"><span class="prompt">$</span> whoami</p>
+
+      <h1 class="hero-title reveal">你好，我是<span class="hl">你的名字</span></h1>
+
+      <p class="hero-sub reveal">
+        全栈开发者。专注于把复杂的需求拆解成清晰、快速、可靠的 Web 产品——
+        喜欢有节制的设计，也喜欢能一眼看懂的代码。
+      </p>
+
+      <p class="status reveal"><span class="dot" aria-hidden="true"></span>目前开放全职与远程机会</p>
+
+      <div class="hero-actions reveal">
+        <a class="btn btn-primary" href="#projects">
+          查看项目
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
+        </a>
+        <a class="btn btn-ghost" href="assets/resume.pdf" download>下载简历</a>
+      </div>
+
+      <ul class="socials reveal">
+        <li>
+          <a href="#github" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.8a10.2 10.2 0 0 0-3.2 19.9c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.3-.3-4.7-1.1-4.7-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.7.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.7 5 .4.3.7 1 .7 2v3c0 .3.2.6.7.5A10.2 10.2 0 0 0 12 1.8Z" /></svg>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:you@example.com" aria-label="邮箱">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.8" y="4.8" width="18.4" height="14.4" rx="2.4" /><path d="m3.6 7.2 8.4 5.6 8.4-5.6" /></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#linkedin" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.5h4V21H3V9.5Zm6.5 0h3.8v1.6h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.3c0-1.27-.02-2.9-1.83-2.9-1.83 0-2.11 1.38-2.11 2.8V21h-4V9.5Z" /></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= 01 关于我 ================= -->
+  <section class="section" id="about">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">01</span>
+        <h2>关于我</h2>
+      </header>
+
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            我是一名拥有 <strong>5 年</strong> 经验的开发者，日常在
+            <strong>TypeScript</strong> 与 <strong>Python</strong> 之间来回切换。
+            过去几年主要在做面向真实用户的 Web 产品：从需求澄清、技术选型，
+            到上线后的性能与稳定性，都习惯自己盯到底。
+          </p>
+          <p>
+            我相信好的产品是「减法」做出来的——能一个页面说清的，就不做三个；
+            能一次请求解决的，就不加中间层。技术选型上偏保守，但对自己写的每一行代码负责。
+          </p>
+          <p>
+            工作之外，我会写一些开源小工具，也在持续整理自己的学习笔记。
+            如果你在做有意思的事，欢迎随时找我聊聊。
+          </p>
+        </div>
+
+        <aside class="about-card reveal">
+          <div class="avatar" aria-hidden="true">
+            <svg viewBox="0 0 120 120"><rect width="120" height="120" rx="18" fill="currentColor" opacity=".08"/><text x="60" y="78" font-size="46" font-family="monospace" font-weight="700" text-anchor="middle" fill="currentColor">Y</text></svg>
+          </div>
+          <dl class="facts">
+            <div><dt>坐标</dt><dd>中国 · 杭州</dd></div>
+            <div><dt>方向</dt><dd>全栈 / Web 工程</dd></div>
+            <div><dt>经验</dt><dd>5 年</dd></div>
+            <div><dt>状态</dt><dd class="ok">可入职</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 02 技术栈 ================= -->
+  <section class="section section-alt" id="skills">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">02</span>
+        <h2>技术栈</h2>
+        <p class="section-desc">日常真正在用、能独立交付的工具，而不是简历上的罗列。</p>
+      </header>
+
+      <div class="skill-groups">
+        <div class="skill-group reveal">
+          <h3 class="mono">前端</h3>
+          <ul class="tags">
+            <li>TypeScript</li><li>React</li><li>Next.js</li>
+            <li>Vue 3</li><li>Tailwind CSS</li><li>Vite</li>
+          </ul>
+        </div>
+        <div class="skill-group reveal">
+          <h3 class="mono">后端</h3>
+          <ul class="tags">
+            <li>Node.js</li><li>Python</li><li>FastAPI</li>
+            <li>PostgreSQL</li><li>Redis</li><li>GraphQL</li>
+          </ul>
+        </div>
+        <div class="skill-group reveal">
+          <h3 class="mono">工程化</h3>
+          <ul class="tags">
+            <li>Docker</li><li>GitHub Actions</li><li>Nginx</li>
+            <li>Playwright</li><li>Vitest</li><li>可观测性</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 03 精选项目 ================= -->
+  <section class="section" id="projects">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">03</span>
+        <h2>精选项目</h2>
+        <p class="section-desc">挑了几个能说明问题的。每个都附上了线上地址或源码。</p>
+      </header>
+
+      <div class="projects">
+
+        <article class="project reveal">
+          <a class="project-link" href="#" target="_blank" rel="noopener">
+            <div class="project-cover" data-index="01">
+              <span class="mono">01</span>
+            </div>
+            <div class="project-body">
+              <div class="project-top">
+                <h3>实时协作文档</h3>
+                <span class="arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
+                </span>
+              </div>
+              <p>基于 CRDT 的多人在线编辑器，支持离线编辑与冲突自动合并，万级文档下首屏 &lt; 400ms。</p>
+              <ul class="tags small">
+                <li>TypeScript</li><li>Yjs</li><li>WebSocket</li>
+              </ul>
+            </div>
+          </a>
+        </article>
+
+        <article class="project reveal">
+          <a class="project-link" href="#" target="_blank" rel="noopener">
+            <div class="project-cover" data-index="02">
+              <span class="mono">02</span>
+            </div>
+            <div class="project-body">
+              <div class="project-top">
+                <h3>数据看板引擎</h3>
+                <span class="arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
+                </span>
+              </div>
+              <p>拖拽式 BI 看板，把 20+ 种图表规格抽象成统一 DSL，业务方无需开发即可自助搭建。</p>
+              <ul class="tags small">
+                <li>React</li><li>ECharts</li><li>FastAPI</li>
+              </ul>
+            </div>
+          </a>
+        </article>
+
+        <article class="project reveal">
+          <a class="project-link" href="#" target="_blank" rel="noopener">
+            <div class="project-cover" data-index="03">
+              <span class="mono">03</span>
+            </div>
+            <div class="project-body">
+              <div class="project-top">
+                <h3>CLI 提效工具</h3>
+                <span class="arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
+                </span>
+              </div>
+              <p>把团队日常发布流程封装成一条命令，发布耗时从 12 分钟压到 90 秒，已开源。</p>
+              <ul class="tags small">
+                <li>Node.js</li><li>GitHub Actions</li><li>CLI</li>
+              </ul>
+            </div>
+          </a>
+        </article>
+
+        <article class="project reveal">
+          <a class="project-link" href="#" target="_blank" rel="noopener">
+            <div class="project-cover" data-index="04">
+              <span class="mono">04</span>
+            </div>
+            <div class="project-body">
+              <div class="project-top">
+                <h3>性能监控 SDK</h3>
+                <span class="arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
+                </span>
+              </div>
+              <p>浏览器端埋点与性能采集库，压缩后仅 4.2KB，接入成本一行代码，已覆盖公司全部 C 端页面。</p>
+              <ul class="tags small">
+                <li>TypeScript</li><li>Rollup</li><li>Performance API</li>
+              </ul>
+            </div>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 04 工作经历 ================= -->
+  <section class="section section-alt" id="experience">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">04</span>
+        <h2>工作经历</h2>
+      </header>
+
+      <ol class="timeline">
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">2023 — 至今</div>
+          <div class="tl-body">
+            <h3>高级前端工程师 · 某某科技</h3>
+            <p>负责核心业务线的前端架构与性能治理，主导从 Vue 2 到 Vue 3 的渐进式迁移，首屏时间下降 46%。带 3 人小组，建立了团队的前端规范与 CI 流程。</p>
+          </div>
+        </li>
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">2021 — 2023</div>
+          <div class="tl-body">
+            <h3>全栈工程师 · 某某网络</h3>
+            <p>从 0 到 1 搭建面向 B 端的 SaaS 后台，独立完成鉴权体系、权限模型与数据报表模块，服务 200+ 企业客户。</p>
+          </div>
+        </li>
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">2019 — 2021</div>
+          <div class="tl-body">
+            <h3>前端工程师 · 某某工作室</h3>
+            <p>参与多个中小型项目交付，覆盖官网、电商小程序与数据可视化，积累了与客户直接对接的完整项目经验。</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= 05 联系 ================= -->
+  <section class="section section-contact" id="contact">
+    <div class="container contact-inner">
+      <span class="section-index mono reveal">05</span>
+      <h2 class="reveal">一起做点东西？</h2>
+      <p class="reveal">无论是岗位机会、项目合作，还是单纯想聊聊技术，我都很乐意。通常 24 小时内回复。</p>
+      <div class="hero-actions center reveal">
+        <a class="btn btn-primary" href="mailto:you@example.com">
+          发邮件给我
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
+        </a>
+        <a class="btn btn-ghost" href="#github" target="_blank" rel="noopener">在 GitHub 上看看</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="mono">© <span id="year">2026</span> 你的名字</p>
+    <p class="mono">HTML · CSS · JavaScript — 由 GitHub Pages 托管</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
