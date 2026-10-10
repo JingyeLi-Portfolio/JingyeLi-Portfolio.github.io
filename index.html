@@ -5,27 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
 <!-- ============================================================
-     替换清单（搜索这些标记即可定位）：
-     「你的名字」        -> 改成你的真实姓名
-     you@example.com     -> 改成你的邮箱
-     username.github.io  -> 改成你的 GitHub Pages 地址
-     assets/resume.pdf   -> 放入同名简历文件，或删掉该按钮
-     #github #linkedin   -> 改成你的社交主页链接
+     待替换的占位内容（全局搜索即可定位）：
+     「你的名字」            -> 你的真实姓名
+     you@example.com         -> 你的邮箱
+     space.bilibili.com/xxx  -> 你的 B 站主页（放 demo 视频）
+     username.github.io      -> 你的站点地址
+     assets/resume.pdf       -> 放入简历文件
+     城市占位 / 项目名称占位  -> 你的真实信息
      ============================================================ -->
 
-<title>你的名字 · 作品集</title>
-<meta name="description" content="全栈开发者作品集 —— 把复杂需求变成清晰、快速、可靠的 Web 产品。" />
+<title>你的名字 · 关卡策划作品集</title>
+<meta name="description" content="建筑学出身的关卡策划求职作品集 —— 两个 FPS 白盒关卡 Demo 与空间设计作品。" />
 <meta name="author" content="你的名字" />
 
-<!-- 分享卡片（发到微信 / 社交平台时的预览） -->
 <meta property="og:type" content="website" />
-<meta property="og:title" content="你的名字 · 作品集" />
-<meta property="og:description" content="全栈开发者作品集 —— 把复杂需求变成清晰、快速、可靠的 Web 产品。" />
+<meta property="og:title" content="你的名字 · 关卡策划作品集" />
+<meta property="og:description" content="建筑学出身的关卡策划求职作品集 —— 两个 FPS 白盒关卡 Demo 与空间设计作品。" />
 <meta property="og:url" content="https://username.github.io/" />
 <meta name="twitter:card" content="summary_large_image" />
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232b5cff'/%3E%3Ctext x='50' y='70' font-size='60' font-family='monospace' font-weight='700' fill='white' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E" />
 <link rel="stylesheet" href="assets/css/style.css" />
+
+<!-- 若浏览器禁用了 JS，跳过入场动画，保证内容始终可见 -->
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
 
 <script>
   /* 在首屏渲染前应用主题，避免明暗闪烁 */
@@ -55,10 +58,10 @@
     </a>
 
     <nav class="nav" id="nav" aria-label="主导航">
-      <a href="#about">关于</a>
-      <a href="#skills">技术</a>
-      <a href="#projects">项目</a>
-      <a href="#experience">经历</a>
+      <a href="#transfer">能力迁移</a>
+      <a href="#works">白盒 Demo</a>
+      <a href="#architecture">建筑作品</a>
+      <a href="#skills">技能</a>
       <a href="#contact">联系</a>
     </nav>
 
@@ -85,265 +88,357 @@
   <!-- ================= Hero ================= -->
   <section class="hero" id="top">
     <div class="container">
-      <p class="eyebrow mono reveal"><span class="prompt">$</span> whoami</p>
+      <p class="eyebrow mono reveal"><span class="prompt">$</span> level designer / 关卡策划</p>
 
-      <h1 class="hero-title reveal">你好，我是<span class="hl">你的名字</span></h1>
+      <h1 class="hero-title reveal">建筑学出身，<br />用<span class="hl">空间思维</span>做关卡</h1>
 
       <p class="hero-sub reveal">
-        全栈开发者。专注于把复杂的需求拆解成清晰、快速、可靠的 Web 产品——
-        喜欢有节制的设计，也喜欢能一眼看懂的代码。
+        五年建筑学训练让我习惯先想清楚「人在这里怎么走、看到什么、感受到什么」，再去搭建空间。
+        现在我把这套思维用在关卡设计上——从一个白盒开始，反复走位、验证节奏，直到它真的好玩。
       </p>
 
-      <p class="status reveal"><span class="dot" aria-hidden="true"></span>目前开放全职与远程机会</p>
-
       <div class="hero-actions reveal">
-        <a class="btn btn-primary" href="#projects">
-          查看项目
+        <a class="btn btn-primary" href="#works">
+          查看白盒 Demo
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
         </a>
         <a class="btn btn-ghost" href="assets/resume.pdf" download>下载简历</a>
       </div>
 
-      <ul class="socials reveal">
+      <!-- 关键数字：请替换为你的真实数据 -->
+      <ul class="stats reveal">
         <li>
-          <a href="#github" aria-label="GitHub">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.8a10.2 10.2 0 0 0-3.2 19.9c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.3-.3-4.7-1.1-4.7-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.7.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.7 5 .4.3.7 1 .7 2v3c0 .3.2.6.7.5A10.2 10.2 0 0 0 12 1.8Z" /></svg>
-          </a>
+          <span class="stat-num">2</span>
+          <span class="stat-label">个 FPS 白盒关卡</span>
         </li>
         <li>
-          <a href="mailto:you@example.com" aria-label="邮箱">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.8" y="4.8" width="18.4" height="14.4" rx="2.4" /><path d="m3.6 7.2 8.4 5.6 8.4-5.6" /></svg>
-          </a>
+          <span class="stat-num">5</span>
+          <span class="stat-label">年建筑学空间训练</span>
         </li>
         <li>
-          <a href="#linkedin" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.5h4V21H3V9.5Zm6.5 0h3.8v1.6h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.3c0-1.27-.02-2.9-1.83-2.9-1.83 0-2.11 1.38-2.11 2.8V21h-4V9.5Z" /></svg>
-          </a>
+          <span class="stat-num">30+</span>
+          <span class="stat-label">件设计与出图作品</span>
         </li>
       </ul>
     </div>
   </section>
 
-  <!-- ================= 01 关于我 ================= -->
-  <section class="section" id="about">
+  <!-- ================= 01 能力迁移 ================= -->
+  <section class="section section-alt" id="transfer">
     <div class="container">
       <header class="section-head reveal">
         <span class="section-index mono">01</span>
-        <h2>关于我</h2>
+        <h2>为什么建筑学出身适合做关卡</h2>
+        <p class="section-desc">
+          关卡设计和建筑设计解决的是同一类问题：在一个空间里安排人的行为、视线与情绪。
+          下面是我认为可以直接迁移的六项能力。
+        </p>
       </header>
 
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <p>
-            我是一名拥有 <strong>5 年</strong> 经验的开发者，日常在
-            <strong>TypeScript</strong> 与 <strong>Python</strong> 之间来回切换。
-            过去几年主要在做面向真实用户的 Web 产品：从需求澄清、技术选型，
-            到上线后的性能与稳定性，都习惯自己盯到底。
-          </p>
-          <p>
-            我相信好的产品是「减法」做出来的——能一个页面说清的，就不做三个；
-            能一次请求解决的，就不加中间层。技术选型上偏保守，但对自己写的每一行代码负责。
-          </p>
-          <p>
-            工作之外，我会写一些开源小工具，也在持续整理自己的学习笔记。
-            如果你在做有意思的事，欢迎随时找我聊聊。
-          </p>
-        </div>
-
-        <aside class="about-card reveal">
-          <div class="avatar" aria-hidden="true">
-            <svg viewBox="0 0 120 120"><rect width="120" height="120" rx="18" fill="currentColor" opacity=".08"/><text x="60" y="78" font-size="46" font-family="monospace" font-weight="700" text-anchor="middle" fill="currentColor">Y</text></svg>
+      <ul class="mapping">
+        <li class="map-row reveal">
+          <div class="map-from">
+            <span class="mono">建筑学训练</span>
+            <p>空间序列与叙事组织</p>
           </div>
-          <dl class="facts">
-            <div><dt>坐标</dt><dd>中国 · 杭州</dd></div>
-            <div><dt>方向</dt><dd>全栈 / Web 工程</dd></div>
-            <div><dt>经验</dt><dd>5 年</dd></div>
-            <div><dt>状态</dt><dd class="ok">可入职</dd></div>
-          </dl>
-        </aside>
+          <span class="map-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+          </span>
+          <div class="map-to">
+            <span class="mono">关卡设计应用</span>
+            <p>关卡节奏与情绪曲线设计</p>
+          </div>
+        </li>
+
+        <li class="map-row reveal">
+          <div class="map-from">
+            <span class="mono">建筑学训练</span>
+            <p>流线与动线规划</p>
+          </div>
+          <span class="map-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+          </span>
+          <div class="map-to">
+            <span class="mono">关卡设计应用</span>
+            <p>玩家动线引导与路径选择</p>
+          </div>
+        </li>
+
+        <li class="map-row reveal">
+          <div class="map-from">
+            <span class="mono">建筑学训练</span>
+            <p>人体尺度与空间感知</p>
+          </div>
+          <span class="map-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+          </span>
+          <div class="map-to">
+            <span class="mono">关卡设计应用</span>
+            <p>移动体感、掩体比例与战斗空间</p>
+          </div>
+        </li>
+
+        <li class="map-row reveal">
+          <div class="map-from">
+            <span class="mono">建筑学训练</span>
+            <p>视线设计与框景控制</p>
+          </div>
+          <span class="map-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+          </span>
+          <div class="map-to">
+            <span class="mono">关卡设计应用</span>
+            <p>视觉引导、信息投放与威胁预判</p>
+          </div>
+        </li>
+
+        <li class="map-row reveal">
+          <div class="map-from">
+            <span class="mono">建筑学训练</span>
+            <p>材质、光照与氛围营造</p>
+          </div>
+          <span class="map-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+          </span>
+          <div class="map-to">
+            <span class="mono">关卡设计应用</span>
+            <p>氛围塑造与场景叙事</p>
+          </div>
+        </li>
+
+        <li class="map-row reveal">
+          <div class="map-from">
+            <span class="mono">建筑学训练</span>
+            <p>图纸表达与方案汇报</p>
+          </div>
+          <span class="map-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6" /></svg>
+          </span>
+          <div class="map-to">
+            <span class="mono">关卡设计应用</span>
+            <p>关卡文档、动线图与团队沟通</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= 02 白盒 Demo ================= -->
+  <section class="section" id="works">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">02</span>
+        <h2>白盒关卡 Demo</h2>
+        <p class="section-desc">
+          两个 FPS 关卡的完整设计过程。每个都包含设计目标、平面动线分析、
+          关键节点拆解与迭代记录——不只有成品录屏。
+        </p>
+      </header>
+
+      <div class="works">
+
+        <article class="work-card reveal">
+          <a class="work-link" href="work-blockout-01.html">
+            <div class="work-cover">
+              <span class="cover-pill mono">FPS · 白盒</span>
+              <!-- 替换：删掉 span.cover-holder，改放 <img src="assets/img/xxx.jpg" alt="关卡俯视平面图" /> -->
+              <span class="cover-holder mono">封面：关卡俯视平面图</span>
+            </div>
+            <div class="work-body">
+              <h3>关卡一 · 废弃设施</h3>
+              <p class="work-meta mono">Unreal Engine 5 · 单人项目 · 3 周 · 约 15 分钟流程</p>
+
+              <p class="work-goal">
+                <span class="mono">设计目标</span>
+                用一条不断收窄又放开的路径，把玩家从开阔区的安全感逐步推向室内近战的压迫感。
+              </p>
+
+              <ul class="highlights">
+                <li>三个战斗空间按「宽 → 窄 → 垂直」递进，节奏逐段收紧</li>
+                <li>用建筑框景手法在进入每个区域前预告战场，避免无预警遭遇</li>
+                <li>关键岔路用光照差与材质对比引导，不依赖 UI 指示</li>
+              </ul>
+
+              <span class="more">
+                查看完整设计拆解
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
+              </span>
+            </div>
+          </a>
+        </article>
+
+        <article class="work-card reveal">
+          <a class="work-link" href="work-blockout-02.html">
+            <div class="work-cover">
+              <span class="cover-pill mono">FPS · 白盒</span>
+              <span class="cover-holder mono">封面：关卡俯视平面图</span>
+            </div>
+            <div class="work-body">
+              <h3>关卡二 · 垂直中庭</h3>
+              <p class="work-meta mono">Unreal Engine 5 · 单人项目 · 4 周 · 约 20 分钟流程</p>
+
+              <p class="work-goal">
+                <span class="mono">设计目标</span>
+                围绕一个多层中庭做立体战斗，让玩家的每一次上下移动都改变战场信息。
+              </p>
+
+              <ul class="highlights">
+                <li>中央通高空间作为视觉锚点，玩家始终能建立方位感</li>
+                <li>三条高度不同的动线互相可射、可绕、可退，形成立体博弈</li>
+                <li>用剖面图推敲每一层的视线遮挡关系，控制信息差</li>
+              </ul>
+
+              <span class="more">
+                查看完整设计拆解
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
+              </span>
+            </div>
+          </a>
+        </article>
+
       </div>
     </div>
   </section>
 
-  <!-- ================= 02 技术栈 ================= -->
-  <section class="section section-alt" id="skills">
+  <!-- ================= 03 建筑作品 ================= -->
+  <section class="section section-alt" id="architecture">
     <div class="container">
       <header class="section-head reveal">
-        <span class="section-index mono">02</span>
-        <h2>技术栈</h2>
-        <p class="section-desc">日常真正在用、能独立交付的工具，而不是简历上的罗列。</p>
+        <span class="section-index mono">03</span>
+        <h2>空间设计作品</h2>
+        <p class="section-desc">
+          建筑学期间与接单完成的设计、建模与出图作品。
+          这里只挑出能体现空间引导、尺度控制与氛围营造的部分。
+        </p>
+      </header>
+
+      <div class="gallery">
+        <figure class="g-item reveal">
+          <div class="g-thumb"><span class="mono">渲染图</span></div>
+          <figcaption>
+            <h3>项目名称占位</h3>
+            <p class="mono">公共建筑 · 2024 · 方案设计 + 出图</p>
+          </figcaption>
+        </figure>
+
+        <figure class="g-item reveal">
+          <div class="g-thumb"><span class="mono">效果图</span></div>
+          <figcaption>
+            <h3>项目名称占位</h3>
+            <p class="mono">住宅空间 · 2024 · 建模 + 渲染</p>
+          </figcaption>
+        </figure>
+
+        <figure class="g-item reveal">
+          <div class="g-thumb"><span class="mono">鸟瞰图</span></div>
+          <figcaption>
+            <h3>项目名称占位</h3>
+            <p class="mono">景观规划 · 2023 · 概念方案</p>
+          </figcaption>
+        </figure>
+
+        <figure class="g-item reveal">
+          <div class="g-thumb"><span class="mono">室内效果</span></div>
+          <figcaption>
+            <h3>项目名称占位</h3>
+            <p class="mono">室内设计 · 2023 · 接单作品</p>
+          </figcaption>
+        </figure>
+
+        <figure class="g-item reveal">
+          <div class="g-thumb"><span class="mono">分析图</span></div>
+          <figcaption>
+            <h3>项目名称占位</h3>
+            <p class="mono">空间分析 · 2023 · 动线与视线分析</p>
+          </figcaption>
+        </figure>
+
+        <figure class="g-item reveal">
+          <div class="g-thumb"><span class="mono">技术图纸</span></div>
+          <figcaption>
+            <h3>项目名称占位</h3>
+            <p class="mono">施工图 · 2022 · 平立剖绘制</p>
+          </figcaption>
+        </figure>
+      </div>
+
+      <p class="gallery-note reveal">更多作品与过程文件可应要求提供。</p>
+    </div>
+  </section>
+
+  <!-- ================= 04 技能与工具 ================= -->
+  <section class="section" id="skills">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">04</span>
+        <h2>技能与工具</h2>
+        <p class="section-desc">按能力维度分组，只列真正能独立交付的部分。</p>
       </header>
 
       <div class="skill-groups">
         <div class="skill-group reveal">
-          <h3 class="mono">前端</h3>
+          <h3 class="mono">关卡设计</h3>
           <ul class="tags">
-            <li>TypeScript</li><li>React</li><li>Next.js</li>
-            <li>Vue 3</li><li>Tailwind CSS</li><li>Vite</li>
+            <li>白盒搭建</li><li>动线规划</li><li>节奏设计</li>
+            <li>战斗空间设计</li><li>难度曲线</li><li>可玩性测试</li>
           </ul>
         </div>
         <div class="skill-group reveal">
-          <h3 class="mono">后端</h3>
+          <h3 class="mono">引擎与建模</h3>
           <ul class="tags">
-            <li>Node.js</li><li>Python</li><li>FastAPI</li>
-            <li>PostgreSQL</li><li>Redis</li><li>GraphQL</li>
+            <li>Unreal Engine 5</li><li>Unity</li><li>Blender</li>
+            <li>SketchUp</li><li>Rhino</li><li>3ds Max</li>
           </ul>
         </div>
         <div class="skill-group reveal">
-          <h3 class="mono">工程化</h3>
+          <h3 class="mono">出图与表达</h3>
           <ul class="tags">
-            <li>Docker</li><li>GitHub Actions</li><li>Nginx</li>
-            <li>Playwright</li><li>Vitest</li><li>可观测性</li>
+            <li>Photoshop</li><li>Illustrator</li><li>V-Ray</li>
+            <li>Enscape</li><li>Lumion</li><li>AutoCAD</li>
+          </ul>
+        </div>
+        <div class="skill-group reveal">
+          <h3 class="mono">文档与协作</h3>
+          <ul class="tags">
+            <li>关卡设计文档</li><li>动线与视线分析图</li><li>平面／剖面表达</li>
+            <li>Notion</li><li>Git</li><li>版本管理</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= 03 精选项目 ================= -->
-  <section class="section" id="projects">
+  <!-- ================= 05 求职信息 ================= -->
+  <section class="section section-alt" id="contact">
     <div class="container">
       <header class="section-head reveal">
-        <span class="section-index mono">03</span>
-        <h2>精选项目</h2>
-        <p class="section-desc">挑了几个能说明问题的。每个都附上了线上地址或源码。</p>
+        <span class="section-index mono">05</span>
+        <h2>求职信息</h2>
       </header>
 
-      <div class="projects">
+      <div class="job-grid">
+        <dl class="job-card reveal">
+          <div><dt>目标岗位</dt><dd>关卡策划 / Level Designer</dd></div>
+          <div><dt>期望城市</dt><dd>城市占位</dd></div>
+          <div><dt>到岗时间</dt><dd>随时到岗</dd></div>
+          <div><dt>岗位类型</dt><dd>全职 · 应届 / 实习均可</dd></div>
+        </dl>
 
-        <article class="project reveal">
-          <a class="project-link" href="#" target="_blank" rel="noopener">
-            <div class="project-cover" data-index="01">
-              <span class="mono">01</span>
-            </div>
-            <div class="project-body">
-              <div class="project-top">
-                <h3>实时协作文档</h3>
-                <span class="arrow" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
-                </span>
-              </div>
-              <p>基于 CRDT 的多人在线编辑器，支持离线编辑与冲突自动合并，万级文档下首屏 &lt; 400ms。</p>
-              <ul class="tags small">
-                <li>TypeScript</li><li>Yjs</li><li>WebSocket</li>
-              </ul>
-            </div>
-          </a>
-        </article>
-
-        <article class="project reveal">
-          <a class="project-link" href="#" target="_blank" rel="noopener">
-            <div class="project-cover" data-index="02">
-              <span class="mono">02</span>
-            </div>
-            <div class="project-body">
-              <div class="project-top">
-                <h3>数据看板引擎</h3>
-                <span class="arrow" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
-                </span>
-              </div>
-              <p>拖拽式 BI 看板，把 20+ 种图表规格抽象成统一 DSL，业务方无需开发即可自助搭建。</p>
-              <ul class="tags small">
-                <li>React</li><li>ECharts</li><li>FastAPI</li>
-              </ul>
-            </div>
-          </a>
-        </article>
-
-        <article class="project reveal">
-          <a class="project-link" href="#" target="_blank" rel="noopener">
-            <div class="project-cover" data-index="03">
-              <span class="mono">03</span>
-            </div>
-            <div class="project-body">
-              <div class="project-top">
-                <h3>CLI 提效工具</h3>
-                <span class="arrow" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
-                </span>
-              </div>
-              <p>把团队日常发布流程封装成一条命令，发布耗时从 12 分钟压到 90 秒，已开源。</p>
-              <ul class="tags small">
-                <li>Node.js</li><li>GitHub Actions</li><li>CLI</li>
-              </ul>
-            </div>
-          </a>
-        </article>
-
-        <article class="project reveal">
-          <a class="project-link" href="#" target="_blank" rel="noopener">
-            <div class="project-cover" data-index="04">
-              <span class="mono">04</span>
-            </div>
-            <div class="project-body">
-              <div class="project-top">
-                <h3>性能监控 SDK</h3>
-                <span class="arrow" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8" /></svg>
-                </span>
-              </div>
-              <p>浏览器端埋点与性能采集库，压缩后仅 4.2KB，接入成本一行代码，已覆盖公司全部 C 端页面。</p>
-              <ul class="tags small">
-                <li>TypeScript</li><li>Rollup</li><li>Performance API</li>
-              </ul>
-            </div>
-          </a>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 04 工作经历 ================= -->
-  <section class="section section-alt" id="experience">
-    <div class="container">
-      <header class="section-head reveal">
-        <span class="section-index mono">04</span>
-        <h2>工作经历</h2>
-      </header>
-
-      <ol class="timeline">
-        <li class="tl-item reveal">
-          <span class="tl-dot" aria-hidden="true"></span>
-          <div class="tl-meta mono">2023 — 至今</div>
-          <div class="tl-body">
-            <h3>高级前端工程师 · 某某科技</h3>
-            <p>负责核心业务线的前端架构与性能治理，主导从 Vue 2 到 Vue 3 的渐进式迁移，首屏时间下降 46%。带 3 人小组，建立了团队的前端规范与 CI 流程。</p>
+        <div class="contact-card reveal">
+          <h3>聊聊看？</h3>
+          <p>作品集里没放完的过程文件、设计笔记和 demo 视频，都可以随时发给你。</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:you@example.com">
+              发邮件给我
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
+            </a>
+            <a class="btn btn-ghost" href="assets/resume.pdf" download>下载简历</a>
           </div>
-        </li>
-        <li class="tl-item reveal">
-          <span class="tl-dot" aria-hidden="true"></span>
-          <div class="tl-meta mono">2021 — 2023</div>
-          <div class="tl-body">
-            <h3>全栈工程师 · 某某网络</h3>
-            <p>从 0 到 1 搭建面向 B 端的 SaaS 后台，独立完成鉴权体系、权限模型与数据报表模块，服务 200+ 企业客户。</p>
-          </div>
-        </li>
-        <li class="tl-item reveal">
-          <span class="tl-dot" aria-hidden="true"></span>
-          <div class="tl-meta mono">2019 — 2021</div>
-          <div class="tl-body">
-            <h3>前端工程师 · 某某工作室</h3>
-            <p>参与多个中小型项目交付，覆盖官网、电商小程序与数据可视化，积累了与客户直接对接的完整项目经验。</p>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ================= 05 联系 ================= -->
-  <section class="section section-contact" id="contact">
-    <div class="container contact-inner">
-      <span class="section-index mono reveal">05</span>
-      <h2 class="reveal">一起做点东西？</h2>
-      <p class="reveal">无论是岗位机会、项目合作，还是单纯想聊聊技术，我都很乐意。通常 24 小时内回复。</p>
-      <div class="hero-actions center reveal">
-        <a class="btn btn-primary" href="mailto:you@example.com">
-          发邮件给我
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
-        </a>
-        <a class="btn btn-ghost" href="#github" target="_blank" rel="noopener">在 GitHub 上看看</a>
+          <ul class="contact-links">
+            <li><span class="mono">邮箱</span> you@example.com</li>
+            <li><span class="mono">B 站</span> space.bilibili.com/xxx</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -352,8 +447,8 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p class="mono">© <span id="year">2026</span> 你的名字</p>
-    <p class="mono">HTML · CSS · JavaScript — 由 GitHub Pages 托管</p>
+    <p class="mono">© <span id="year">2026</span> 你的名字 · 关卡策划作品集</p>
+    <p class="mono">由 GitHub Pages 托管</p>
   </div>
 </footer>
 

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+<!-- ============================================================
+     白盒 Demo 详情页 · 第二个作品
+     结构与 work-blockout-01.html 完全一致，替换文案与图片即可。
+     ============================================================ -->
+
+<title>垂直中庭 · 关卡设计拆解 | 你的名字</title>
+<meta name="description" content="FPS 白盒关卡《垂直中庭》的完整设计拆解：立体动线、视线控制与关键节点。" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232b5cff'/%3E%3Ctext x='50' y='70' font-size='60' font-family='monospace' font-weight='700' fill='white' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E" />
+<link rel="stylesheet" href="assets/css/style.css" />
+
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="返回作品集首页">
+      <span class="brand-mark" aria-hidden="true">Y</span>
+      <span class="brand-text">你的名字</span>
+    </a>
+    <div class="header-actions">
+      <a class="btn btn-ghost btn-sm back-link" href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
+        返回作品集
+      </a>
+      <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="切换深色模式">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" />
+          <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6" />
+        </svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 14.3A8.6 8.6 0 1 1 9.7 3.5a6.9 6.9 0 0 0 10.8 10.8Z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="case-hero">
+    <div class="container">
+      <p class="eyebrow mono reveal"><span class="prompt">$</span> FPS · 白盒关卡 · Unreal Engine 5</p>
+      <h1 class="case-title reveal">垂直中庭</h1>
+      <p class="case-lede reveal">
+        围绕一个多层中庭做立体战斗，让玩家的每一次上下移动，都改变他掌握的战场信息。
+      </p>
+
+      <dl class="case-meta reveal">
+        <div><dt>项目类型</dt><dd>FPS 单关卡设计</dd></div>
+        <div><dt>引擎</dt><dd>Unreal Engine 5</dd></div>
+        <div><dt>制作周期</dt><dd>4 周</dd></div>
+        <div><dt>预计流程</dt><dd>约 20 分钟</dd></div>
+        <div><dt>我的角色</dt><dd>关卡设计 · 白盒搭建 · 文档</dd></div>
+        <div><dt>完成时间</dt><dd>2026 年 8 月</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container container-narrow">
+      <header class="section-head reveal">
+        <span class="section-index mono">01</span>
+        <h2>设计目标与约束</h2>
+      </header>
+
+      <div class="prose reveal">
+        <p>
+          这张关卡要验证一个假设：<strong>在 FPS 里，高度差本身就是一种信息优势</strong>。
+          站在高处的人能看到更多，但也更容易暴露自己。我想让玩家在「占高地」和「藏起来」之间反复权衡。
+        </p>
+        <p>
+          为此我把整张关卡的战斗全部围绕一个<strong>通高 18 米的中庭</strong>展开。
+          三层动线在平面上互相重叠，但在剖面上错开——玩家抬头能看到另一层的人，却不一定打得中。
+        </p>
+      </div>
+
+      <div class="callout reveal">
+        <div class="callout-item">
+          <span class="mono">设计约束</span>
+          <p>全部战斗必须发生在这个中庭的视线范围内，不设独立房间；单人开发 4 周。</p>
+        </div>
+        <div class="callout-item">
+          <span class="mono">验收标准</span>
+          <p>测试者应能仅凭空间关系判断敌方大概位置，而不需要额外的音效或 UI 提示。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">02</span>
+        <h2>平面布局与剖面关系</h2>
+        <p class="section-desc">三层动线在平面投影上互相交叠，实际高差分别为 0 米、6 米、12 米。</p>
+      </header>
+
+      <figure class="figure-block reveal">
+        <div class="fig-placeholder mono">此处放：平面图 + 剖面图并排（剖面图是关键）</div>
+        <figcaption>
+          平面：三层动线叠加投影 · 剖面：L1 主战场 / L2 回廊 / L3 狙击平台 / 中央通高空间
+        </figcaption>
+      </figure>
+
+      <ul class="legend reveal">
+        <li><span class="lg lg-1"></span>L1 主战场（开阔，掩体密集）</li>
+        <li><span class="lg lg-2"></span>L2 回廊（可绕行，视野受限）</li>
+        <li><span class="lg lg-3"></span>L3 平台（视野最好，暴露最多）</li>
+        <li><span class="lg lg-4"></span>垂直连通（楼梯／竖井，交火高发点）</li>
+      </ul>
+
+      <div class="prose reveal">
+        <p>
+          剖面是这张关卡的<strong>主要设计工具</strong>。我在纸上反复调整每一层挑檐的出挑长度，
+          目的是让「从 L1 能否看到 L3」这个问题的答案，在不同位置给出不同的结果。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">03</span>
+        <h2>节奏曲线</h2>
+        <p class="section-desc">与线性关卡不同，这里的强度由「高度差」而非推进距离驱动。</p>
+      </header>
+
+      <figure class="figure-block reveal">
+        <div class="curve-wrap">
+          <svg viewBox="0 0 640 260" role="img" aria-label="关卡紧张度曲线">
+            <title>垂直中庭的紧张度曲线</title>
+            <desc>曲线在进入中庭后迅速抬升，中段保持高位波动，末段回落。</desc>
+
+            <line x1="60" y1="210" x2="610" y2="210" stroke="#d3d7de" stroke-width="1" />
+            <line x1="60" y1="30" x2="60" y2="210" stroke="#d3d7de" stroke-width="1" />
+
+            <text x="60"  y="232" font-size="12" fill="#8a92a0" text-anchor="middle">进入</text>
+            <text x="190" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">L1 遭遇</text>
+            <text x="320" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">L2 绕行</text>
+            <text x="450" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">L3 争夺</text>
+            <text x="590" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">撤离</text>
+
+            <path d="M60 200 L100 175 L190 88 L260 105 L320 128 L390 62 L450 40 L520 78 L590 190"
+                  fill="none" stroke="#2b5cff" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round" />
+
+            <circle cx="190" cy="88" r="4.5" fill="#2b5cff" />
+            <circle cx="450" cy="40" r="4.5" fill="#2b5cff" />
+          </svg>
+        </div>
+        <figcaption>
+          进入中庭后迅速抬升，中段刻意保持在高位并小幅波动——玩家始终处在需要观察上方的状态，
+          而不是像线性关卡那样有明显的喘息段落。
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">04</span>
+        <h2>关键节点拆解</h2>
+      </header>
+
+      <div class="nodes">
+
+        <article class="node-card reveal">
+          <div class="node-media">
+            <div class="fig-placeholder mono">节点 A 截图</div>
+          </div>
+          <div class="node-body">
+            <span class="node-index mono">节点 A · 中庭入口</span>
+            <h3>用通高空间先建立方位感</h3>
+            <p>
+              玩家从一条低矮的入口通道进入中庭，视线在走出通道的瞬间被垂直打开，
+              一眼能看清三层结构的大致轮廓。
+            </p>
+            <p class="node-why">
+              <span class="mono">为什么这么做</span>
+              立体关卡最容易让人迷路。给一个可以反复参照的空间锚点，玩家之后每次抬头都能重新定位自己。
+            </p>
+          </div>
+        </article>
+
+        <article class="node-card reveal">
+          <div class="node-media">
+            <div class="fig-placeholder mono">节点 B 截图</div>
+          </div>
+          <div class="node-body">
+            <span class="node-index mono">节点 B · 挑檐与遮挡</span>
+            <h3>让高度优势带着代价</h3>
+            <p>
+              L2 回廊的挑檐出挑 2.4 米，正好遮住 L1 玩家抬头时的部分视野；
+              而 L3 平台没有任何遮挡，站上去视野全开，但也全程暴露。
+            </p>
+            <p class="node-why">
+              <span class="mono">为什么这么做</span>
+              如果高处永远最好，玩家就会一直往上爬，战斗会退化成抢楼梯。遮挡关系让每一层都有各自的活法。
+            </p>
+          </div>
+        </article>
+
+        <article class="node-card reveal">
+          <div class="node-media">
+            <div class="fig-placeholder mono">节点 C 截图</div>
+          </div>
+          <div class="node-body">
+            <span class="node-index mono">节点 C · 竖井交火</span>
+            <h3>把最危险的位置放在必经之路上</h3>
+            <p>
+              三层之间的连通全靠两个竖井式楼梯，站位狭窄且上下贯通。
+              玩家在通过时必须决定是快速冲过还是先探头观察。
+            </p>
+            <p class="node-why">
+              <span class="mono">为什么这么做</span>
+              立体关卡需要几个「所有人都必须经过」的紧张点，否则各层玩家会各自为战，缺少交汇。
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container container-narrow">
+      <header class="section-head reveal">
+        <span class="section-index mono">05</span>
+        <h2>迭代记录</h2>
+      </header>
+
+      <ol class="timeline">
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">v1 · 第 1 周</div>
+          <div class="tl-body">
+            <h3>问题：三层完全对通，高处碾压一切</h3>
+            <p>最初三层之间没有任何遮挡，测试者一旦抢占 L3 就几乎无法被击落，其余两层形同虚设。</p>
+          </div>
+        </li>
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">v2 · 第 2—3 周</div>
+          <div class="tl-body">
+            <h3>改动：加入挑檐与遮挡，重新分配视野</h3>
+            <p>L2 挑檐出挑 2.4 米，L3 平台边缘加设低矮胸墙。L3 视野依然最好，但不再是单向屠杀，L1 玩家有了贴近的路径。</p>
+          </div>
+        </li>
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">v3 · 第 4 周</div>
+          <div class="tl-body">
+            <h3>改动：压缩竖井宽度，制造必经的紧张点</h3>
+            <p>把两处楼梯从 4 米压缩到 2.5 米并贯通上下视线。测试反馈显示，竖井交火成为了整张关卡被提及最多的片段。</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container-narrow">
+      <header class="section-head reveal">
+        <span class="section-index mono">06</span>
+        <h2>复盘</h2>
+      </header>
+
+      <div class="review reveal">
+        <div class="review-col">
+          <h3 class="mono ok">做得好的</h3>
+          <ul class="highlights">
+            <li>剖面先行的设计方法，让视线关系可以提前推敲而不是靠试错</li>
+            <li>三层各有明确的最优场景，没有出现一层独大</li>
+            <li>中央通高空间作为锚点，全程无人迷路</li>
+          </ul>
+        </div>
+        <div class="review-col">
+          <h3 class="mono warn">待改进的</h3>
+          <ul class="highlights">
+            <li>L3 平台边缘的胸墙高度偏矮，仍有一定的单向优势</li>
+            <li>竖井内的战斗受地形限制，走位空间不足，容易变成对枪</li>
+            <li>入口通道略长，重新进入中庭时的节奏有点拖</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">07</span>
+        <h2>实机演示</h2>
+        <p class="section-desc">三层动线的完整走位，以及竖井交火的实测录像。</p>
+      </header>
+
+      <!-- 替换：把下面的 div 换成 B 站 iframe
+           <iframe src="//player.bilibili.com/player.html?bvid=你的BV号&page=1"
+                   scrolling="no" border="0" frameborder="no" framespacing="0"
+                   allowfullscreen="true" class="video-frame"></iframe>
+      -->
+      <div class="video-holder mono reveal">
+        <span>此处嵌入 B 站视频</span>
+        <small>替换方式见本文件源码注释</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <a class="next-work reveal" href="work-blockout-01.html">
+        <span class="mono">下一个关卡</span>
+        <h2>废弃设施</h2>
+        <span class="next-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
+        </span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="mono">© <span id="year">2026</span> 你的名字 · 关卡策划作品集</p>
+    <p class="mono"><a href="index.html">返回首页</a></p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

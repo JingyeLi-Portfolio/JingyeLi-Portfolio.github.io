@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+<!-- ============================================================
+     白盒 Demo 详情页模板
+     用法：复制本文件为 work-blockout-02.html，替换文案与图片即可。
+     所有图片位置都用 .fig-placeholder 占位，替换方式见每处注释。
+     ============================================================ -->
+
+<title>废弃设施 · 关卡设计拆解 | 你的名字</title>
+<meta name="description" content="FPS 白盒关卡《废弃设施》的完整设计拆解：设计目标、动线分析、关键节点与迭代记录。" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232b5cff'/%3E%3Ctext x='50' y='70' font-size='60' font-family='monospace' font-weight='700' fill='white' text-anchor='middle'%3EY%3C/text%3E%3C/svg%3E" />
+<link rel="stylesheet" href="assets/css/style.css" />
+
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">跳到主要内容</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="返回作品集首页">
+      <span class="brand-mark" aria-hidden="true">Y</span>
+      <span class="brand-text">你的名字</span>
+    </a>
+    <div class="header-actions">
+      <a class="btn btn-ghost btn-sm back-link" href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
+        返回作品集
+      </a>
+      <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="切换深色模式">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" />
+          <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6" />
+        </svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 14.3A8.6 8.6 0 1 1 9.7 3.5a6.9 6.9 0 0 0 10.8 10.8Z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= 项目标题区 ================= -->
+  <section class="case-hero">
+    <div class="container">
+      <p class="eyebrow mono reveal"><span class="prompt">$</span> FPS · 白盒关卡 · Unreal Engine 5</p>
+      <h1 class="case-title reveal">废弃设施</h1>
+      <p class="case-lede reveal">
+        用一条不断收窄又放开的路径，把玩家从开阔区的安全感，逐步推向室内近战的压迫感。
+      </p>
+
+      <dl class="case-meta reveal">
+        <div><dt>项目类型</dt><dd>FPS 单关卡设计</dd></div>
+        <div><dt>引擎</dt><dd>Unreal Engine 5</dd></div>
+        <div><dt>制作周期</dt><dd>3 周</dd></div>
+        <div><dt>预计流程</dt><dd>约 15 分钟</dd></div>
+        <div><dt>我的角色</dt><dd>关卡设计 · 白盒搭建 · 文档</dd></div>
+        <div><dt>完成时间</dt><dd>2026 年 6 月</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ================= 01 设计目标 ================= -->
+  <section class="section section-alt">
+    <div class="container container-narrow">
+      <header class="section-head reveal">
+        <span class="section-index mono">01</span>
+        <h2>设计目标与约束</h2>
+      </header>
+
+      <div class="prose reveal">
+        <p>
+          这是一张<strong>以节奏变化为唯一核心</strong>的短流程关卡。我希望玩家在 15 分钟里，
+          完整经历一次「放松 → 警觉 → 紧张 → 释放」的情绪曲线，而不是从头到尾保持同一种紧张度。
+        </p>
+        <p>
+          空间手段上，我选择用<strong>通道净宽</strong>作为控制变量：开场区域给到 30 米以上的开阔视野，
+          中段压缩到 6 米，终段收进 3 米的室内走廊。玩家未必会意识到宽度在变，
+          但体感上会明显感到「越来越挤」。
+        </p>
+      </div>
+
+      <div class="callout reveal">
+        <div class="callout-item">
+          <span class="mono">设计约束</span>
+          <p>仅使用引擎自带素材，不制作任何新美术资源；单人开发，总工时压缩在 3 周内。</p>
+        </div>
+        <div class="callout-item">
+          <span class="mono">验收标准</span>
+          <p>找 3 名测试者试玩，至少 2 人能主动说出「越往里走越压抑」——即节奏变化被感知到。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 02 平面与动线 ================= -->
+  <section class="section">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">02</span>
+        <h2>平面布局与动线分析</h2>
+        <p class="section-desc">整张关卡是一条带岔路的线性路径，主路径约 180 米，共 3 个战斗空间。</p>
+      </header>
+
+      <!-- 替换：把 .fig-placeholder 换成 <img src="assets/img/plan.jpg" alt="关卡俯视平面图" /> -->
+      <figure class="figure-block reveal">
+        <div class="fig-placeholder mono">此处放：关卡俯视平面图（建议导出引擎 top view 或手绘平面）</div>
+        <figcaption>
+          俯视平面：A 出生点 · B 开阔战斗区 · C 收窄通道 · D 垂直中庭 · E 撤离区
+        </figcaption>
+      </figure>
+
+      <ul class="legend reveal">
+        <li><span class="lg lg-1"></span>主路径（引导玩家前进）</li>
+        <li><span class="lg lg-2"></span>侧翼岔路（提供绕后与风险选择）</li>
+        <li><span class="lg lg-3"></span>视线通廊（可提前观察战场）</li>
+        <li><span class="lg lg-4"></span>资源点（弹药的争夺目标）</li>
+      </ul>
+
+      <div class="prose reveal">
+        <p>
+          动线设计上我刻意让<strong>主路径和侧翼岔路在三个位置交汇</strong>。
+          这样玩家无论走哪条，都会在下一个战斗空间重新汇合——既保留了选择感，
+          又不会因为走错路而完全错过内容。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 03 节奏曲线 ================= -->
+  <section class="section section-alt">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">03</span>
+        <h2>节奏曲线</h2>
+        <p class="section-desc">横轴是玩家推进路径，纵轴是设计意图上的紧张度。</p>
+      </header>
+
+      <figure class="figure-block reveal">
+        <div class="curve-wrap">
+          <svg viewBox="0 0 640 260" role="img" aria-label="关卡紧张度曲线">
+            <title>关卡紧张度随时间的变化曲线</title>
+            <desc>曲线在开场平缓，中段两次抬升，末端达到峰值后快速回落。</desc>
+
+            <line x1="60" y1="210" x2="610" y2="210" stroke="#d3d7de" stroke-width="1" />
+            <line x1="60" y1="30" x2="60" y2="210" stroke="#d3d7de" stroke-width="1" />
+
+            <text x="60" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">出生</text>
+            <text x="196" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">战斗区 B</text>
+            <text x="340" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">通道 C</text>
+            <text x="470" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">中庭 D</text>
+            <text x="600" y="232" font-size="12" fill="#8a92a0" text-anchor="middle">撤离</text>
+
+            <path d="M60 196 L120 190 L196 130 L260 165 L340 95 L400 120 L470 45 L540 60 L600 185"
+                  fill="none" stroke="#2b5cff" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round" />
+
+            <circle cx="196" cy="130" r="4.5" fill="#2b5cff" />
+            <circle cx="340" cy="95"  r="4.5" fill="#2b5cff" />
+            <circle cx="470" cy="45"  r="4.5" fill="#2b5cff" />
+          </svg>
+        </div>
+        <figcaption>
+          三个峰值分别对应开阔区的遭遇战、收窄通道的伏击、以及中庭的垂直交战。
+          每两次峰值之间保留一段回落，让玩家有喘息和整理资源的时间。
+        </figcaption>
+      </figure>
+
+      <div class="prose reveal">
+        <p>
+          我刻意<strong>没有让曲线一路上扬</strong>。中段通道 C 之后有一段明显的回落，
+          这段空间没有任何敌人，只有弹药和一条可选的侧翼路线——作用是让玩家在进入最高强度区域前，
+          有机会重新建立心理准备。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 04 关键节点拆解 ================= -->
+  <section class="section">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">04</span>
+        <h2>关键节点拆解</h2>
+        <p class="section-desc">挑三个最影响体验的空间，说明设计意图与验证结果。</p>
+      </header>
+
+      <div class="nodes">
+
+        <article class="node-card reveal">
+          <div class="node-media">
+            <!-- 替换：<img src="assets/img/node-a.jpg" alt="入口框景" /> -->
+            <div class="fig-placeholder mono">节点 A 截图</div>
+          </div>
+          <div class="node-body">
+            <span class="node-index mono">节点 A · 入口框景</span>
+            <h3>先让玩家看见战场，再让他走进去</h3>
+            <p>
+              在进入开阔战斗区之前，路径经过一条 8 米长的窄廊，尽头正对战场。
+              玩家在廊道里是安全的，但能完整观察到战场布局与敌人分布。
+            </p>
+            <p class="node-why">
+              <span class="mono">为什么这么做</span>
+              无预警遭遇会让玩家感到被惩罚，而不是被挑战。提前给信息，遭遇战就变成了「我准备好了」。
+            </p>
+          </div>
+        </article>
+
+        <article class="node-card reveal">
+          <div class="node-media">
+            <div class="fig-placeholder mono">节点 B 截图</div>
+          </div>
+          <div class="node-body">
+            <span class="node-index mono">节点 B · 收窄通道</span>
+            <h3>用净宽压缩制造体感压力</h3>
+            <p>
+              中段通道从 12 米逐段收窄到 6 米，同时抬高两侧墙体 1.5 米。
+              玩家在这里无法横向展开，只能沿轴线推进。
+            </p>
+            <p class="node-why">
+              <span class="mono">为什么这么做</span>
+              这是建筑学里的空间感知手法：不需要加敌人，仅靠尺度变化就能让玩家变紧张。
+            </p>
+          </div>
+        </article>
+
+        <article class="node-card reveal">
+          <div class="node-media">
+            <div class="fig-placeholder mono">节点 C 截图</div>
+          </div>
+          <div class="node-body">
+            <span class="node-index mono">节点 C · 垂直中庭</span>
+            <h3>把「绕后」变成一个需要权衡的决定</h3>
+            <p>
+              终段是一个两层中庭，二层回廊可以直接俯视一层主战场。
+              走回廊更安全、视野更好，但会错过一层的弹药补给。
+            </p>
+            <p class="node-why">
+              <span class="mono">为什么这么做</span>
+              让最优解不存在，玩家必须做取舍——这是我认为关卡设计里最有效的决策压力来源。
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 05 迭代记录 ================= -->
+  <section class="section section-alt">
+    <div class="container container-narrow">
+      <header class="section-head reveal">
+        <span class="section-index mono">05</span>
+        <h2>迭代记录</h2>
+        <p class="section-desc">每一轮改动都来自测试反馈，而不是我自己的判断。</p>
+      </header>
+
+      <ol class="timeline">
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">v1 · 第 1 周</div>
+          <div class="tl-body">
+            <h3>问题：玩家绕过了核心战斗区</h3>
+            <p>首版开阔区给得太大，测试中 3 人里有 2 人选择从边缘绕行，完全跳过了中央遭遇战。节奏曲线的第一个峰值没有生效。</p>
+          </div>
+        </li>
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">v2 · 第 2 周</div>
+          <div class="tl-body">
+            <h3>改动：收窄绕行路线，增加侧翼代价</h3>
+            <p>把边缘通道净宽从 10 米压缩到 4 米，并在其中放置高价值补给。绕行从「更省事」变成了「更冒险但收益更高」，两个选择都有了存在意义。</p>
+          </div>
+        </li>
+        <li class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-meta mono">v3 · 第 3 周</div>
+          <div class="tl-body">
+            <h3>改动：加入垂直落差，强化终局决策</h3>
+            <p>终段中庭增加二层回廊，并在回廊尽头设置撤离点。玩家面对「安全但错过资源」和「危险但补给充足」的取舍，测试反馈这一段的讨论度最高。</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= 06 复盘 ================= -->
+  <section class="section">
+    <div class="container container-narrow">
+      <header class="section-head reveal">
+        <span class="section-index mono">06</span>
+        <h2>复盘</h2>
+      </header>
+
+      <div class="review reveal">
+        <div class="review-col">
+          <h3 class="mono ok">做得好的</h3>
+          <ul class="highlights">
+            <li>净宽作为节奏控制变量，成本极低但测试者可感知</li>
+            <li>用视线通廊替代 UI 指引，玩家没有迷路过</li>
+            <li>三个战斗空间的掩体密度与通道宽度正相关，战斗风格自然分化</li>
+          </ul>
+        </div>
+        <div class="review-col">
+          <h3 class="mono warn">待改进的</h3>
+          <ul class="highlights">
+            <li>开场引导仍依赖一次显式的地面标识，不够优雅</li>
+            <li>通道 C 的空窗期偏长，第二次测试中有人误以为走错路</li>
+            <li>二层回廊的护栏高度遮挡了部分射击视线，需要再调</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 07 Demo 视频 ================= -->
+  <section class="section section-alt">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">07</span>
+        <h2>实机演示</h2>
+        <p class="section-desc">完整走位流程与三个战斗空间的实测录像。</p>
+      </header>
+
+      <!-- 替换：把下面的 div 换成 B 站 iframe
+           <iframe src="//player.bilibili.com/player.html?bvid=你的BV号&page=1"
+                   scrolling="no" border="0" frameborder="no" framespacing="0"
+                   allowfullscreen="true" class="video-frame"></iframe>
+      -->
+      <div class="video-holder mono reveal">
+        <span>此处嵌入 B 站视频</span>
+        <small>替换方式见本文件源码注释</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 下一个作品 ================= -->
+  <section class="section">
+    <div class="container">
+      <a class="next-work reveal" href="work-blockout-02.html">
+        <span class="mono">下一个关卡</span>
+        <h2>垂直中庭</h2>
+        <span class="next-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
+        </span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="mono">© <span id="year">2026</span> 你的名字 · 关卡策划作品集</p>
+    <p class="mono"><a href="index.html">返回首页</a></p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
