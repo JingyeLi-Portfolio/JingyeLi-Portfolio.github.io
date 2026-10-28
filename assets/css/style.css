@@ -1354,3 +1354,59 @@ html[data-theme="dark"] .mono.warn { color: #fbbf24; }
 @media (max-width: 860px) {
   .works { grid-template-columns: 1fr; }
 }
+
+/* ---- 主页精选位：左可交互地图 + 右项目说明 ---- */
+.feature {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color .22s var(--ease), box-shadow .22s var(--ease);
+}
+.feature:hover { border-color: var(--border-strong); box-shadow: var(--shadow); }
+
+.feature-map {
+  position: relative;
+  padding: 20px;
+  background: var(--bg-soft);
+  border-right: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+}
+.feature-map svg { display: block; width: 100%; height: auto; margin-top: 26px; }
+
+.hp { cursor: pointer; outline: none; }
+.hp-hit { fill: transparent; }
+.hp-ring {
+  fill: none; stroke: var(--accent); stroke-width: 1.5;
+  opacity: 0; transition: opacity .18s var(--ease);
+}
+.hp:hover .hp-ring, .hp:focus-visible .hp-ring { opacity: .55; }
+.hp.is-active .hp-ring { opacity: .9; }
+.cd-dot-shop { fill: #d97706; }
+.cd-dot-res { fill: #dc2626; }
+
+.map-info {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-soft);
+  font-size: .84rem;
+  line-height: 1.75;
+  min-height: 4.2em;
+}
+.map-info strong { display: block; color: var(--text); margin-bottom: 4px; font-size: .88rem; }
+
+.feature-body { padding: 26px 28px; display: flex; flex-direction: column; }
+.feature-body h3 { font-size: 1.25rem; }
+.feature-body .work-goal { margin-top: 18px; }
+.feature-body .more { margin-top: auto; padding-top: 20px; text-decoration: none; }
+
+@media (max-width: 900px) {
+  .feature { grid-template-columns: 1fr; }
+  .feature-map { border-right: 0; border-bottom: 1px solid var(--border-soft); }
+}

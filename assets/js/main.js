@@ -169,3 +169,24 @@
     }
   });
 })();
+
+/* 主页精选位：小镇地图热点，点击查看位置说明 */
+(function () {
+  'use strict';
+  var spots = document.querySelectorAll('.feature-map .hp');
+  var info = document.getElementById('homeMapInfo');
+  if (!spots.length || !info) return;
+
+  function activate(spot) {
+    spots.forEach(function (s) { s.classList.remove('is-active'); });
+    spot.classList.add('is-active');
+    info.innerHTML = '<strong>' + spot.dataset.name + '</strong>' + spot.dataset.desc;
+  }
+
+  spots.forEach(function (spot) {
+    spot.addEventListener('click', function () { activate(spot); });
+    spot.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(spot); }
+    });
+  });
+})();

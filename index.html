@@ -81,17 +81,17 @@
     <div class="container">
       <p class="eyebrow mono reveal"><span class="prompt">$</span> level designer · 关卡策划 · 郑州</p>
 
-      <h1 class="hero-title reveal">不给任务箭头，<br />让玩家自己<span class="hl">读出该往哪走</span></h1>
+      <h1 class="hero-title reveal">三个白盒关卡，<br />从 5v5 竞技到<span class="hl">开放世界探索</span></h1>
 
       <p class="hero-sub reveal">
-        我是李敬业，郑州大学建筑学五年制，现在做关卡。手上是三个 Unity 白盒：
-        两张 CS 5v5 竞技图（Borgo、Dam），和一个开放世界丧尸生存的第一章《Last Light》。
-        如果你只看一个——看最后那个。它没有 UI 引导点，玩家靠路网、视线和一盏灯找到终点。
+        我是李敬业，郑州大学建筑学五年制。这里是我用 Unity 做的三个关卡：
+        开放世界探索章节《Last Light》，和两张 CS 风格的 5v5 竞技地图 Borgo、Dam。
+        每个项目都写了设计目标、动线安排和修改过程，你可以直接看到我是怎么想问题的，而不只是看几张截图。
       </p>
 
       <div class="hero-actions reveal">
-        <a class="btn btn-primary" href="work-lastlight.html">
-          看《Last Light》
+        <a class="btn btn-primary" href="#works">
+          查看关卡作品
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
         </a>
         <a class="btn btn-ghost" href="assets/resume.pdf" download>下载简历</a>
@@ -221,59 +221,87 @@
         <span class="section-index mono">02</span>
         <h2>关卡作品</h2>
         <p class="section-desc">
-          三张 Unity 白盒：一个开放世界探索章节，两张 CS 竞技双包点地图。
-          每张点进去都不只是录屏——有设计约束、动线分析、POI 意图与迭代记录。
+          三个项目都是我一个人做的，从画平面到搭白盒。下面这张地图可以直接点，
+          每个项目的详情页里有完整的设计过程和修改记录。
         </p>
       </header>
 
       <div class="works">
 
-        <article class="work-card work-card-lead reveal">
-          <a class="work-link" href="work-lastlight.html">
-            <div class="work-cover cover-draw">
-              <span class="cover-pill mono">开放世界 · 探索 PVE · 第一章</span>
-              <svg viewBox="0 0 520 300" role="img" aria-label="Last Light 小镇区块平面示意">
-                <rect x="0" y="0" width="520" height="300" class="cd-bg" />
-                <path d="M0 150 H520" class="cd-road cd-road-main" />
-                <path d="M96 150 V268" class="cd-road" />
-                <path d="M300 150 V96" class="cd-road cd-road-alley" />
-                <path d="M430 150 V214" class="cd-road" />
-                <rect x="40" y="218" width="112" height="62" class="cd-block cd-safe" />
-                <rect x="170" y="196" width="70" height="52" class="cd-block" />
-                <rect x="196" y="60" width="66" height="46" class="cd-block" />
-                <rect x="272" y="60" width="66" height="46" class="cd-block" />
-                <rect x="386" y="184" width="94" height="70" class="cd-block cd-goal" />
-                <rect x="392" y="176" width="82" height="9" class="cd-canopy" />
-                <circle cx="62" cy="66" r="13" class="cd-tower" />
-                <polyline class="cd-route" points="96,249 96,150 170,150 300,150 386,150 430,150 430,200" />
+        <article class="work-card work-card-lead feature reveal" id="lastlight">
+          <div class="feature-map">
+            <span class="cover-pill mono">精选 · 开放世界探索</span>
+            <svg viewBox="0 0 520 300" role="group" aria-label="Last Light 小镇示意地图，圆点可以点击">
+              <rect x="0" y="0" width="520" height="300" class="cd-bg" />
+              <path d="M0 150 H520" class="cd-road cd-road-main" />
+              <path d="M96 150 V268" class="cd-road" />
+              <path d="M300 150 V96" class="cd-road cd-road-alley" />
+              <path d="M430 150 V214" class="cd-road" />
+              <rect x="40" y="218" width="112" height="62" class="cd-block cd-safe" />
+              <rect x="170" y="196" width="70" height="52" class="cd-block" />
+              <rect x="196" y="60" width="66" height="46" class="cd-block" />
+              <rect x="272" y="60" width="66" height="46" class="cd-block" />
+              <rect x="386" y="184" width="94" height="70" class="cd-block cd-goal" />
+              <rect x="392" y="176" width="82" height="9" class="cd-canopy" />
+              <circle cx="62" cy="66" r="13" class="cd-tower" />
+              <polyline class="cd-route" points="96,249 96,150 170,150 300,150 386,150 430,150 430,200" />
+              <text x="96" y="292" class="cd-label">HAVEN</text>
+              <text x="433" y="240" class="cd-label">FUEL</text>
+              <text x="262" y="44" class="cd-label">RESIDENTIAL</text>
+
+              <g class="hp" tabindex="0" role="button" aria-label="安全屋"
+                 data-name="安全屋 Haven House"
+                 data-desc="出发点和返程终点，全程唯一绝对安全的位置。玩家在这里整理装备，也在这里看到任务完成时亮起的那盏灯。">
+                <circle cx="96" cy="249" r="18" class="hp-hit" />
                 <circle cx="96" cy="249" r="7" class="cd-dot cd-dot-safe" />
+                <circle cx="96" cy="249" r="13" class="hp-ring" />
+              </g>
+              <g class="hp" tabindex="0" role="button" aria-label="杂货店"
+                 data-name="杂货店 Corner Store"
+                 data-desc="在主街转角，不在街中段。转角本来就会让人减速，所以把第一次搜刮教学放在这里，玩家最容易注意到。">
+                <circle cx="205" cy="222" r="18" class="hp-hit" />
+                <circle cx="205" cy="222" r="7" class="cd-dot cd-dot-shop" />
+                <circle cx="205" cy="222" r="13" class="hp-ring" />
+              </g>
+              <g class="hp" tabindex="0" role="button" aria-label="住宅区"
+                 data-name="住宅区 Residential"
+                 data-desc="物资最多、感染者最密的一段。玩家要决定进几栋房子：搜得越仔细，回程的弹药和体力就越紧张。">
+                <circle cx="262" cy="83" r="18" class="hp-hit" />
+                <circle cx="262" cy="83" r="7" class="cd-dot cd-dot-res" />
+                <circle cx="262" cy="83" r="13" class="hp-ring" />
+              </g>
+              <g class="hp" tabindex="0" role="button" aria-label="加油站"
+                 data-name="加油站 Miller's Fuel"
+                 data-desc="本章目标。正门是一片开阔地，进去之前会先暴露自己；后门安静，但要先穿过后巷。两种进法对应两种风险。">
+                <circle cx="430" cy="200" r="18" class="hp-hit" />
                 <circle cx="430" cy="200" r="7" class="cd-dot cd-dot-goal" />
-                <text x="96" y="284" class="cd-label">HAVEN</text>
-                <text x="433" y="240" class="cd-label">FUEL</text>
-              </svg>
-            </div>
-            <div class="work-body">
-              <h3>Last Light · 最后的微光</h3>
-              <p class="work-meta mono">Unity · 探索 PVE · Restore Power</p>
+                <circle cx="430" cy="200" r="13" class="hp-ring" />
+              </g>
+            </svg>
+            <p class="map-info" id="homeMapInfo">点地图上的四个圆点，看看这些位置为什么这么安排。</p>
+          </div>
 
-              <p class="work-goal">
-                <span class="mono">设计约束</span>
-                全章不放任务箭头与 UI 引导点。玩家能不能找到加油站，只取决于路网、
-                开阔度和远处的轮廓是否写得清楚——这件事我用自己的空间训练来解决。
-              </p>
+          <div class="feature-body">
+            <h3>Last Light · 最后的微光</h3>
+            <p class="work-meta mono">Unity · 开放世界探索 · 个人项目</p>
 
-              <ul class="highlights">
-                <li>7 个 POI 按威胁梯度排布：越深入住宅区，资源越值钱、危险越高</li>
-                <li>三条可达路线并存，对应不同的探索状态、耗时与容错成本</li>
-                <li>压力峰值放在回程而非去程——巡逻错位，逼玩家重读一遍地图</li>
-              </ul>
+            <p class="work-goal">
+              <span class="mono">做了什么</span>
+              一个丧尸题材小镇的第一章。玩家从安全屋出发，穿过住宅区去加油站找燃油，
+              再把它带回来。平面布局、白盒搭建和整条探索路线都是我一个人做的。
+            </p>
 
-              <span class="more">
-                进入可交互地图与完整拆解
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
-              </span>
-            </div>
-          </a>
+            <ul class="highlights">
+              <li>7 个 POI，按危险程度安排资源：越危险的位置，物资越值得冒险</li>
+              <li>三条路线通往加油站，赶时间、想潜行、想搜刮各有走法</li>
+              <li>返程比去程更紧张：巡逻路线会变化，不能只靠背板走回头路</li>
+            </ul>
+
+            <a class="more" href="work-lastlight.html">
+              查看完整拆解
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
+            </a>
+          </div>
         </article>
 
         <article class="work-card reveal">
