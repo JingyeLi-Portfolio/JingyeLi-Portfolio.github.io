@@ -2,20 +2,24 @@
    POI 互动地图渲染器
    读取 window.LL_POI 配置（见 lastlight-poi.js），在页面上生成可点的按钮。
    页面里放一个占位元素即可：
-     <div data-poi-map="page"></div>  详情页模式（按钮+详情面板+图例）
-     <div data-poi-map="home"></div>  首页模式（只显示 home:true 的按钮）
+     <div data-poi-map="overview"></div>  关卡总览（图+侧栏详情+图例）
+     <div data-poi-map="layout"></div>    主区白盒布局（同上）
+     <div data-poi-map="home"></div>      首页精选卡片（只显示 home:true 的按钮）
+   桌面端：地图在左、详情面板在右侧 sticky，点按钮一屏内即可看到详情。
+   移动端：面板在图下方，点击后自动滚动到面板。
    编辑模式：网址加 #poi-edit，可拖动按钮取坐标。
    ========================================================================== */
 (function () {
   'use strict';
 
   var cfg = window.LL_POI;
-  if (!cfg) return;
+  if (!cfg || !cfg.maps) return;
 
   var roots = Array.prototype.slice.call(document.querySelectorAll('[data-poi-map]'));
   if (!roots.length) return;
 
   var isEditing = location.hash.indexOf('poi-edit') !== -1;
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- 工具 ---------- */
 
@@ -29,18 +33,7 @@
     return (cfg.categories[cat] && cfg.categories[cat].label) || cat;
   }
 
-  /* ---------- 详情面板（详情页模式） ---------- */
-
-  function buildDetailPanel(root) {
-    var panel = document.createElement('div');
-    panel.className = 'poi-detail';
-    panel.id = 'poiDetail';
-    panel.setAttribute('aria-live', 'polite');
-    panel.innerHTML =
-      '<p class="poi-detail-empty mono">点地图上的标记，查看该位置的设计说明。</p>';
-    root.appendChild(panel);
-    return panel;
-  }
+  /* ---------- 详情面板 ---------- */
 
   function fillDetail(panel, p) {
     var fig = p.img
@@ -53,9 +46,12 @@
       '<p class="poi-detail-desc">' + esc(p.desc) + '</p>' +
       fig;
     panel.classList.add('is-filled');
-  }
 
-  /* ---------- 首页信息行 ---------- */
+    /* 小屏（面板在图下方）时自动滚过去，保证一屏内看到详情 */
+    if (window.innerWidth <= 1000 && !prefersReduced) {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
 
   function fillHomeInfo(p) {
     var info = document.getElementById('homeMapInfo');
@@ -79,7 +75,7 @@
         p.y = Math.round(y * 10) / 10;
         btn.style.left = p.x + '%';
         btn.style.top = p.y + '%';
-        var bar = document.getElementById('poiEditBar');
+        var bar = document.getElementById('poiEditBar-' + p.mapKey);
         if (bar) {
           bar.textContent = p.name + '  →  x: ' + p.x + ', y: ' + p.y + '  （松手后把这行数字填进 lastlight-poi.js）';
         }
@@ -96,30 +92,41 @@
     });
   }
 
-  function buildEditBar(root) {
-    var bar = document.createElement('div');
-    bar.className = 'poi-edit-bar mono';
-    bar.id = 'poiEditBar';
-    bar.textContent = '编辑模式：按住任意按钮拖动到想要的位置，坐标会显示在这里';
-    root.insertBefore(bar, root.firstChild);
-  }
-
   /* ---------- 主流程 ---------- */
 
   roots.forEach(function (root) {
-    var mode = root.getAttribute('data-poi-map');
-    var list = cfg.pois.filter(function (p) {
+    var mode = root.getAttribute('data-poi-map');           // overview / layout / home
+    var mapKey = mode === 'home' ? 'overview' : mode;
+    var map = cfg.maps[mapKey];
+    if (!map) return;
+
+    var list = map.pois.filter(function (p) {
       return mode === 'home' ? p.home !== false : true;
     });
 
     root.classList.add('poi-map');
 
+    if (isEditing && mode !== 'home') {
+      var bar = document.createElement('div');
+      bar.className = 'poi-edit-bar mono';
+      bar.id = 'poiEditBar-' + mapKey;
+      bar.textContent = '编辑模式：按住任意按钮拖动到想要的位置，坐标会显示在这里';
+      root.appendChild(bar);
+    }
+
+    /* 桌面端左图右栏布局 */
+    var layout = document.createElement('div');
+    layout.className = mode === 'home' ? 'poi-home' : 'poi-layout';
+
+    var main = document.createElement('div');
+    main.className = 'poi-main';
+
     var stage = document.createElement('div');
     stage.className = 'poi-stage';
 
     var img = document.createElement('img');
-    img.src = cfg.image;
-    img.alt = cfg.alt || '';
+    img.src = map.image;
+    img.alt = map.alt || '';
     img.loading = 'lazy';
     stage.appendChild(img);
 
@@ -127,6 +134,7 @@
     var panel = null;
 
     list.forEach(function (p) {
+      p.mapKey = mapKey;
       var btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'poi-btn poi-btn-' + esc(p.cat);
@@ -146,12 +154,12 @@
         }
       });
 
-      if (isEditing) makeEditable(stage, btn, p);
+      if (isEditing && mode !== 'home') makeEditable(stage, btn, p);
       stage.appendChild(btn);
       btns.push(btn);
     });
 
-    root.appendChild(stage);
+    main.appendChild(stage);
 
     if (mode !== 'home') {
       /* 图例：五种颜色 */
@@ -163,11 +171,21 @@
                 esc(cfg.categories[key].label) + '</span>';
       });
       legend.innerHTML = html;
-      root.appendChild(legend);
-
-      panel = buildDetailPanel(root);
+      main.appendChild(legend);
     }
 
-    if (isEditing) buildEditBar(root);
+    layout.appendChild(main);
+
+    if (mode !== 'home') {
+      panel = document.createElement('div');
+      panel.className = 'poi-detail';
+      panel.id = 'poiDetail-' + mapKey;
+      panel.setAttribute('aria-live', 'polite');
+      panel.innerHTML =
+        '<p class="poi-detail-empty mono">点地图上的标记，右侧查看该位置的设计说明。</p>';
+      layout.appendChild(panel);
+    }
+
+    root.appendChild(layout);
   });
 })();

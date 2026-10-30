@@ -79,7 +79,9 @@
   <!-- ================= Hero ================= -->
   <section class="hero" id="top">
     <div class="container">
-      <p class="eyebrow mono reveal"><span class="prompt">$</span> level designer · 关卡策划 · 郑州</p>
+      <div class="hero-grid">
+        <div class="hero-text">
+      <p class="eyebrow mono reveal"><span class="prompt">$</span> level designer · 关卡策划</p>
 
       <h1 class="hero-title reveal">从竞技地图到开放世界，<br />探索空间如何<span class="hl">影响玩家决策</span></h1>
 
@@ -104,6 +106,18 @@
         </a>
         <a class="btn btn-ghost" href="assets/resume.pdf" download>下载简历</a>
       </div>
+        </div><!-- /hero-text -->
+
+        <!-- 首屏右侧视觉：点击图片直接进入 Last Light 详情。
+             后续替换：选定开放世界截图后，把下面 img 的 src 换成新文件即可 -->
+        <a class="hero-visual reveal" href="work-lastlight.html" aria-label="进入 Last Light 开放世界项目详情">
+          <img src="assets/img/lastlight-layout.jpg" alt="Last Light 开放世界小镇白盒布局俯视图" />
+          <span class="hero-visual-tag">
+            Last Light · 开放世界生存（制作中）
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
+          </span>
+        </a>
+      </div><!-- /hero-grid -->
 
       <ul class="stats reveal">
         <li>
@@ -219,8 +233,8 @@
 
             <ul class="highlights">
               <li>区域布局与道路连接已在 Unity 白盒中落地</li>
-              <li>探索动线围绕 Restore Power 任务设计，主线为往返（PICK &amp; BACK）结构</li>
-              <li>兴趣点危险程度、资源价值与撤离路线的取舍是当前设计重点</li>
+              <li>两条主路线引导玩家体验不同空间的遭遇与氛围，主线为往返（PICK &amp; BACK）结构</li>
+              <li>已实现可搜刮物资系统：6 大分类 · 36 种物资 · 3 档稀有度</li>
             </ul>
 
             <a class="more" href="work-lastlight.html">

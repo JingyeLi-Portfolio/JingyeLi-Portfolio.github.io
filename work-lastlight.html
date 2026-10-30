@@ -68,7 +68,8 @@
         <div><dt>项目状态</dt><dd><span class="badge-wip">制作中</span></dd></div>
         <div><dt>项目类型</dt><dd>开放世界生存 · 探索</dd></div>
         <div><dt>当前阶段</dt><dd>第一节任务 · Restore Power</dd></div>
-        <div><dt>引擎</dt><dd>Unity · 白盒</dd></div>
+        <div><dt>引擎</dt><dd>Unity（ProBuilder 白盒）</dd></div>
+        <div><dt>制作工具</dt><dd>Unity · ProBuilder · Photoshop</dd></div>
         <div><dt>我的角色</dt><dd>关卡设计 · 白盒搭建</dd></div>
         <div><dt>关键词</dt><dd>POI · 探索动线 · 风险与收益</dd></div>
       </dl>
@@ -100,6 +101,10 @@
         <p>
           以丧尸灾变后的现代小镇为背景，尝试通过住宅区、资源兴趣点与安全屋之间的空间关系，
           组织一段具有探索目标与风险选择的生存关卡体验。
+        </p>
+        <p>
+          白盒在 Unity 中搭建，建筑体量与道路使用 ProBuilder 建模，布局图与标注图用 Photoshop 绘制；
+          可搜刮物资系统的图标与游戏内展示使用同一套程序生成的白盒资产。
         </p>
         <p>
           项目仍在制作中。具体玩法机制与测试结论将在实现和验证后补充。
@@ -144,7 +149,7 @@
       </header>
 
       <div class="reveal">
-        <div data-poi-map="page"></div>
+        <div data-poi-map="overview"></div>
       </div>
     </div>
   </section>
@@ -180,17 +185,18 @@
         <h2>主区白盒布局</h2>
         <p class="section-desc">
           Unity 白盒阶段的俯视全景：住宅组团、镇中心、环路、农田与水体一起构成小镇的骨架。
+          点下面的标记，查看各区域的空间关系说明。
         </p>
       </header>
 
-      <figure class="figure-block reveal">
-        <img src="assets/img/lastlight-layout.jpg" alt="主区白盒布局俯视图：住宅组团沿街排布，中部为镇中心密集建筑群，右上有环路连接，下方为农田与温室" loading="lazy" />
-        <figcaption>
-          白盒关注的是空间关系而不是美术表现：建筑体量先按尺度与朝向摆出来，
-          验证路网是否成立、体量是否能承担方向感。镇中心的密集街巷与周边的农田、水体
-          形成「密 — 疏」两种空间密度，对应不同的探索节奏。
-        </figcaption>
-      </figure>
+      <div class="reveal">
+        <div data-poi-map="layout"></div>
+      </div>
+      <p class="section-desc reveal" style="margin-top: 18px;">
+        白盒关注的是空间关系而不是美术表现：建筑体量先按尺度与朝向摆出来，
+        验证路网是否成立、体量是否能承担方向感。镇中心的密集街巷与周边的农田、水体
+        形成「密 — 疏」两种空间密度，对应不同的探索节奏。
+      </p>
     </div>
   </section>
 
@@ -214,6 +220,7 @@
             <li>区域之间的道路连接与主线路径（START ↔ PICK &amp; BACK）</li>
             <li>POI 空间关系与资源分布的规划布局</li>
             <li>任务目标设计：搜寻燃油 → 返回安全屋</li>
+            <li>可搜刮物资系统：6 大分类 · 36 种物资 · 3 档稀有度，见下方图鉴</li>
           </ul>
         </div>
         <div class="scope-col">
@@ -228,48 +235,43 @@
       </div>
 
       <div class="prose reveal" style="margin-top: 28px;">
-        <h3 class="sub-head">往返路线的设计设想</h3>
+        <h3 class="sub-head">往返路线的引导设计</h3>
         <p>
-          围绕「安全屋 → 加油站 → 安全屋」的往返结构，我在布局上预留了三种走法的空间基础，
-          属于设计设想，实际选择率有待实现后测试验证：
+          这张图的可走区域比较自由，路线不是唯一走法。我在布局上明确了<strong>两条主路线</strong>，
+          作用是引导玩家去体验不同空间形成的遭遇与氛围：一条把视野打开、把方向讲清楚，
+          一条把空间收紧、把压力加上去。
         </p>
       </div>
 
       <div class="route-panels reveal">
         <article class="route-panel is-on">
           <div class="route-head">
-            <h3>主街直行</h3>
-            <p class="route-metrics mono">路程直观 · 暴露最高 · 耗时最短</p>
+            <h3>主线一 · 主街直行</h3>
+            <p class="route-metrics mono">视野开阔 · 方向清晰 · 遭遇直接</p>
           </div>
           <p>
-            沿主街往返。这条路几乎不需要「找」，承担方向教学的职能——
-            在认知负担最低的情况下把街区的方向和尺度讲清楚。
-            设想瓶颈点收窄通行宽度，脚步与视线被引向预设方向。
+            沿主街往返加油站。这条路线承担方向教学的职能：视野开阔、可参照物多，
+            玩家在认知负担最低的情况下读懂街区的方向和尺度。主街瓶颈处收窄通行宽度，
+            引导视线朝向预设方向，把「正面遭遇」放在视线相对可控的位置。
           </p>
         </article>
 
         <article class="route-panel">
           <div class="route-head">
-            <h3>街背绕行</h3>
-            <p class="route-metrics mono">视野受限 · 暴露最低 · 撤退空间小</p>
+            <h3>主线二 · 住宅巷深入</h3>
+            <p class="route-metrics mono">空间收紧 · 氛围紧张 · 高风险高收益</p>
           </div>
           <p>
-            贴着住宅组团外侧绕行。设想给「已经熟悉地形的玩家」一条更聪明的走法，
-            代价是几乎没有容错：被发现时退路有限。设计上预留了半掩体喘息点的位置。
-          </p>
-        </article>
-
-        <article class="route-panel">
-          <div class="route-head">
-            <h3>深入慢搜</h3>
-            <p class="route-metrics mono">资源收益最高 · 耗时最长 · 遭遇最多</p>
-          </div>
-          <p>
-            穿过住宅巷逐栋搜索。设想给愿意多花时间的玩家对应的高价值资源，
-            真实瓶颈不是路线而是消耗品——「继续搜还是见好就收」是这条路的核心取舍。
+            从主街拐入住宅巷，在细碎的室内外空间之间穿行。这条路线把空间收紧、
+            视线压短，营造「不知道下一个转角有什么」的紧张感；对应地，
+            这里的资源价值最高——玩家用空间体验上的压力换取搜刮收益。
           </p>
         </article>
       </div>
+      <p class="section-desc reveal" style="margin-top: 16px;">
+        除两条主路线外，街背与农田方向同样连通可自由探索。引导的意义在于让玩家感受到空间差异，
+        而不是限制他们的选择；实际路线选择有待实现后测试验证。
+      </p>
     </div>
   </section>
 
@@ -339,6 +341,34 @@
     </div>
   </section>
 
+  <!-- ================= 07 物资系统与图鉴 ================= -->
+  <section class="section section-alt" id="loot">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">07</span>
+        <h2>物资系统与图鉴</h2>
+        <p class="section-desc">
+          为搜刮玩法设计的一套资源系统：6 大分类 · 36 种物资 · 3 档稀有度。
+          全部模型为程序生成的低多边形白盒资产，图标由同一套模型批量渲染，与游戏内展示完全一致。
+        </p>
+      </header>
+
+      <div class="loot-rules reveal">
+        <span>对准可搜刮点按 <b>F</b> 搜刮，每个容器可搜 <b>3 轮</b></span>
+        <span>每轮 <b>22%</b> 概率一无所获</span>
+        <span>掉落池绑定容器：<b>车辆</b> → 材料/工具/贵重/医疗</span>
+        <span><b>垃圾桶</b> → 食物/饮水/材料/医疗</span>
+      </div>
+
+      <div class="reveal" data-loot-gallery></div>
+
+      <p class="section-desc reveal" style="margin-top: 20px;">
+        设计上让稀有物资承担「惊喜奖励」而非硬性门槛：常见物资保证每个搜刮点的资源下限，
+        高稀有度道具（收音机、门禁卡、防毒面具）则引导玩家主动走向风险更高的路线。
+      </p>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
       <a class="next-work reveal" href="work-blockout-01.html">
@@ -360,5 +390,6 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/lastlight-poi.js"></script>
 <script src="assets/js/poi-map.js"></script>
+<script src="assets/js/loot-gallery.js"></script>
 </body>
 </html>
