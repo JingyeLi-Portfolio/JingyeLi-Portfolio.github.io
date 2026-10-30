@@ -1410,3 +1410,261 @@ html[data-theme="dark"] .mono.warn { color: #fbbf24; }
   .feature { grid-template-columns: 1fr; }
   .feature-map { border-right: 0; border-bottom: 1px solid var(--border-soft); }
 }
+
+/* ==========================================================================
+   POI 互动地图（配置见 assets/js/lastlight-poi.js）
+   ========================================================================== */
+.poi-map { position: relative; }
+
+.poi-stage {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  line-height: 0;
+}
+.poi-stage img { width: 100%; height: auto; display: block; }
+
+/* ---- 按钮：五色圆点 ---- */
+.poi-btn {
+  --poi-c: #2b5cff;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 22px; height: 22px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: var(--poi-c);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .38);
+  transition: transform .16s var(--ease), box-shadow .16s var(--ease);
+  z-index: 2;
+}
+.poi-btn i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.92); }
+.poi-btn:hover, .poi-btn:focus-visible {
+  transform: translate(-50%, -50%) scale(1.28);
+  outline: none;
+}
+.poi-btn:focus-visible { box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--poi-c); }
+.poi-btn.is-active {
+  box-shadow: 0 0 0 3px rgba(255,255,255,.85), 0 0 0 6px var(--poi-c), 0 1px 6px rgba(0,0,0,.4);
+  transform: translate(-50%, -50%) scale(1.18);
+}
+.poi-btn.is-dragging { cursor: grabbing; }
+
+/* 悬停名称气泡 */
+.poi-btn::after {
+  content: attr(data-name);
+  position: absolute;
+  left: 50%; bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: .72rem; line-height: 1;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 9px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .15s var(--ease);
+  box-shadow: var(--shadow);
+}
+.poi-btn:hover::after, .poi-btn:focus-visible::after { opacity: 1; }
+
+/* 五种颜色 */
+.poi-btn-goal   { --poi-c: #2b5cff; }
+.poi-btn-safe   { --poi-c: #dc2626; }
+.poi-btn-poi    { --poi-c: #16a34a; }
+.poi-btn-danger { --poi-c: #db2777; }
+.poi-btn-node   { --poi-c: #d97706; }
+html[data-theme="dark"] .poi-btn-goal   { --poi-c: #6b8cff; }
+html[data-theme="dark"] .poi-btn-safe   { --poi-c: #f05252; }
+html[data-theme="dark"] .poi-btn-poi    { --poi-c: #34c06d; }
+html[data-theme="dark"] .poi-btn-danger { --poi-c: #ec5fa4; }
+html[data-theme="dark"] .poi-btn-node   { --poi-c: #e8a03c; }
+
+/* ---- 图例 ---- */
+.poi-legend {
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+  margin-top: 12px;
+  line-height: 1.6;
+}
+.poi-legend span {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: .8rem; color: var(--text-soft);
+}
+.poi-swatch {
+  width: 10px; height: 10px; border-radius: 50%;
+  display: inline-block;
+  border: 1.5px solid #fff;
+  background: var(--poi-c, #2b5cff);
+  box-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+
+/* ---- 详情面板 ---- */
+.poi-detail {
+  margin-top: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 18px 20px;
+  min-height: 5em;
+}
+.poi-detail-empty { color: var(--text-soft); font-size: .84rem; margin: 0; }
+
+.poi-detail.is-filled {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 18px;
+  align-items: start;
+}
+.poi-cat {
+  display: inline-block;
+  font-size: .72rem; line-height: 1;
+  padding: 4px 9px;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--poi-c, #2b5cff);
+  margin-bottom: 10px;
+}
+.poi-cat-goal   { --poi-c: #2b5cff; }
+.poi-cat-safe   { --poi-c: #dc2626; }
+.poi-cat-poi    { --poi-c: #16a34a; }
+.poi-cat-danger { --poi-c: #db2777; }
+.poi-cat-node   { --poi-c: #d97706; }
+html[data-theme="dark"] .poi-cat-goal   { --poi-c: #6b8cff; }
+html[data-theme="dark"] .poi-cat-safe   { --poi-c: #f05252; }
+html[data-theme="dark"] .poi-cat-poi    { --poi-c: #34c06d; }
+html[data-theme="dark"] .poi-cat-danger { --poi-c: #ec5fa4; }
+html[data-theme="dark"] .poi-cat-node   { --poi-c: #e8a03c; }
+
+.poi-detail-title { font-size: 1.05rem; margin: 0 0 8px; }
+.poi-detail-desc { font-size: .9rem; color: var(--text-soft); line-height: 1.8; margin: 0; }
+
+.poi-detail-fig {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-soft);
+}
+.poi-detail-fig img { display: block; width: 100%; height: auto; }
+.poi-detail-fig-empty {
+  min-height: 140px;
+  display: flex; align-items: center; justify-content: center;
+  border-style: dashed;
+  color: var(--text-soft);
+  font-size: .78rem;
+}
+
+/* ---- 编辑模式 ---- */
+.poi-edit-bar {
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border: 1px dashed var(--accent);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: .78rem;
+  background: var(--surface);
+  position: sticky; top: 70px; z-index: 5;
+}
+
+/* ---- 制作中徽标 ---- */
+.badge-wip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .74rem; line-height: 1;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid #d97706;
+  color: #b45309;
+  background: rgba(217, 119, 6, .08);
+  white-space: nowrap;
+}
+html[data-theme="dark"] .badge-wip {
+  color: #e8a03c;
+  border-color: #b45309;
+  background: rgba(217, 119, 6, .14);
+}
+.badge-wip::before {
+  content: "";
+  width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor;
+}
+
+/* ---- 首页精选卡片里的 POI 地图 ---- */
+.feature-map .poi-stage { margin-top: 18px; }
+.feature-map .poi-btn { width: 19px; height: 19px; }
+.feature-map .poi-btn i { width: 5px; height: 5px; }
+.feature-map .map-info { margin-top: 14px; }
+
+@media (max-width: 720px) {
+  .poi-detail.is-filled { grid-template-columns: 1fr; }
+  .poi-detail-fig { order: 2; }
+  .poi-btn { width: 26px; height: 26px; }
+  .feature-map .poi-btn { width: 22px; height: 22px; }
+}
+
+/* 首屏多段落正文 */
+.hero-sub p { margin: 0; }
+.hero-sub p + p { margin-top: 10px; }
+
+/* 建筑空间设计经历（简洁说明模块） */
+.arch-summary {
+  max-width: 72ch;
+  border-left: 2px solid var(--accent);
+  padding: 4px 0 4px 22px;
+}
+.arch-summary p { color: var(--text-soft); line-height: 1.9; margin: 0; }
+.arch-summary p + p { margin-top: 12px; }
+.arch-note { margin-top: 18px; font-size: .78rem; color: var(--text-soft); }
+
+/* ==========================================================================
+   Last Light 详情页（重写版）补充样式
+   ========================================================================== */
+.case-title-sub {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-soft);
+  letter-spacing: 0;
+}
+.mission-text + .mission-text { margin-top: 10px; }
+
+/* 设计重点四卡 */
+.focus-grid {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.focus-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 20px 22px;
+}
+.focus-idx {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  font-size: .78rem;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  margin-bottom: 12px;
+}
+.focus-card h3 { font-size: .98rem; margin: 0 0 8px; }
+.focus-card p {
+  margin: 0;
+  font-size: .86rem;
+  color: var(--text-soft);
+  line-height: 1.75;
+}
+
+/* 路线设想三卡（全部显示，不用选项卡） */
+.route-panels .route-panel { display: block; }
+.route-panels .route-panel + .route-panel { margin-top: 14px; }
+
+/* 小节内标题 */
+.prose .sub-head { font-size: 1.08rem; margin: 0 0 10px; }

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
 <title>Last Light · 最后的微光 | 李敬业</title>
-<meta name="description" content="开放世界末日生存 PVE 关卡白盒《Last Light》的设计拆解：POI 布局、探索动线、资源与遭遇设计、迭代记录。" />
+<meta name="description" content="开放世界生存关卡《Last Light》（制作中）的设计拆解：以丧尸灾变后的现代小镇为背景，围绕住宅区、资源兴趣点与安全屋的空间关系组织探索任务。" />
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232b5cff'/%3E%3Ctext x='50' y='70' font-size='60' font-family='monospace' font-weight='700' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
 <link rel="stylesheet" href="assets/css/style.css" />
@@ -58,20 +58,19 @@
 
   <section class="case-hero">
     <div class="container">
-      <p class="eyebrow mono reveal"><span class="prompt">$</span> 开放世界 · 末日生存 PVE · 白盒关卡</p>
-      <h1 class="case-title reveal">Last Light</h1>
+      <p class="eyebrow mono reveal"><span class="prompt">$</span> 开放世界 · 生存 · 探索 · 白盒关卡</p>
+      <h1 class="case-title reveal">Last Light <span class="case-title-sub">最后的微光</span></h1>
       <p class="case-lede reveal">
-        第一章《最后的微光》。停电的安全屋、一桶燃油、一条穿过住宅区的路——
-        这一章只做一件事：让玩家在没有任务箭头的情况下，靠空间自己读出「我该往哪走」。
+        该项目主要展示第一节任务的探索。
       </p>
 
       <dl class="case-meta reveal">
-        <div><dt>项目类型</dt><dd>开放世界探索 / 生存 PVE</dd></div>
-        <div><dt>玩法片段</dt><dd>第一章 · Restore Power</dd></div>
+        <div><dt>项目状态</dt><dd><span class="badge-wip">制作中</span></dd></div>
+        <div><dt>项目类型</dt><dd>开放世界生存 · 探索</dd></div>
+        <div><dt>当前阶段</dt><dd>第一节任务 · Restore Power</dd></div>
         <div><dt>引擎</dt><dd>Unity · 白盒</dd></div>
-        <div><dt>关卡规模</dt><dd>小镇街区（待你确认尺寸）</dd></div>
-        <div><dt>我的角色</dt><dd>关卡设计 · 白盒搭建 · 脚本逻辑</dd></div>
-        <div><dt>关键词</dt><dd>POI · 探索动线 · 威胁梯度 · 节奏控制</dd></div>
+        <div><dt>我的角色</dt><dd>关卡设计 · 白盒搭建</dd></div>
+        <div><dt>关键词</dt><dd>POI · 探索动线 · 风险与收益</dd></div>
       </dl>
 
       <div class="mission reveal">
@@ -79,329 +78,210 @@
         <h2 class="mission-title">Restore Power — 恢复供电</h2>
         <p class="mission-text">
           Haven House 的备用发电机已经停止工作。玩家必须前往 Miller's Fuel 搜寻燃油，
-          避开住宅区的感染者，并把燃油带回安全屋。当发电机重新启动，屋内一盏昏暗的灯亮起。
-          远处的水塔依然沉在黑暗里——它提醒玩家，恢复一栋房子的供电，只是第一步。
+          避开住宅区的感染者，并把燃油带回安全屋。
+        </p>
+        <p class="mission-text">
+          当发电机重新启动，屋内一盏昏暗的灯亮起。远处通往军事基地的断桥依然沉在黑暗里——
+          它提醒玩家，恢复一栋房子的供电，只是第一步。
         </p>
       </div>
     </div>
   </section>
 
-  <!-- ================= 01 项目概述 ================= -->
+  <!-- ================= 01 项目概述与设计重点 ================= -->
   <section class="section section-alt" id="overview">
     <div class="container">
       <header class="section-head reveal">
         <span class="section-index mono">01</span>
-        <h2>项目概述与实现范围</h2>
-        <p class="section-desc">
-          这是个人的关卡设计练习。下面写清楚哪些已经在 Unity 里跑通、哪些还停在纸面——
-          把边界说清楚，比把话说满更有用。
-        </p>
+        <h2>项目概述与设计重点</h2>
       </header>
 
       <div class="prose reveal">
         <p>
-          做这张图的时候我给自己定的约束是：<strong>不放引导箭头，不放 UI 任务marker</strong>。
-          玩家能不能自己找到加油站，取决于路网本身写得是否清楚——这正是我想验证的部分。
-          所以这一章的核心是「可读性」：让空间结构本身承担导航。
+          以丧尸灾变后的现代小镇为背景，尝试通过住宅区、资源兴趣点与安全屋之间的空间关系，
+          组织一段具有探索目标与风险选择的生存关卡体验。
+        </p>
+        <p>
+          项目仍在制作中。具体玩法机制与测试结论将在实现和验证后补充。
         </p>
       </div>
 
-      <div class="scope reveal">
-        <div class="scope-col">
-          <h3 class="scope-head"><span class="tick tick-on" aria-hidden="true"></span>已在 Unity 中实现</h3>
-          <ul class="scope-list">
-            <li>小镇街区白盒：安全屋、住宅区、后巷、加油站主体量</li>
-            <li>探索动线与 POI 空间关系（可按 02 的路线实际走通）</li>
-            <li>燃油拾取 → 返回安全屋 → 发电机重启的主线流程</li>
-            <li>基础感染者巡逻与感知（视听范围，可触发追击）</li>
-            <li>灯光作为反馈：发电机启动后的屋内照明变化</li>
-          </ul>
+      <div class="focus-grid">
+        <div class="focus-card reveal">
+          <span class="mono focus-idx">A</span>
+          <h3>区域布局</h3>
+          <p>组织住宅区、加油站等核心空间与道路连接关系。</p>
         </div>
-        <div class="scope-col">
-          <h3 class="scope-head"><span class="tick" aria-hidden="true"></span>仍在设计规划中</h3>
-          <ul class="scope-list">
-            <li>资源随机刷新表与掉落权重（当前为手动摆放）</li>
-            <li>第二章「水塔」区域的接驳设计</li>
-            <li>完整的制作 / 建造系统与数值平衡</li>
-            <li>美术层：目前只到白盒 + 临时材质</li>
-          </ul>
+        <div class="focus-card reveal">
+          <span class="mono focus-idx">B</span>
+          <h3>玩家动线</h3>
+          <p>围绕安全屋至加油站的资源搜集任务，设计探索路径。</p>
+        </div>
+        <div class="focus-card reveal">
+          <span class="mono focus-idx">C</span>
+          <h3>风险与收益</h3>
+          <p>探索如何结合兴趣点危险程度、资源价值与撤离路线形成决策。</p>
+        </div>
+        <div class="focus-card reveal">
+          <span class="mono focus-idx">D</span>
+          <h3>白盒验证</h3>
+          <p>通过 Unity 场景搭建检查空间尺度、路径可读性与实际行走体验。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= 02 世界布局与 POI ================= -->
+  <!-- ================= 02 关卡总览与 POI ================= -->
   <section class="section" id="world">
     <div class="container">
       <header class="section-head reveal">
         <span class="section-index mono">02</span>
-        <h2>世界布局与 POI</h2>
+        <h2>关卡总览与 POI</h2>
         <p class="section-desc">
-          点地图上的标记看每个 POI 的设计意图；用上面的标签可以按类型筛选。
-          功能区不是平均铺开的——越靠近住宅区，资源密度越高，威胁也越高。
+          小镇关卡的总览俯视：图中标注了住宅巷、学校、教堂、加油站等兴趣点，
+          以及主线的行进路线与瓶颈、资源分布。点下面的标记，查看每个位置的设计说明。
         </p>
       </header>
 
-      <div class="map-shell reveal">
-        <div class="map-chips" role="group" aria-label="POI 类型筛选">
-          <button class="chip is-on" type="button" data-filter="all">全部</button>
-          <button class="chip" type="button" data-filter="quest">剧情</button>
-          <button class="chip" type="button" data-filter="loot">资源</button>
-          <button class="chip" type="button" data-filter="threat">威胁</button>
-          <button class="chip" type="button" data-filter="route">动线</button>
-          <button class="chip" type="button" data-filter="landmark">地标</button>
-        </div>
-
-        <div class="map-frame">
-          <svg viewBox="0 0 900 600" role="group" aria-label="Last Light 小镇区块示意图（可点击 POI）">
-
-            <rect x="0" y="0" width="900" height="600" class="map-bg" />
-
-            <!-- 路网 -->
-            <path d="M60 283 H840" class="road road-main" />
-            <path d="M183 283 V392" class="road" />
-            <path d="M470 130 V283" class="road road-alley" />
-            <path d="M775 390 V283" class="road" />
-
-            <!-- 街区体量 -->
-            <rect x="88" y="392" width="190" height="150" class="block block-safe" />
-            <text x="183" y="476" class="zone-label">HAVEN HOUSE</text>
-
-            <rect x="300" y="352" width="120" height="90" class="block" />
-            <text x="360" y="400" class="zone-label">SHOP</text>
-
-            <rect x="336" y="120" width="110" height="80" class="block" />
-            <rect x="462" y="120" width="110" height="80" class="block" />
-            <rect x="336" y="215" width="110" height="60" class="block" />
-            <rect x="520" y="215" width="90" height="60" class="block" />
-            <text x="455" y="112" class="zone-label">RESIDENTIAL</text>
-
-            <rect x="690" y="320" width="170" height="140" class="block block-goal" />
-            <text x="775" y="392" class="zone-label">MILLER'S FUEL</text>
-            <rect x="700" y="300" width="150" height="16" class="canopy" />
-
-            <!-- 路障 -->
-            <g class="hazard">
-              <path d="M436 272 L470 272 L470 296 L436 296 Z" />
-              <path d="M436 272 L470 296 M470 272 L436 296" class="hazard-x" />
-            </g>
-
-            <!-- 水塔 -->
-            <g class="tower">
-              <circle cx="790" cy="110" r="26" />
-              <path d="M778 132 L772 168 M802 132 L808 168" class="tower-leg" />
-            </g>
-
-            <!-- 路线（由 03 的选项卡切换显示） -->
-            <polyline class="route-line" data-route="a" points="183,467 183,300 300,300 430,300 640,300 775,300 775,370" />
-            <polyline class="route-line" data-route="b" points="183,467 183,420 300,360 380,320 470,240 540,220 640,300 700,330 775,372" />
-            <polyline class="route-line" data-route="c" points="183,467 260,467 300,430 360,397 470,300 560,290 660,310 775,372" />
-
-            <!-- POI 标记 -->
-            <g class="poi" data-type="quest" tabindex="0" role="button"
-               data-en="Haven House" data-title="安全屋 · 起点与终点"
-               data-grid="区块 A1" data-risk="无" data-loot="基础物资 · 发电机"
-               data-note="整章唯一「不用抬头看路」的地方。它同时是出发点、回程目标和安全感锚点，所以体量端正、门廊深、可视性好——玩家第一次出门时的转身记忆点。">
-              <circle cx="183" cy="467" r="14" class="poi-dot poi-quest" />
-              <circle cx="183" cy="467" r="22" class="poi-ring" />
-              <text x="203" y="458" class="poi-id mono">P01</text>
-              <text x="203" y="474" class="poi-label">Haven House</text>
-            </g>
-
-            <g class="poi" data-type="loot" tabindex="0" role="button"
-               data-en="Corner Store" data-title="杂货店 · 资源密度入口"
-               data-grid="区块 B2" data-risk="低" data-loot="食物 · 零件 · 少量弹药"
-               data-note="放在主街转角而非街中段，因为转角天然减速。它教玩家一条规则：看到街角就值得进去看一眼。这也是全章资源 cue 的教学点。">
-              <circle cx="360" cy="397" r="14" class="poi-dot poi-loot" />
-              <circle cx="360" cy="397" r="22" class="poi-ring" />
-              <text x="380" y="388" class="poi-id mono">P02</text>
-              <text x="380" y="404" class="poi-label">Corner Store</text>
-            </g>
-
-            <g class="poi" data-type="threat" tabindex="0" role="button"
-               data-en="Residential Block" data-title="住宅区 · 高收益高风险"
-               data-grid="区块 C1" data-risk="高" data-loot="医疗 · 工具 · 弹药"
-               data-note="威胁梯度最高的一段。房屋进深统一但开间不同，逼玩家在「多搜一间」和「体力／弹药够不够回程」之间做取舍。这里是全章第一次真正的风险—收益计算。">
-              <circle cx="455" cy="150" r="14" class="poi-dot poi-threat" />
-              <circle cx="455" cy="150" r="22" class="poi-ring" />
-              <text x="475" y="141" class="poi-id mono">P03</text>
-              <text x="475" y="157" class="poi-label">Residential</text>
-            </g>
-
-            <g class="poi" data-type="route" tabindex="0" role="button"
-               data-en="Back Alley" data-title="后巷 · 潜行捷径与瓶颈点"
-               data-grid="区块 C2" data-risk="中" data-loot="零散物资"
-               data-note="宽约两米的线性空间，视线被两侧围墙压成一条走廊。它缩短路程但几乎没有撤退空间——一旦被发现，这里就是交火现场而不是通道。我在中段留了一处凸出的垃圾箱做半掩体，给一个喘息点。">
-              <circle cx="470" cy="215" r="14" class="poi-dot poi-route" />
-              <circle cx="470" cy="215" r="22" class="poi-ring" />
-              <text x="490" y="206" class="poi-id mono">P04</text>
-              <text x="490" y="222" class="poi-label">Back Alley</text>
-            </g>
-
-            <g class="poi" data-type="route" tabindex="0" role="button"
-               data-en="Roadblock" data-title="废弃路障 · 软引导路标"
-               data-grid="区块 B3" data-risk="低" data-loot="车体物资"
-               data-note="主街中段的视觉闸口。它不封锁道路，但把可通行宽度收到一侧——玩家会被推到特定一侧行走，自然进入预设的视线朝向。属于「用空间做引导」而不是用 UI 做引导。">
-              <circle cx="470" cy="300" r="14" class="poi-dot poi-route" />
-              <circle cx="470" cy="300" r="22" class="poi-ring" />
-              <text x="490" y="291" class="poi-id mono">P05</text>
-              <text x="490" y="307" class="poi-label">Roadblock</text>
-            </g>
-
-            <g class="poi" data-type="quest" tabindex="0" role="button"
-               data-en="Miller's Fuel" data-title="加油站 · 本章目标"
-               data-grid="区块 D3" data-risk="中" data-loot="燃油（主线） · 补给"
-               data-note="全章最强的可视锚点：开阔、有顶棚剪影、位于地块尽端。主路上就能看见它的轮廓，所以不必额外引导。设计上刻意留了后门，让走后巷的玩家不用绕回主街暴露。">
-              <circle cx="775" cy="390" r="14" class="poi-dot poi-quest" />
-              <circle cx="775" cy="390" r="22" class="poi-ring" />
-              <text x="795" y="381" class="poi-id mono">P06</text>
-              <text x="795" y="397" class="poi-label">Miller's Fuel</text>
-            </g>
-
-            <g class="poi" data-type="landmark" tabindex="0" role="button"
-               data-en="Water Tower" data-title="水塔 · 下一章的钩"
-               data-grid="区块 E1" data-risk="—" data-loot="—"
-               data-note="刻意保持黑暗、且不可达。它在多次开阔视野里反复出现，把「第二章」埋进玩家的空间记忆里。远处的黑暗地标比任务列表更有钩子——这是开放世界关卡常用的期待感设计。">
-              <circle cx="790" cy="110" r="14" class="poi-dot poi-landmark" />
-              <circle cx="790" cy="110" r="22" class="poi-ring" />
-              <text x="810" y="101" class="poi-id mono">P07</text>
-              <text x="810" y="117" class="poi-label">Water Tower</text>
-            </g>
-          </svg>
-        </div>
-
-        <aside class="poi-panel" id="poiPanel" aria-live="polite">
-          <p class="poi-panel-empty mono">← 点地图上的任一标记，查看该 POI 的设计意图、资源与威胁设定。</p>
-        </aside>
+      <div class="reveal">
+        <div data-poi-map="page"></div>
       </div>
     </div>
   </section>
 
-  <!-- ================= 03 玩家流程与路线设计 ================= -->
-  <section class="section section-alt" id="flow">
+  <!-- ================= 03 空间决策与战斗节奏 ================= -->
+  <section class="section section-alt" id="pace">
     <div class="container">
       <header class="section-head reveal">
         <span class="section-index mono">03</span>
-        <h2>玩家流程与路线设计</h2>
+        <h2>空间决策与战斗节奏</h2>
         <p class="section-desc">
-          从安全屋到加油站，我留了三条走得通的路。切换选项卡，上方平面图会同步显示对应路线与决策点。
-        </p>
-      </header>
-
-      <div class="route-tabs reveal" role="group" aria-label="选择路线">
-        <button class="chip is-on" type="button" data-route="a"><span class="swatch sw-a" aria-hidden="true"></span>路线 A · 主街直行</button>
-        <button class="chip" type="button" data-route="b"><span class="swatch sw-b" aria-hidden="true"></span>路线 B · 后巷潜行</button>
-        <button class="chip" type="button" data-route="c"><span class="swatch sw-c" aria-hidden="true"></span>路线 C · 街背慢搜</button>
-      </div>
-
-      <div class="route-panels reveal">
-        <article class="route-panel is-on" data-route="a">
-          <div class="route-head">
-            <h3>路线 A · 主街直行</h3>
-            <p class="route-metrics mono">路程最长 · 暴露最高 · 遭遇密度中</p>
-          </div>
-          <p>
-            沿主街一路向东。这条路几乎不需要「找」——所以它承担教学：先在认知负担最低的情况下，
-            把街区的方向和尺度讲清楚。选它的玩家往往是因为看见了远处加油站的顶棚轮廓。
-          </p>
-          <ol class="decision-list">
-            <li><span class="mono">D1</span> <strong>出门向左还是向右</strong>：右侧主街尽端能看到加油站顶棚剪影，完成第一次空间定向</li>
-            <li><span class="mono">D2</span> <strong>杂货店转角停不停</strong>：转角天然减速，用一次试错教会玩家「看到街角就值得进去」</li>
-            <li><span class="mono">D3</span> <strong>废弃路障怎么绕</strong>：通行宽度被收到一侧，脚步与视线同时被推向预设方向</li>
-            <li><span class="mono">D4</span> <strong>加油站前场怎么进</strong>：开阔暴露窗口，必须判断走正门还是绕后门</li>
-          </ol>
-          <p class="route-note mono">回程建议原路返回：安全，但几乎拿不到额外资源。</p>
-        </article>
-
-        <article class="route-panel" data-route="b">
-          <div class="route-head">
-            <h3>路线 B · 后巷潜行</h3>
-            <p class="route-metrics mono">路程最短 · 视野受限 · 撤退空间最小</p>
-          </div>
-          <p>
-            沿住宅北侧绕进后巷，从加油站后门进。它的存在是为了给「已经熟悉地形的玩家」一条更聪明的选择——
-            代价是几乎没有容错：被发现时，后巷从捷径变成交火现场。
-          </p>
-          <ol class="decision-list">
-            <li><span class="mono">D1</span> <strong>要不要绕去北侧</strong>：入口不明显，第一次玩的玩家大概率错过</li>
-            <li><span class="mono">D2</span> <strong>后巷中段停不停</strong>：唯一的垃圾桶半掩体，是这条路上唯一的喘息点</li>
-            <li><span class="mono">D3</span> <strong>住宅区边缘抢不抢</strong>：顺手资源近在眼前，但感染者密度也在这里上升</li>
-            <li><span class="mono">D4</span> <strong>后门进还是绕正门</strong>：后门几乎无声，但一旦被发现，退路只有来时那条窄巷</li>
-          </ol>
-          <p class="route-note mono">设计时反复确认的标准：瓶颈点可以难受，但必须有可视被告知的出口。</p>
-        </article>
-
-        <article class="route-panel" data-route="c">
-          <div class="route-head">
-            <h3>路线 C · 街背慢搜</h3>
-            <p class="route-metrics mono">资源收益最高 · 耗时最长 · 遭遇次数最多</p>
-          </div>
-          <p>
-            贴着住宅区外侧、穿过杂货店后院再到加油站。这是给「第二次、第三次重玩」的玩家准备的路线：
-            第一次通关的人不知道巷子里有东西，知道的人才会愿意多花时间绕。
-          </p>
-          <ol class="decision-list">
-            <li><span class="mono">D1</span> <strong>进不进第一栋住宅</strong>：门口杂物暗示可搜，进去则失去退路视野</li>
-            <li><span class="mono">D2</span> <strong>带不带走这份物资</strong>：背包空间有限，这是全章第一道资源取舍题</li>
-            <li><span class="mono">D3</span> <strong>弹药够不够走完</strong>：慢搜路线的真实瓶颈不是路线，而是消耗品</li>
-            <li><span class="mono">D4</span> <strong>继续搜还是见好就收</strong>：拿上一桶燃油之后，回程的每一步都在算收益</li>
-          </ol>
-          <p class="route-note mono">这条路撑起了重复可玩性：同一个关卡，第二轮才是完整内容。</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 04 关键空间分析 ================= -->
-  <section class="section" id="spaces">
-    <div class="container">
-      <header class="section-head reveal">
-        <span class="section-index mono">04</span>
-        <h2>关键空间分析</h2>
-        <p class="section-desc">
-          四个我最在意的空间节点。每张图看的东西是一样的：视线、掩体、瓶颈宽度，以及被打时往哪退。
+          这张分析图把任务拆成两层：往哪里走（探索），以及在哪停下来做决定（节奏）。
         </p>
       </header>
 
       <figure class="figure-block reveal">
-        <div class="fig-placeholder mono">此处放：后巷第一人称截图（文件名建议 lastlight-node-alley.jpg）</div>
+        <img src="assets/img/lastlight-pace.jpg" alt="空间决策与战斗节奏分析图：标注起点 START、折返点 PICK&BACK，用颜色区分遭遇与节奏、探索区、安全屋，并标出资源点、瓶颈点与节奏决策点" loading="lazy" />
         <figcaption>
-          后巷：两侧围墙把视线压成走廊。检查两件事——中段的凸出垃圾桶是否提供了可辨认的半掩体，以及尽端是否留了可见出口。
-        </figcaption>
-      </figure>
-
-      <figure class="figure-block reveal" style="margin-top: 22px;">
-        <div class="fig-placeholder mono">此处放：住宅区转角截图（lastlight-node-corner.jpg）</div>
-        <figcaption>
-          转角：这里没加任何指示牌，只用一处卡口的宽度变化暗示「里面有东西」。视线在转角被切断，形成标准的转角清理动作。
-        </figcaption>
-      </figure>
-
-      <figure class="figure-block reveal" style="margin-top: 22px;">
-        <div class="fig-placeholder mono">此处放：加油站前场开阔地截图（lastlight-node-fuel.jpg）</div>
-        <figcaption>
-          加油站前场：全章最大的暴露窗口。顶棚提供明确轮廓，同时遮挡正上方的视线；玩家需要在开阔地里判断「走正门还是绕后门」。
-        </figcaption>
-      </figure>
-
-      <figure class="figure-block reveal" style="margin-top: 22px;">
-        <div class="fig-placeholder mono">此处放：瓶颈点 / 撤退方向截图（lastlight-node-bottleneck.jpg）</div>
-        <figcaption>
-          瓶颈点：宽度收窄到只容一人通过。设计原则是可被告知——在难受之前，玩家必须先看得见它。
+          图中颜色含义：粉红 — 遭遇与节奏（战斗/威胁区域）、蓝 — 探索区、红 — 安全屋；
+          符号含义：绿 — 资源点、红三角 — 瓶颈点、橙黄圆点 — 节奏决策点。
+          主线为 PICK &amp; BACK 结构：拿取关键物资（燃油），返回 START——
+          去程与回程共用同一片空间，玩家的资源状态与警觉性却完全不同。
         </figcaption>
       </figure>
     </div>
   </section>
 
-  <!-- ================= 05 资源与遭遇设计 ================= -->
-  <section class="section section-alt" id="encounter">
+  <!-- ================= 04 主区白盒布局 ================= -->
+  <section class="section" id="layout">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">04</span>
+        <h2>主区白盒布局</h2>
+        <p class="section-desc">
+          Unity 白盒阶段的俯视全景：住宅组团、镇中心、环路、农田与水体一起构成小镇的骨架。
+        </p>
+      </header>
+
+      <figure class="figure-block reveal">
+        <img src="assets/img/lastlight-layout.jpg" alt="主区白盒布局俯视图：住宅组团沿街排布，中部为镇中心密集建筑群，右上有环路连接，下方为农田与温室" loading="lazy" />
+        <figcaption>
+          白盒关注的是空间关系而不是美术表现：建筑体量先按尺度与朝向摆出来，
+          验证路网是否成立、体量是否能承担方向感。镇中心的密集街巷与周边的农田、水体
+          形成「密 — 疏」两种空间密度，对应不同的探索节奏。
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= 05 设计设想与计划验证 ================= -->
+  <section class="section section-alt" id="plan">
     <div class="container">
       <header class="section-head reveal">
         <span class="section-index mono">05</span>
-        <h2>资源与遭遇编排</h2>
+        <h2>设计设想与计划验证</h2>
         <p class="section-desc">
-          资源不是随机撒的，威胁也不是。下表写的是每个 POI「为什么放这些东西」——
-          让每一次弯腰捡拾，都对应一次真实的取舍。
+          把边界说清楚：哪些已经在 Unity 白盒里落地，哪些还停留在设计设想——
+          后者会在实现与测试后补充结论。
+        </p>
+      </header>
+
+      <div class="scope reveal">
+        <div class="scope-col">
+          <h3 class="scope-head"><span class="tick tick-on" aria-hidden="true"></span>已在白盒中落地</h3>
+          <ul class="scope-list">
+            <li>小镇主区白盒：住宅区、镇中心、学校、教堂、加油站与安全屋</li>
+            <li>区域之间的道路连接与主线路径（START ↔ PICK &amp; BACK）</li>
+            <li>POI 空间关系与资源分布的规划布局</li>
+            <li>任务目标设计：搜寻燃油 → 返回安全屋</li>
+          </ul>
+        </div>
+        <div class="scope-col">
+          <h3 class="scope-head"><span class="tick" aria-hidden="true"></span>设计设想 · 计划验证</h3>
+          <ul class="scope-list">
+            <li>感染者行为：巡逻路线、感知与追击（计划实现后验证威胁梯度）</li>
+            <li>多路线取舍的实际选择率与通行体验测试</li>
+            <li>资源价值与危险程度的数值平衡</li>
+            <li>完整路线演示视频与测试结论</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="prose reveal" style="margin-top: 28px;">
+        <h3 class="sub-head">往返路线的设计设想</h3>
+        <p>
+          围绕「安全屋 → 加油站 → 安全屋」的往返结构，我在布局上预留了三种走法的空间基础，
+          属于设计设想，实际选择率有待实现后测试验证：
+        </p>
+      </div>
+
+      <div class="route-panels reveal">
+        <article class="route-panel is-on">
+          <div class="route-head">
+            <h3>主街直行</h3>
+            <p class="route-metrics mono">路程直观 · 暴露最高 · 耗时最短</p>
+          </div>
+          <p>
+            沿主街往返。这条路几乎不需要「找」，承担方向教学的职能——
+            在认知负担最低的情况下把街区的方向和尺度讲清楚。
+            设想瓶颈点收窄通行宽度，脚步与视线被引向预设方向。
+          </p>
+        </article>
+
+        <article class="route-panel">
+          <div class="route-head">
+            <h3>街背绕行</h3>
+            <p class="route-metrics mono">视野受限 · 暴露最低 · 撤退空间小</p>
+          </div>
+          <p>
+            贴着住宅组团外侧绕行。设想给「已经熟悉地形的玩家」一条更聪明的走法，
+            代价是几乎没有容错：被发现时退路有限。设计上预留了半掩体喘息点的位置。
+          </p>
+        </article>
+
+        <article class="route-panel">
+          <div class="route-head">
+            <h3>深入慢搜</h3>
+            <p class="route-metrics mono">资源收益最高 · 耗时最长 · 遭遇最多</p>
+          </div>
+          <p>
+            穿过住宅巷逐栋搜索。设想给愿意多花时间的玩家对应的高价值资源，
+            真实瓶颈不是路线而是消耗品——「继续搜还是见好就收」是这条路的核心取舍。
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 06 资源与风险规划 ================= -->
+  <section class="section" id="encounter">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">06</span>
+        <h2>资源与风险规划</h2>
+        <p class="section-desc">
+          下表是各兴趣点的资源与威胁规划，属于设计意图——
+          让每一次弯腰捡拾都对应一次真实的取舍，具体数值待实现后验证调整。
         </p>
       </header>
 
@@ -411,116 +291,49 @@
             <tr>
               <th>POI</th>
               <th>资源投放</th>
-              <th>遭遇编排</th>
+              <th>威胁设想</th>
               <th>玩家要做的取舍</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><span class="mono">P01</span> Haven House</td>
+              <td>起点 · 安全屋</td>
               <td>基础物资、主线目标（发电机）</td>
-              <td>无敌人</td>
-              <td>出门前要不要多带一个弹匣</td>
+              <td>无</td>
+              <td>出门前带多少消耗品</td>
             </tr>
             <tr>
-              <td><span class="mono">P02</span> Corner Store</td>
-              <td>食物、零件、少量弹药</td>
-              <td>1–2 只游荡感染者</td>
-              <td>低风险收益，用来教搜索规则</td>
+              <td>住宅巷（两片）</td>
+              <td>医疗、工具、弹药（价值最高）</td>
+              <td>感染者密度最高</td>
+              <td>深入几栋：多搜的收益 vs 回程的弹药与体力</td>
             </tr>
             <tr>
-              <td><span class="mono">P03</span> Residential</td>
-              <td>医疗、工具、弹药</td>
-              <td>密度最高，室内潜伏</td>
-              <td>高收益换高消耗，能否走完回程</td>
+              <td>学校</td>
+              <td>中等资源、大空间搜索</td>
+              <td>中等</td>
+              <td>大房间搜得快但暴露久</td>
             </tr>
             <tr>
-              <td><span class="mono">P04</span> Back Alley</td>
-              <td>零散物资</td>
-              <td>少但致命，退路被切断</td>
-              <td>抄近道是否值得赌一次被发现</td>
+              <td>教堂</td>
+              <td>补给</td>
+              <td>较低</td>
+              <td>绕行顺路补给 vs 直线赶路</td>
             </tr>
             <tr>
-              <td><span class="mono">P05</span> Roadblock</td>
-              <td>车体物资</td>
-              <td>无强制遭遇</td>
-              <td>暴露在路中央捡东西值不值</td>
-            </tr>
-            <tr>
-              <td><span class="mono">P06</span> Miller's Fuel</td>
-              <td>燃油（主线）、补给</td>
-              <td>中密度，前场开阔、室内掩护</td>
-              <td>先清场还是拿到就跑</td>
+              <td>加油站（任务目标）</td>
+              <td>主线燃油、补给</td>
+              <td>前场开阔、室内掩体</td>
+              <td>先清场还是拿了就跑</td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
-  </section>
-
-  <!-- ================= 06 测试与迭代 ================= -->
-  <section class="section" id="iterate">
-    <div class="container">
-      <header class="section-head reveal">
-        <span class="section-index mono">06</span>
-        <h2>测试与迭代</h2>
-        <p class="section-desc">
-          这里是我在自己反复试走过程中改过的地方。有数据我会补数据，没有的部分我不会编——先留位置。
-        </p>
-      </header>
-
-      <div class="figure-pair reveal">
-        <figure class="figure-block">
-          <div class="fig-placeholder mono">修改前（lastlight-before-1.jpg）</div>
-          <figcaption>v1 状态</figcaption>
-        </figure>
-        <figure class="figure-block">
-          <div class="fig-placeholder mono">修改后（lastlight-after-1.jpg）</div>
-          <figcaption>v2 状态</figcaption>
-        </figure>
-      </div>
-
-      <ul class="iter-list reveal">
-        <li>
-          <span class="mono">待补 01</span>
-          <p>问题：（请你补一句测试里发现的实际问题）→ 修改：（怎么改的）→ 结果：（通行 / 视线 / 路线选择有何变化）</p>
-        </li>
-        <li>
-          <span class="mono">待补 02</span>
-          <p>问题：（例如后巷某段被发现即等于必死）→ 修改：（加半掩体 / 加可见出口）→ 结果：（逃生成功率变化）</p>
-        </li>
-        <li>
-          <span class="mono">待补 03</span>
-          <p>问题：（例如玩家不知道加油站怎么进）→ 修改：（加顶棚轮廓 / 开后门）→ 结果：（首次找到目标的时间变化）</p>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ================= 07 实机演示 ================= -->
-  <section class="section section-alt" id="demo">
-    <div class="container">
-      <header class="section-head reveal">
-        <span class="section-index mono">07</span>
-        <h2>实机演示</h2>
-        <p class="section-desc">2–4 分钟的完整路线演示。视频到位后这块会自动接上。</p>
-      </header>
-
-      <div class="figure-block reveal">
-        <div class="fig-placeholder mono">此处放演示视频（建议 lastlight-demo.mp4，或给 B 站 BV 号改用 iframe）</div>
-        <figcaption>
-          建议内容：一次不剪辑的完整往返（出门 → 决策点 → 加油站 → 返回 → 灯亮起），镜头不要乱甩。
-        </figcaption>
-      </div>
 
       <div class="callout reveal" style="margin-top: 24px;">
         <div class="callout-item">
-          <span class="mono">运行方式</span>
-          <p>Unity 版本 / 操作说明 / 是否提供可运行包，稍后补。</p>
-        </div>
-        <div class="callout-item">
-          <span class="mono">下一步计划</span>
-          <p>第二章：水塔区域。届时这块会更新为已完成的阶段。</p>
+          <span class="mono">下一步</span>
+          <p>实现感染者行为与巡逻逻辑，用实际试走验证威胁梯度与多路线取舍，补充测试结论与演示视频。</p>
         </div>
       </div>
     </div>
@@ -530,7 +343,7 @@
     <div class="container">
       <a class="next-work reveal" href="work-blockout-01.html">
         <span class="mono">下一个项目</span>
-        <strong>Borgo · CS 竞技双包点白盒</strong>
+        <strong>Borgo · 紧凑城区与路线博弈</strong>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" /></svg>
       </a>
     </div>
@@ -545,77 +358,7 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
-<script>
-  (function () {
-    'use strict';
-
-    var mapSvg = document.querySelector('.map-frame svg');
-    if (!mapSvg) return;
-
-    var pois = [].slice.call(mapSvg.querySelectorAll('.poi'));
-    var panel = document.getElementById('poiPanel');
-    var chips = [].slice.call(document.querySelectorAll('.map-chips [data-filter]'));
-    var routeTabs = [].slice.call(document.querySelectorAll('.route-tabs [data-route]'));
-    var routePanels = [].slice.call(document.querySelectorAll('.route-panel'));
-    var routeLines = [].slice.call(mapSvg.querySelectorAll('.route-line'));
-
-    function renderPoi(item) {
-      if (!panel) return;
-      var d = item.dataset;
-      panel.innerHTML =
-        '<p class="poi-kicker mono">' + d.en + ' · ' + d.grid + '</p>' +
-        '<h3 class="poi-title">' + d.title + '</h3>' +
-        '<dl class="poi-meta">' +
-          '<div><dt>威胁等级</dt><dd>' + d.risk + '</dd></div>' +
-          '<div><dt>资源投放</dt><dd>' + d.loot + '</dd></div>' +
-        '</dl>' +
-        '<p class="poi-note">' + d.note + '</p>';
-      panel.classList.add('is-filled');
-    }
-
-    function selectPoi(item) {
-      pois.forEach(function (p) { p.classList.remove('is-active'); });
-      item.classList.add('is-active');
-      renderPoi(item);
-    }
-
-    pois.forEach(function (item) {
-      item.addEventListener('click', function () { selectPoi(item); });
-      item.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          selectPoi(item);
-        }
-      });
-    });
-
-    function filterPois(type) {
-      pois.forEach(function (item) {
-        var hit = type === 'all' || item.dataset.type === type;
-        item.classList.toggle('is-hidden', !hit);
-      });
-    }
-
-    chips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        chips.forEach(function (c) { c.classList.remove('is-on'); });
-        chip.classList.add('is-on');
-        filterPois(chip.dataset.filter);
-      });
-    });
-
-    function selectRoute(key) {
-      routeTabs.forEach(function (t) { t.classList.toggle('is-on', t.dataset.route === key); });
-      routePanels.forEach(function (p) { p.classList.toggle('is-on', p.dataset.route === key); });
-      routeLines.forEach(function (l) { l.classList.toggle('is-on', l.dataset.route === key); });
-    }
-
-    routeTabs.forEach(function (tab) {
-      tab.addEventListener('click', function () { selectRoute(tab.dataset.route); });
-    });
-
-    if (routeLines.length) selectRoute('a');
-  })();
-</script>
+<script src="assets/js/lastlight-poi.js"></script>
+<script src="assets/js/poi-map.js"></script>
 </body>
 </html>
