@@ -218,10 +218,10 @@
           <div class="feature-map">
             <div class="feature-map-head">
               <span class="cover-pill mono">开放世界 · 生存 · <em>制作中</em></span>
-              <span class="map-hint mono">点击圆点查看设计说明</span>
+              <span class="map-hint mono">点击圆点查看设计说明与实景</span>
             </div>
-            <div data-poi-map="home"></div>
-            <p class="map-info" id="homeMapInfo"><strong>互动地图</strong>点地图上的圆点，这里会显示该位置的设计意图。</p>
+            <!-- 与 Last Light 详情页同一套完整交互：全部 POI + 图例 + 多图翻页 -->
+            <div data-poi-map="overview"></div>
           </div>
 
           <div class="feature-body">
@@ -229,15 +229,19 @@
             <p class="work-meta mono">Unity · 开放世界生存 · 制作中</p>
 
             <p class="work-goal">
-              <span class="mono">设计重点</span>
-              以丧尸灾变后的现代小镇为背景，围绕「安全屋 ↔ 加油站」的恢复供电任务，
-              组织住宅区、资源兴趣点与安全屋之间的<b class="kw">空间关系</b>，让探索自带目标与风险选择。
+              <span class="mono">项目介绍</span>
+              以现代小镇为背景的开放世界生存关卡设计。围绕「安全屋恢复供电」这一阶段目标，
+              玩家从安全屋出发，穿过住宅区，前往加油站与便利店搜集燃料和物资，再规划返程路线。
+              设计重点是住宅区、道路网络与资源兴趣点之间的<b class="kw">空间关系</b>：
+              玩家为什么前往某个地点、如何抵达、途中会遇到什么，以及如何安全返回。
+              目前主岛住宅区与加油站周边已完成白盒，物资搜刮、丧尸与可破坏性结构已实现，其余区域仍以设计规划展示。
             </p>
 
             <ul class="highlights">
-              <li>区域布局与道路连接已在 Unity 白盒中落地</li>
-              <li><b class="kw">两条主路线</b>引导玩家体验不同空间的遭遇与氛围，主线为往返（PICK &amp; BACK）结构</li>
-              <li>已实现可搜刮物资系统：6 大分类 · 36 种物资 · 3 档稀有度</li>
+              <li><b class="kw">区域结构</b>：以安全屋住宅区为核心，通过住宅街道、道路交汇、建筑组团与城镇主路组织空间；住宅区承担相对安全的活动与补给，加油站形成更高风险、更高资源价值的探索目标。</li>
+              <li><b class="kw">玩家路线</b>：围绕「安全屋—住宅街道—加油站—返程」组织探索流程，用道路连接、街巷转折与空间开合控制移动节奏，返程时需要重新评估路线安全。</li>
+              <li><b class="kw">POI 配置</b>：加油站提供燃料，诊所侧重医疗，超市提供基础生存物资，农场与温室提供农业资源；通过资源类型、丰富程度与风险差异，让玩家权衡收益与危险。</li>
+              <li><b class="kw">世界结构</b>：外岛承担初期剧情与资源获取，主岛作为长期生存、探索与建造核心，军事基地岛作为后期高风险区域；当前重点搭建主岛城镇，其余区域展示整体布局与拓展方向。</li>
             </ul>
 
             <a class="more" href="work-lastlight.html">

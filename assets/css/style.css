@@ -1676,10 +1676,52 @@ html[data-theme="dark"] .badge-wip {
   background: currentColor;
 }
 
-/* ---- 首页精选卡片里的 POI 地图 ---- */
+/* ---- Last Light 详情页：本页目录 ---- */
+.case-toc {
+  margin-bottom: 12px;
+  padding: 22px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+.case-toc-title {
+  margin-bottom: 14px;
+  color: var(--text-faint);
+  font-size: .72rem;
+  letter-spacing: .05em;
+}
+.case-toc-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 28px;
+}
+.case-toc-list a {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text-soft);
+  font-size: .9rem;
+  transition: color .18s var(--ease);
+}
+.case-toc-list a span { color: var(--accent); font-size: .7rem; flex: none; }
+.case-toc-list a:hover { color: var(--accent); }
+@media (max-width: 640px) {
+  .case-toc { padding: 18px; }
+  .case-toc-list { grid-template-columns: 1fr; }
+}
+
+/* ---- 首页精选卡片里的完整 POI 地图（与详情页同一套交互） ---- */
+.feature-map .poi-layout { grid-template-columns: 1fr; }
+.feature-map .poi-detail { position: static; margin-top: 14px; }
 .feature-map .poi-btn { width: 19px; height: 19px; }
 .feature-map .poi-btn i { width: 5px; height: 5px; }
-.feature-map .poi-map { margin-top: 16px; margin-bottom: 20px; }
+.feature-map .poi-map { margin-top: 16px; }
+.feature-map .poi-legend { gap: 5px 13px; }
+.feature-map .poi-legend span { font-size: .72rem; }
+.feature-map .poi-gallery { margin-top: 14px; }
 
 @media (max-width: 720px) {
   .poi-detail.is-filled { grid-template-columns: 1fr; }
