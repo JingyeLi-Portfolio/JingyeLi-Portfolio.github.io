@@ -1789,3 +1789,30 @@ html[data-theme="dark"] .badge-wip {
 .loot-item.r-rare { border-color: rgba(147, 51, 234, .4); }
 
 .hero-text { min-width: 0; }
+
+/* ---- 编辑模式：提示行 + 一键复制按钮 ---- */
+.poi-edit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.poi-edit-tip { flex: 1 1 auto; min-width: 220px; }
+.poi-edit-copy {
+  flex: 0 0 auto;
+  font: inherit;
+  font-size: .78rem;
+  line-height: 1;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .16s var(--ease), color .16s var(--ease), border-color .16s var(--ease);
+}
+.poi-edit-copy:hover { background: var(--accent); color: #fff; }
+.poi-edit-copy.is-copied { background: #16a34a; border-color: #16a34a; color: #fff; }
+.poi-edit-pos { margin-top: 8px; color: var(--text-soft); font-size: .76rem; }
