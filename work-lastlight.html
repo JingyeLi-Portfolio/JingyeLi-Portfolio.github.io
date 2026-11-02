@@ -183,7 +183,7 @@
         <span class="section-index mono">04</span>
         <h2>主区白盒布局</h2>
         <p class="section-desc">
-          Unity 白盒阶段的俯视全景：住宅组团、镇中心、环路、农田与水体一起构成小镇的骨架。
+          Unity 白盒阶段的俯视全景：住宅组团、镇中心、环路与农场一起构成小镇的骨架。
           点下面的标记，查看各区域的空间关系说明。
         </p>
       </header>
@@ -193,17 +193,59 @@
       </div>
       <p class="section-desc reveal" style="margin-top: 18px;">
         白盒关注的是空间关系而不是美术表现：建筑体量先按尺度与朝向摆出来，
-        验证路网是否成立、体量是否能承担方向感。镇中心的密集街巷与周边的农田、水体
+        验证路网是否成立、体量是否能承担方向感。镇中心的密集街巷与周边的农场
         形成「密 — 疏」两种空间密度，对应不同的探索节奏。
       </p>
     </div>
   </section>
 
-  <!-- ================= 05 设计设想与计划验证 ================= -->
-  <section class="section section-alt" id="plan">
+  <!-- ================= 05 视线引导与视线分析 ================= -->
+  <section class="section section-alt" id="sight">
     <div class="container">
       <header class="section-head reveal">
         <span class="section-index mono">05</span>
+        <h2>视线引导与视线分析</h2>
+        <p class="section-desc">
+          三个真实的站立位置：玩家站在那里能看见什么、被挡住什么。
+          关卡里的方向感不是靠 UI 箭头给的，而是靠这些看得见的轮廓撑起来的。
+        </p>
+      </header>
+
+      <div class="figure-grid reveal">
+        <figure class="figure-block">
+          <img src="assets/img/poi/sight-street.jpg" alt="住宅区街巷视角：房屋间隙中露出西侧水塔，为玩家指引方向" loading="lazy" />
+          <figcaption>
+            <b>住宅区街巷视角</b>：视线穿过房屋间隙，能看到西侧的<strong>水塔</strong>。
+            在低矮、细碎的住宅空间里，远处一个可辨认的竖向轮廓，就能让玩家判断自己大致走了多远、
+            该往哪边转弯——同时也暗示了那个方向存在兴趣点。
+          </figcaption>
+        </figure>
+
+        <figure class="figure-block">
+          <img src="assets/img/poi/sight-store.jpg" alt="加油站便利店内部视角：透过门窗可以看到教堂，为玩家定位方向" loading="lazy" />
+          <figcaption>
+            <b>加油站便利店视角</b>：在室内近距离空间里，透过门窗仍能望见远处的<strong>教堂</strong>。
+            封闭空间没有切断与外界的视觉联系，玩家在搜刮时依然保持方位感，
+            不会被「进门—出门」打断方向认知。
+          </figcaption>
+        </figure>
+
+        <figure class="figure-block">
+          <img src="assets/img/poi/sight-greenhouse.jpg" alt="温室大棚视角：从南侧农场望向教堂尖顶，用于定位方向" loading="lazy" />
+          <figcaption>
+            <b>温室大棚视角</b>：镇子南侧的空旷农田中，<strong>教堂尖顶</strong>成为唯一的竖向标志。
+            开敞空间把视野拉远、把威胁感降下来，同时用一个远处的轮廓保证玩家不会在空地里失去方向。
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 06 设计设想与计划验证 ================= -->
+  <section class="section section-alt" id="plan">
+    <div class="container">
+      <header class="section-head reveal">
+        <span class="section-index mono">06</span>
         <h2>设计设想与计划验证</h2>
         <p class="section-desc">
           把边界说清楚：哪些已经在 Unity 白盒里落地，哪些还停留在设计设想——
@@ -271,6 +313,28 @@
         除两条主路线外，街背与农田方向同样连通可自由探索。引导的意义在于让玩家感受到空间差异，
         而不是限制他们的选择；实际路线选择有待实现后测试验证。
       </p>
+
+      <div class="figure-grid reveal" style="margin-top: 26px;">
+        <figure class="figure-block">
+          <img src="assets/img/poi/poi-routes-overview.jpg" alt="两条主路线的俯瞰对比：主街直行与住宅巷深入" loading="lazy" />
+          <figcaption><b>两条路线鸟瞰</b>：左侧沿主街直行、右侧拐入住宅巷。同一段距离，空间宽度与视线长度完全不同。</figcaption>
+        </figure>
+
+        <figure class="figure-block">
+          <img src="assets/img/poi/poi-fuel-road.jpg" alt="主路通往加油站的路口：开阔前场与进入方式" loading="lazy" />
+          <figcaption><b>主路—加油站路口</b>：任务目标前的最后一段主路。开阔前场意味着进入前先暴露自己。</figcaption>
+        </figure>
+
+        <figure class="figure-block">
+          <img src="assets/img/poi/poi-fuel-store.jpg" alt="加油站便利店内部：近距离空间与门窗视线" loading="lazy" />
+          <figcaption><b>加油站便利店（内部）</b>：近距离体量与掩体关系，是「拿了就跑」还是「先清场」的取舍现场。</figcaption>
+        </figure>
+
+        <figure class="figure-block">
+          <img src="assets/img/poi/poi-res-interior.jpg" alt="住宅室内资源点：细碎室内空间与逐间搜索节奏" loading="lazy" />
+          <figcaption><b>住宅室内资源点</b>：细碎的室内空间让视线变短，逐间搜索的节奏与风险同时上升。</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -278,7 +342,7 @@
   <section class="section" id="encounter">
     <div class="container">
       <header class="section-head reveal">
-        <span class="section-index mono">06</span>
+        <span class="section-index mono">07</span>
         <h2>资源与风险规划</h2>
         <p class="section-desc">
           下表是各兴趣点的资源与威胁规划，属于设计意图——
@@ -344,7 +408,7 @@
   <section class="section section-alt" id="loot">
     <div class="container">
       <header class="section-head reveal">
-        <span class="section-index mono">07</span>
+        <span class="section-index mono">08</span>
         <h2>物资系统与图鉴</h2>
         <p class="section-desc">
           为搜刮玩法设计的一套资源系统：6 大分类 · 36 种物资 · 3 档稀有度。

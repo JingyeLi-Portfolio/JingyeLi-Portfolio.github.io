@@ -1849,3 +1849,20 @@ html[data-theme="dark"] .badge-wip {
     0 0 0 7px color-mix(in srgb, var(--poi-c) 65%, transparent),
     0 1px 6px rgba(0, 0, 0, .4);
 }
+
+/* ---- 三/四联实景图组 ---- */
+.figure-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+}
+.figure-grid .figure-block { margin: 0; }
+.figure-grid figcaption b {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text);
+  font-weight: 500;
+}
+@media (max-width: 640px) {
+  .figure-grid { grid-template-columns: 1fr; }
+}

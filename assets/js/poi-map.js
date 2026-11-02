@@ -34,15 +34,26 @@
     return (cfg.categories[cat] && cfg.categories[cat].label) || cat;
   }
 
+  /* 每张图可以有自己的图例文案（如布局图只区分资源 / 风险 / 节点 / 目标） */
+  function catsOf(mapKey) {
+    var m = cfg.maps[mapKey];
+    return (m && m.categories) || cfg.categories;
+  }
+
+  function labelOf(cats, cat) {
+    return (cats[cat] && cats[cat].label) || cat;
+  }
+
   /* ---------- 详情面板 ---------- */
 
   function fillDetail(panel, p) {
+    var cats = catsOf(p.mapKey);
     var fig = p.img
-      ? '<div class="poi-detail-fig"><img src="' + esc(p.img) + '" alt="' + esc(p.name) + '" loading="lazy" /></div>'
+      ? '<div class="poi-detail-fig"><img src="' + esc(p.img) + '" alt="' + esc(p.name) + ' 实景" loading="lazy" /></div>'
       : '<div class="poi-detail-fig poi-detail-fig-empty mono">POI 实景截图 · 待补充</div>';
 
     panel.innerHTML =
-      '<span class="poi-cat poi-cat-' + esc(p.cat) + '">' + esc(catLabel(p.cat)) + '</span>' +
+      '<span class="poi-cat poi-cat-' + esc(p.cat) + '">' + esc(labelOf(cats, p.cat)) + '</span>' +
       '<h3 class="poi-detail-title">' + esc(p.name) + '</h3>' +
       '<p class="poi-detail-desc">' + esc(p.desc) + '</p>' +
       fig;
@@ -227,12 +238,20 @@
 
     if (mode !== 'home') {
       /* 图例：五种颜色 */
+      /* 图例只显示这张图上真正用到的分类 */
+      var cats = catsOf(mapKey);
+      var usedCats = [];
+      list.forEach(function (p) {
+        if (usedCats.indexOf(p.cat) === -1) usedCats.push(p.cat);
+      });
+
       var legend = document.createElement('div');
       legend.className = 'poi-legend';
       var html = '';
-      Object.keys(cfg.categories).forEach(function (key) {
+      Object.keys(cats).forEach(function (key) {
+        if (usedCats.indexOf(key) === -1) return;
         html += '<span><i class="poi-swatch poi-btn-' + esc(key) + '" aria-hidden="true"></i>' +
-                esc(cfg.categories[key].label) + '</span>';
+                esc(labelOf(cats, key)) + '</span>';
       });
       legend.innerHTML = html;
       main.appendChild(legend);

@@ -15,21 +15,22 @@
    删掉一整段就是减一个。逗号别丢：每段之间用逗号隔开，最后一段后面不写。
 
    【怎么换详情图】
-   把截图放进 assets/img/ 文件夹，然后把 img: '' 改成
-   img: 'assets/img/你的图片名.jpg'，详情面板就会显示它。
+   把截图放进 assets/img/poi/ 文件夹，然后把 img: '' 改成
+   img: 'assets/img/poi/你的图片名.jpg'，详情面板就会显示它。
    img 留空时显示「待补充」占位框。
 
    【五种颜色】
-   cat 填下面 categories 里的名字：
-     goal   任务目标（蓝）
+   cat 填 categories 里的名字：
+     goal   任务目标 / 目标与安全屋（蓝）
      safe   安全屋（红）
-     poi    探索资源点（绿）
-     danger 瓶颈与高危（品红）
-     node   节奏决策点（琥珀黄）
+     poi    探索资源点 / 资源重点（绿）
+     danger 高危区域 / 风险重点（品红）
+     node   节奏决策点 / 视线与路径节点（琥珀黄）
 
    【两张地图】
    maps.overview = 关卡总览图（首页精选卡片也用它的按钮，见 home 标志）
-   maps.layout   = 主区白盒布局图（详情页第 04 节）
+   maps.layout   = 主区白盒布局图（详情页第 04 节，只区分四类：
+                   资源重点 / 风险重点 / 视线与路径节点 / 目标与安全屋）
 
    【首页显示哪几个】
    home: true 的按钮会同时出现在首页精选卡片的小地图上；
@@ -61,7 +62,7 @@ window.LL_POI = {
           x: 78, y: 60,
           name: '安全屋 Haven House',
           desc: '任务的出发点与返程终点。玩家在这里接受「恢复供电」目标，拿到燃油后也要把它带回来。作为整个探索循环的锚点，它的位置让玩家出门时就能对主街方向建立初步认知。',
-          img: '',
+          img: 'assets/img/poi/poi-haven-indoor.jpg',
           home: true
         },
 
@@ -70,7 +71,7 @@ window.LL_POI = {
           x: 12.9, y: 63.7,
           name: '加油站 Miller\'s Fuel',
           desc: '第一章的任务目标（PICK & BACK）。前往开阔的加油站取燃油、再原路返回安全屋——去程与回程走的是同一片空间，但玩家的资源状态和警觉性完全不同，这是这段任务节奏设计的基本盘。',
-          img: '',
+          img: 'assets/img/poi/poi-fuel-exterior.jpg',
           home: true
         },
 
@@ -79,7 +80,7 @@ window.LL_POI = {
           x: 36.8, y: 60.3,
           name: '住宅巷 · 西片区',
           desc: '住宅巷 POI 之一：房屋密集、资源价值高，同时感染者威胁也最高。玩家在「深入多搜一栋」和「为回程保留弹药与体力」之间做取舍，是风险与收益设计的核心区域。',
-          img: '',
+          img: 'assets/img/poi/poi-res-west-1.jpg',
           home: true
         },
 
@@ -88,7 +89,7 @@ window.LL_POI = {
           x: 62.4, y: 59.1,
           name: '住宅巷 · 东片区',
           desc: '住宅巷 POI 之二，与西片区隔着镇中心形成两段独立的深入选择。靠近回程路线，适合「见好就收」的玩家顺路补搜，也承担着回程压力的设计意图。',
-          img: '',
+          img: 'assets/img/poi/poi-res-east-1.jpg',
           home: false
         },
 
@@ -97,7 +98,7 @@ window.LL_POI = {
           x: 36, y: 30,
           name: '学校',
           desc: '镇中心的体量锚点，占位大、辨识度高，帮助玩家在住宅巷的细碎空间里保持方向感。作为探索资源点，它的房间尺度比住宅更大，对应不同的搜索节奏。',
-          img: '',
+          img: 'assets/img/poi/poi-school.jpg',
           home: false
         },
 
@@ -106,7 +107,7 @@ window.LL_POI = {
           x: 70, y: 88,
           name: '教堂',
           desc: '位于回程路线南侧的资源点，塔楼轮廓在多个方向可见，同时承担地标职能。设计意图是给绕行玩家一个可辨认的目标，让「不走主街」也有方向可依。',
-          img: '',
+          img: 'assets/img/poi/poi-church.jpg',
           home: false
         },
 
@@ -114,8 +115,8 @@ window.LL_POI = {
           cat: 'node',
           x: 50.3, y: 50.3,
           name: '主线瓶颈 · 决策点',
-          desc: '主街上收窄通行宽度的瓶颈位置。玩家经过时脚步与视线被引向预设方向，同时这里是「继续走主线」还是「拐进住宅巷搜刮」的节奏决策点。',
-          img: '',
+          desc: '靠近加油站的主路瓶颈与决策位置。玩家经过时脚步与视线被引向预设方向，同时这里是「直接进加油站」还是「先在周边搜刮」的分岔点。',
+          img: 'assets/img/poi/poi-decision-near-fuel.jpg',
           home: false
         },
 
@@ -124,7 +125,7 @@ window.LL_POI = {
           x: 68, y: 63,
           name: '开始决策点（决定探索路线）',
           desc: '离开安全屋后的第一个分岔：直行上主街，或先绕向支线。把第一次路线选择放在视野开阔、无威胁的位置，让玩家在低压状态下建立「路是自己选的」的预期。',
-          img: '',
+          img: 'assets/img/poi/poi-decision-start.jpg',
           home: false
         },
 
@@ -133,7 +134,7 @@ window.LL_POI = {
           x: 46, y: 58,
           name: '转路线决策点（中间）',
           desc: '行程中段的换线口：主街与住宅巷之间的转换位置。玩家可以根据当前弹药、体力与收获量临时改变计划，是「自由度由路线切换产生」的具体落点。',
-          img: '',
+          img: 'assets/img/poi/poi-decision-mid.jpg',
           home: false
         },
 
@@ -142,7 +143,7 @@ window.LL_POI = {
           x: 24, y: 58,
           name: '瓶颈与资源分布点 ①',
           desc: '主路去程段的通行收窄点与资源分布标记（对应《空间决策和战斗节奏》图中的粉色点位）。收窄处收束通行宽度，把脚步与视线引向预设方向。',
-          img: '',
+          img: 'assets/img/poi/poi-mainstreet-1.jpg',
           home: false
         },
 
@@ -151,7 +152,7 @@ window.LL_POI = {
           x: 42, y: 63,
           name: '瓶颈与资源分布点 ②',
           desc: '主路中段的瓶颈与资源分布标记。瓶颈前后各安排了一处可短暂停留的资源点，让玩家在「快速通过」和「冒险多拿一点」之间产生即时取舍。',
-          img: '',
+          img: 'assets/img/poi/poi-mainstreet-2.jpg',
           home: false
         },
 
@@ -160,7 +161,7 @@ window.LL_POI = {
           x: 58, y: 57,
           name: '瓶颈与资源分布点 ③',
           desc: '回程方向的瓶颈与资源分布标记。与去程瓶颈错位布置，让返程不是简单的原路倒放，而是重新阅读一遍熟悉的空间。',
-          img: '',
+          img: 'assets/img/poi/poi-mainstreet-3.jpg',
           home: false
         }
 
@@ -171,16 +172,24 @@ window.LL_POI = {
     /* ============ 图二：主区白盒布局（干净俯视） ============ */
     layout: {
       image: 'assets/img/lastlight-layout.jpg',
-      alt: 'Last Light 主区白盒布局俯视图：住宅组团、镇中心、环岛、仓库、农田与水体构成小镇骨架',
+      alt: 'Last Light 主区白盒布局俯视图：住宅组团、镇中心、环岛、仓库、农场与水塔构成小镇骨架',
+
+      // 这张图只区分四类，图例自动只显示用到的：资源 / 风险 / 节点 / 目标
+      categories: {
+        poi:    { label: '资源重点' },
+        danger: { label: '风险重点' },
+        node:   { label: '视线与路径节点' },
+        goal:   { label: '目标与安全屋' }
+      },
 
       pois: [
 
         {
-          cat: 'safe',
+          cat: 'goal',
           x: 78, y: 58,
           name: '安全屋',
-          desc: '玩家的基地与任务起终点。出门前即可完成第一次空间定向：主街方向、教堂尖顶与水塔轮廓都在视野内。',
-          img: '',
+          desc: '玩家的基地与任务起终点。出门前即可完成第一次空间定向：主街方向、教堂尖顶与水塔轮廓都在视野内。停车场可作为车内资源的探索点。',
+          img: 'assets/img/poi/poi-haven-parking.jpg',
           home: false
         },
 
@@ -189,7 +198,7 @@ window.LL_POI = {
           x: 14, y: 60,
           name: '加油站',
           desc: '任务目标（燃油）所在地。外部开阔、暴露度高；便利店与车库构成「外部—内部—关键资源」的递进空间，车库内存放主线关键资源燃油。',
-          img: '',
+          img: 'assets/img/poi/poi-fuel-garage.jpg',
           home: false
         },
 
@@ -197,8 +206,8 @@ window.LL_POI = {
           cat: 'danger',
           x: 24.1, y: 19.9,
           name: '住宅西区',
-          desc: '沿街排布的密集住宅。细碎的室内外空间交替，物资密集、威胁最高，与镇中心的尺度形成明暗对比。',
-          img: '',
+          desc: '风险重点：房屋密集、室内外空间交替频繁。物资价值最高，感染者威胁也最高，玩家要逐栋权衡「再进一栋」的代价。',
+          img: 'assets/img/poi/poi-res-west-2.jpg',
           home: false
         },
 
@@ -206,53 +215,35 @@ window.LL_POI = {
           cat: 'danger',
           x: 62, y: 22,
           name: '住宅东巷',
-          desc: '住宅区的东半段，巷道更窄、转弯更多。靠近回程路线，适合返程时顺路补搜，但撤离空间也更有限。',
-          img: '',
+          desc: '风险重点：巷道更窄、转弯更多，撤离空间有限。靠近回程路线，适合返程顺路补搜，但被发现后的代价更大。',
+          img: 'assets/img/poi/poi-res-east-2.jpg',
           home: false
         },
 
         {
-          cat: 'node',
-          x: 41.3, y: 44.2,
-          name: '主街十字路口',
-          desc: '小镇路网的核心交汇点，几条主路在这里交汇。玩家从安全屋出发后大概率先经过这里完成空间定向——它是整个探索动线的「坐标原点」。',
-          img: '',
+          cat: 'danger',
+          x: 30, y: 52,
+          name: '汽车旅馆',
+          desc: '风险重点：房间成排、动线重复，行进中被夹击的概率高。收益侧是稳定的物资刷新，属于「高风险—稳定回报」的典型结构。',
+          img: 'assets/img/poi/poi-motel.jpg',
           home: false
         },
 
         {
-          cat: 'poi',
-          x: 47, y: 49.5,
-          name: '主街 · 镇中心建筑群',
-          desc: '自然弯曲的密集街巷与商铺体量，空间密度最高的一段。学校等探索资源点位于其中，也是主线与绕行路线的分岔带。',
-          img: '',
-          home: false
-        },
-
-        {
-          cat: 'node',
-          x: 58.8, y: 36.6,
-          name: '环岛中心',
-          desc: '连接多条道路的环岛。开阔、可环视，玩家在这里能同时看到多个目的地的轮廓，承担方向再定向的地标职能。',
-          img: '',
-          home: false
-        },
-
-        {
-          cat: 'poi',
-          x: 63.7, y: 23.5,
-          name: '泳池宅院',
-          desc: '带泳池的大宅，开阔地块上的独立体量。私密性与暴露度并存，对应「高价值、需权衡」的探索选择。',
-          img: '',
+          cat: 'danger',
+          x: 70, y: 18,
+          name: '仓库（东）',
+          desc: '风险重点：位于镇子东侧、远离安全屋的大型仓库。存储价值高但暴露时间长，深入之后没有近路可退，是风险与收益拉满的一处资源点。',
+          img: 'assets/img/poi/poi-warehouse-east.jpg',
           home: false
         },
 
         {
           cat: 'poi',
           x: 84.2, y: 12.6,
-          name: '仓库（重要资源点）',
-          desc: '大型空旷体量，作为重要资源点可存储物资、实现远距离传输补给。结构简单、占地大，也是远景轮廓的组成部分。',
-          img: '',
+          name: '仓库（住宅区）',
+          desc: '资源重点：住宅区侧的大型仓储体量，可作为资源存储与远距离传输的补给节点。结构简单、占地大，也是远景轮廓的组成部分。',
+          img: 'assets/img/poi/poi-warehouse-res.jpg',
           home: false
         },
 
@@ -260,26 +251,8 @@ window.LL_POI = {
           cat: 'poi',
           x: 38, y: 30,
           name: '学校',
-          desc: '镇中心的体量锚点。正门旁设有医疗资源点，供探索中途补充状态——把补给放在必经之路上，降低长线探索的挫败感。',
-          img: '',
-          home: false
-        },
-
-        {
-          cat: 'poi',
-          x: 70, y: 84,
-          name: '教堂',
-          desc: '尖顶在多个方向可见的地标，兼作南侧资源点。玩家在镇中心、温室大棚等位置都能借它定位方向。',
-          img: '',
-          home: false
-        },
-
-        {
-          cat: 'poi',
-          x: 30, y: 52,
-          name: '汽车旅馆',
-          desc: '主街沿线的中型体量，房间成排、动线重复，适合安排「逐间搜索」的节奏变化，与住宅巷的不规则空间形成对照。',
-          img: '',
+          desc: '资源重点：镇中心的体量锚点，正门旁设有医疗资源点供探索中途补充状态。把补给放在必经之路上，降低长线探索的挫败感。',
+          img: 'assets/img/poi/poi-school.jpg',
           home: false
         },
 
@@ -287,8 +260,8 @@ window.LL_POI = {
           cat: 'poi',
           x: 76, y: 92,
           name: '森林小屋',
-          desc: '南部森林腹地中的小屋，藏有材料类资源点。远离主路的独立目标，奖励愿意偏离主线的玩家。',
-          img: '',
+          desc: '资源重点：南部森林腹地中的小屋，藏有材料类资源。远离主路的独立目标，回报愿意偏离主线的玩家。',
+          img: 'assets/img/poi/poi-cabin.jpg',
           home: false
         },
 
@@ -296,17 +269,8 @@ window.LL_POI = {
           cat: 'poi',
           x: 52, y: 80,
           name: '公园',
-          desc: '镇南的开敞绿地，空间从「密」转「疏」的过渡带。视野拉远、威胁下降，承担节奏上的喘息段。',
-          img: '',
-          home: false
-        },
-
-        {
-          cat: 'node',
-          x: 34, y: 66,
-          name: '下水道入口',
-          desc: '连接地上空间的隐蔽通道入口。为熟悉地图的玩家提供一条低暴露的转移路径，是「捷径」类空间设计。',
-          img: '',
+          desc: '资源重点：镇南的开敞绿地，空间从「密」转「疏」的过渡带。视野拉远、威胁下降，同时提供低风险的零星物资。',
+          img: 'assets/img/poi/poi-park.jpg',
           home: false
         },
 
@@ -314,8 +278,8 @@ window.LL_POI = {
           cat: 'poi',
           x: 55, y: 70,
           name: '农场',
-          desc: '镇子南面的开敞农田与农舍。空间从「密」转「疏」，视野拉远、威胁感下降，也标记了探索的边界。',
-          img: '',
+          desc: '资源重点：镇子南面的开敞农田与农舍。空间从「密」转「疏」，视野拉远、威胁感下降，也标记了探索的边界。',
+          img: 'assets/img/poi/poi-farm.jpg',
           home: false
         },
 
@@ -323,26 +287,71 @@ window.LL_POI = {
           cat: 'poi',
           x: 60, y: 79,
           name: '温室大棚（重要资源点）',
-          desc: '农场区的重要资源点。半透明体量在白盒阶段就承担辨识功能，稳定补给的位置，给绕行南侧的玩家一个落脚点。',
-          img: '',
+          desc: '资源重点：农场区的重要资源点。半透明体量在白盒阶段就承担辨识功能，稳定补给的位置，给绕行南侧的玩家一个落脚点。',
+          img: 'assets/img/poi/poi-greenhouse.jpg',
           home: false
         },
 
         {
           cat: 'poi',
+          x: 47, y: 49.5,
+          name: '主街 · 镇中心建筑群',
+          desc: '资源重点：自然弯曲的密集街巷与商铺体量，空间密度最高的一段。学校等资源点位于其中，也是主线与绕行路线的分岔带。',
+          img: 'assets/img/poi/poi-downtown.jpg',
+          home: false
+        },
+
+        {
+          cat: 'node',
+          x: 41.3, y: 44.2,
+          name: '主街十字路口',
+          desc: '视线与路径节点：小镇路网的核心交汇点，几条主路在这里交汇。玩家从安全屋出发后大概率先经过这里完成空间定向——它是整个探索动线的「坐标原点」。',
+          img: 'assets/img/poi/poi-crossroad.jpg',
+          home: false
+        },
+
+        {
+          cat: 'node',
+          x: 58.8, y: 36.6,
+          name: '环岛中心',
+          desc: '视线与路径节点：连接多条道路的环岛。开阔、可环视，玩家在这里能同时看到多个目的地的轮廓，承担方向再定向的地标职能。',
+          img: 'assets/img/poi/poi-roundabout.jpg',
+          home: false
+        },
+
+        {
+          cat: 'node',
+          x: 34, y: 66,
+          name: '下水道入口',
+          desc: '视线与路径节点：连接地上空间的隐蔽通道入口。为熟悉地图的玩家提供一条低暴露的转移路径，是「捷径」类空间设计。',
+          img: 'assets/img/poi/poi-sewer.jpg',
+          home: false
+        },
+
+        {
+          cat: 'node',
+          x: 70, y: 84,
+          name: '教堂',
+          desc: '视线与路径节点：尖顶在多个方向可见的地标。玩家在镇中心、温室大棚等位置都能借它的轮廓定位方向。',
+          img: 'assets/img/poi/poi-church.jpg',
+          home: false
+        },
+
+        {
+          cat: 'node',
           x: 88, y: 88,
           name: '水塔（南）',
-          desc: '南侧的水塔地标，远距离可见。玩家在住宅街巷等低视点位置能借它判断方位，是「不靠 UI 的方向引导」之一。',
-          img: '',
+          desc: '视线与路径节点：南侧水塔地标，远距离可见。玩家在低视点的街巷里也能借它判断方位，是「不靠 UI 的方向引导」之一。',
+          img: 'assets/img/poi/poi-tower-south.jpg',
           home: false
         },
 
         {
-          cat: 'poi',
+          cat: 'node',
           x: 8, y: 40,
           name: '水塔（西）',
-          desc: '西侧的水塔地标。从住宅区街巷的视角可以看到它的位置，为玩家探索带来指引，也暗示兴趣点的存在。',
-          img: '',
+          desc: '视线与路径节点：西侧水塔地标。从住宅区街巷的视角可以看到它的位置，为玩家探索带来指引，也暗示附近存在兴趣点。',
+          img: 'assets/img/poi/poi-tower-west.jpg',
           home: false
         }
 
