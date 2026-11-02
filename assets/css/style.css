@@ -1816,3 +1816,36 @@ html[data-theme="dark"] .badge-wip {
 .poi-edit-copy:hover { background: var(--accent); color: #fff; }
 .poi-edit-copy.is-copied { background: #16a34a; border-color: #16a34a; color: #fff; }
 .poi-edit-pos { margin-top: 8px; color: var(--text-soft); font-size: .76rem; }
+
+/* ==========================================================================
+   POI 地图第二轮：加宽区块、放大详情、半透明带光晕的按钮
+   ========================================================================== */
+/* 含互动地图的两个区块突破默认容器宽度，左右各延申 */
+.section-wide .container { max-width: 1440px; }
+
+/* 面板占比提高，截图更大 */
+.poi-layout { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px; }
+.poi-detail-fig-empty { min-height: 260px; font-size: .84rem; }
+.poi-detail-fig img { width: 100%; }
+
+/* 按钮半透明 + 彩色光晕：看得清地图、也够显眼 */
+.poi-btn {
+  background: color-mix(in srgb, var(--poi-c) 72%, transparent);
+  backdrop-filter: blur(2px);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--poi-c) 26%, transparent),
+    0 1px 6px rgba(0, 0, 0, .42);
+}
+.poi-btn:hover, .poi-btn:focus-visible {
+  background: var(--poi-c);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--poi-c) 38%, transparent),
+    0 1px 8px rgba(0, 0, 0, .45);
+}
+.poi-btn.is-active {
+  background: var(--poi-c);
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, .85),
+    0 0 0 7px color-mix(in srgb, var(--poi-c) 65%, transparent),
+    0 1px 6px rgba(0, 0, 0, .4);
+}
