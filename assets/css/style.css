@@ -1743,6 +1743,7 @@ html[data-theme="dark"] .badge-wip {
 .arch-summary p { color: var(--text-soft); line-height: 1.9; margin: 0; }
 .arch-summary p + p { margin-top: 12px; }
 .arch-note { margin-top: 18px; font-size: .78rem; color: var(--text-soft); }
+.arch-dl { margin-top: 26px; }
 
 /* ==========================================================================
    Last Light 详情页（重写版）补充样式
