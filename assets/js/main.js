@@ -25,13 +25,6 @@
     });
   }
 
-  // 用户没有手动选过时，跟随系统设置变化
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
-    var saved = null;
-    try { saved = localStorage.getItem('theme'); } catch (err) { /* ignore */ }
-    if (!saved) root.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-  });
-
   /* ---------------------------------------------------------------
      2. 滚动进度条 + 顶栏状态
      --------------------------------------------------------------- */
