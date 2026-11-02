@@ -260,9 +260,17 @@ html[data-theme="dark"] .theme-toggle .i-moon { display: block; }
 .eyebrow .prompt { color: var(--accent); margin-right: 6px; }
 
 .hero-title {
-  font-size: clamp(2.35rem, 5.6vw, 3.75rem);
-  max-width: 12em;
+  font-size: clamp(2.3rem, 4.6vw, 3.4rem);
+  max-width: none; /* 整行横排，不再限制在左栏里 */
   letter-spacing: -.035em;
+}
+/* 标题关键词：竞技地图 / 开放世界 —— 暖色块突显 */
+.hero-title .hl-key {
+  color: var(--accent);
+  background: var(--accent-wash);
+  padding: 0 .14em;
+  border-radius: .16em;
+  white-space: nowrap;
 }
 .hero-title .hl {
   position: relative;
@@ -1695,9 +1703,10 @@ html[data-theme="dark"] .badge-wip {
    ========================================================================== */
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: 44px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 48px;
   align-items: center;
+  margin-top: 30px;
 }
 .hero-visual {
   display: block;
@@ -1985,3 +1994,62 @@ html[data-theme="dark"] .badge-wip {
 
 /* 能力迁移：右侧「关卡设计应用」一侧更醒目 */
 .map-to p { color: var(--accent); font-weight: 650; }
+
+/* ==========================================================================
+   第五轮：浅色层次感与模块质感
+   ========================================================================== */
+/* 桌面端标题在逗号处换行；窄屏自适应折行 */
+@media (max-width: 720px) { .br-desktop { display: none; } }
+
+/* 浅色模式：拉开底色与卡片的层次 */
+html[data-theme="light"] {
+  --bg:            #f6f1ea;
+  --bg-soft:       #efe8dd;
+  --surface:       #ffffff;
+  --border:        #e0d7c8;
+  --border-soft:   #eae3d6;
+  --border-strong: #cfc2ae;
+  --shadow-sm:     0 1px 2px rgba(80, 58, 34, .07);
+  --shadow:        0 2px 6px rgba(80, 58, 34, .06), 0 16px 38px -14px rgba(80, 58, 34, .20);
+  --grid-line:     rgba(60, 48, 32, .06);
+}
+
+/* 卡片默认带一层轻投影，悬停时加深——模块之间一眼能分开 */
+html[data-theme="light"] .work-card,
+html[data-theme="light"] .skill-group,
+html[data-theme="light"] .map-row,
+html[data-theme="light"] .feature,
+html[data-theme="light"] .focus-card,
+html[data-theme="light"] .tl-body,
+html[data-theme="light"] .scope-col,
+html[data-theme="light"] .loot-item,
+html[data-theme="light"] .figure-block,
+html[data-theme="light"] .poi-stage,
+html[data-theme="light"] .poi-detail,
+html[data-theme="light"] .hero-visual {
+  box-shadow: var(--shadow-sm);
+}
+html[data-theme="light"] .work-card:hover,
+html[data-theme="light"] .feature:hover,
+html[data-theme="light"] .hero-visual:hover {
+  box-shadow: var(--shadow);
+}
+
+/* 区块之间的分隔线更明显一点（浅色模式） */
+html[data-theme="light"] .section-alt {
+  background: var(--bg-soft);
+  border-block: 1px solid var(--border);
+}
+
+/* 小节编号加色块，模块起点更醒目 */
+.section-index {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--accent-wash);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+  font-weight: 600;
+}
+
+/* 首屏图片卡片再挺一点 */
+.hero-visual { box-shadow: var(--shadow); }

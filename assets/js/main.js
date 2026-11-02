@@ -16,7 +16,7 @@
 
   function setTheme(theme) {
     root.setAttribute('data-theme', theme);
-    try { localStorage.setItem('theme', theme); } catch (e) { /* 隐私模式下忽略 */ }
+    try { localStorage.setItem('wb-theme', theme); } catch (e) { /* 隐私模式下忽略 */ }
   }
 
   if (themeToggle) {

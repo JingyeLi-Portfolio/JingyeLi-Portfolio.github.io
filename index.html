@@ -24,7 +24,7 @@
   /* 在首屏渲染前应用主题，避免明暗闪烁 */
   (function () {
     try {
-      var saved = localStorage.getItem('theme');
+      var saved = localStorage.getItem('wb-theme');
       document.documentElement.setAttribute('data-theme', saved || 'light');
     } catch (e) {
       document.documentElement.setAttribute('data-theme', 'dark');
@@ -78,12 +78,12 @@
   <!-- ================= Hero ================= -->
   <section class="hero" id="top">
     <div class="container">
-      <div class="hero-grid">
-        <div class="hero-text">
       <p class="eyebrow mono reveal"><span class="prompt">$</span> level designer · 关卡策划</p>
 
-      <h1 class="hero-title reveal">从竞技地图到开放世界，<br />探索空间如何<span class="hl">影响玩家决策</span></h1>
+      <h1 class="hero-title reveal">从<span class="hl-key">竞技地图</span>到<span class="hl-key">开放世界</span>，<br class="br-desktop" />探索空间如何<span class="hl">影响玩家决策</span></h1>
 
+      <div class="hero-grid">
+        <div class="hero-text">
       <div class="hero-sub reveal">
         <p>
           我是李敬业，郑州大学建筑学专业在读，正在向游戏关卡策划方向发展。
