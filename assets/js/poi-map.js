@@ -60,8 +60,16 @@
   function bindGallery(box, imgs, name) {
     if (!box) return;
     var imgEl = box.querySelector('img');
+    var view = box.querySelector('.poi-g-view');
     var count = box.querySelector('.poi-g-count');
     var dots = Array.prototype.slice.call(box.querySelectorAll('.poi-g-dot'));
+
+    /* 打开这个 POI 时就把它的全部截图预先下载好，翻页不再现等网络 */
+    imgs.forEach(function (src) {
+      var pre = new Image();
+      pre.decoding = 'async';
+      pre.src = src;
+    });
 
     function cur() { return parseInt(box.getAttribute('data-i'), 10) || 0; }
 
@@ -69,13 +77,30 @@
       if (i < 0) i = imgs.length - 1;
       if (i >= imgs.length) i = 0;
       box.setAttribute('data-i', String(i));
-      imgEl.src = imgs[i];
-      imgEl.alt = name + ' 实景 ' + (i + 1);
+
+      var src = imgs[i];
+      var applied = false;
+      function apply() {
+        if (applied) return;
+        applied = true;
+        imgEl.src = src;
+        imgEl.alt = name + ' 实景 ' + (i + 1);
+        if (view) view.classList.remove('is-loading');
+      }
+
       if (count) count.textContent = (i + 1) + ' / ' + imgs.length;
       dots.forEach(function (d, k) {
         if (k === i) d.classList.add('is-on');
         else d.classList.remove('is-on');
       });
+
+      /* 图已在缓存里就立刻换；否则先盖一层「加载截图…」，避免看起来像点了没反应 */
+      var probe = new Image();
+      probe.onload = apply;
+      probe.onerror = apply;
+      probe.src = src;
+      if (probe.complete && probe.naturalWidth) apply();
+      else if (view) view.classList.add('is-loading');
     }
 
     var prev = box.querySelector('.poi-g-prev');
@@ -112,7 +137,7 @@
             '<img src="' + esc(imgs[0]) + '" alt="' + esc(p.name) + ' 实景 1" loading="lazy" />' +
             (multi ? '<button type="button" class="poi-g-nav poi-g-prev" aria-label="上一张">' + ARROW_L + '</button>' : '') +
             (multi ? '<button type="button" class="poi-g-nav poi-g-next" aria-label="下一张">' + ARROW_R + '</button>' : '') +
-            (multi ? '<span class="poi-g-count mono">1 / ' + imgs.length + '</span>' : '') +
+            '<span class="poi-g-count mono">1 / ' + imgs.length + '</span>' +
           '</div>' +
           (multi ? '<div class="poi-g-dots">' + dots + '</div>' : '') +
         '</div>';

@@ -2022,7 +2022,7 @@ html[data-theme="dark"] .badge-wip {
   background: rgba(12, 16, 24, .58);
   color: #fff;
   cursor: pointer;
-  opacity: 0;
+  opacity: .88; /* 常显：不用把鼠标悬停到图片上才知道能翻页 */
   transition: opacity .16s var(--ease), background .16s var(--ease);
 }
 .poi-g-nav svg { width: 17px; height: 17px; }
@@ -2032,6 +2032,19 @@ html[data-theme="dark"] .badge-wip {
 .poi-g-prev { left: 10px; }
 .poi-g-next { right: 10px; }
 @media (hover: none) { .poi-g-nav { opacity: 1; } }
+
+/* 切换时若这张图还没下载完，盖一层提示，避免误以为点击没反应 */
+.poi-g-view.is-loading::after {
+  content: "加载截图…";
+  position: absolute;
+  inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(251, 248, 244, .72);
+  color: var(--text-soft);
+  font-size: .8rem; line-height: 1.4;
+  pointer-events: none;
+}
+html[data-theme="dark"] .poi-g-view.is-loading::after { background: rgba(11, 12, 15, .72); }
 
 .poi-g-count {
   position: absolute;
