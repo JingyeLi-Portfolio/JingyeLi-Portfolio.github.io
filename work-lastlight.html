@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN" data-theme="light">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -16,7 +16,7 @@
   (function () {
     try {
       var saved = localStorage.getItem('theme');
-      document.documentElement.setAttribute('data-theme', saved || 'dark');
+      document.documentElement.setAttribute('data-theme', saved || 'light');
     } catch (e) {
       document.documentElement.setAttribute('data-theme', 'dark');
     }
@@ -98,11 +98,19 @@
 
       <div class="prose reveal">
         <p>
-          以丧尸灾变后的现代小镇为背景，尝试通过住宅区、资源兴趣点与安全屋之间的空间关系，
-          组织一段具有探索目标与风险选择的生存关卡体验。
+          以丧尸灾变后的现代小镇为背景，尝试通过住宅区、资源兴趣点与安全屋之间的<b class="kw">空间关系</b>，
+          组织一段具有<b class="kw">探索目标</b>与<b class="kw">风险选择</b>的生存关卡体验。
         </p>
+
+        <p class="kw-box">
+          设计的核心问题是：<strong>不给 UI 引导，玩家怎么知道该往哪走</strong>？
+          答案落在空间本身——路网是否读得懂、地标轮廓是否够远可见、
+          资源与危险的分布是否让「多走一步」变成一个有代价的决定。
+        </p>
+
         <p>
-          白盒在 Unity 中搭建，建筑体量与道路使用 ProBuilder 建模，布局图与标注图用 Photoshop 绘制；
+          白盒在 <strong>Unity</strong> 中搭建，建筑体量与道路使用 <strong>ProBuilder</strong> 建模，
+          布局图与标注图用 <strong>Photoshop</strong> 绘制；
           可搜刮物资系统的图标与游戏内展示使用同一套程序生成的白盒资产。
         </p>
         <p>
@@ -114,22 +122,22 @@
         <div class="focus-card reveal">
           <span class="mono focus-idx">A</span>
           <h3>区域布局</h3>
-          <p>组织住宅区、加油站等核心空间与道路连接关系。</p>
+          <p>组织住宅区、加油站等核心空间与<b class="kw">道路连接</b>关系。</p>
         </div>
         <div class="focus-card reveal">
           <span class="mono focus-idx">B</span>
           <h3>玩家动线</h3>
-          <p>围绕安全屋至加油站的资源搜集任务，设计探索路径。</p>
+          <p>围绕安全屋至加油站的资源搜集任务，设计<b class="kw">探索路径</b>。</p>
         </div>
         <div class="focus-card reveal">
           <span class="mono focus-idx">C</span>
           <h3>风险与收益</h3>
-          <p>探索如何结合兴趣点危险程度、资源价值与撤离路线形成决策。</p>
+          <p>结合兴趣点<b class="kw">危险程度</b>、资源价值与撤离路线形成决策。</p>
         </div>
         <div class="focus-card reveal">
           <span class="mono focus-idx">D</span>
           <h3>白盒验证</h3>
-          <p>通过 Unity 场景搭建检查空间尺度、路径可读性与实际行走体验。</p>
+          <p>在 Unity 中检查<b class="kw">空间尺度</b>、<b class="kw">路径可读性</b>与实际行走体验。</p>
         </div>
       </div>
     </div>
@@ -143,7 +151,8 @@
         <h2>关卡总览与 POI</h2>
         <p class="section-desc">
           小镇关卡的总览俯视：图中标注了住宅巷、学校、教堂、加油站等兴趣点，
-          以及主线的行进路线与瓶颈、资源分布。点下面的标记，查看每个位置的设计说明。
+          以及主线的行进路线与<b class="kw">瓶颈</b>、<b class="kw">资源分布</b>。
+          点下面的标记，查看每个位置的设计说明与多张实景截图。
         </p>
       </header>
 
@@ -167,8 +176,8 @@
       <figure class="figure-block reveal">
         <img src="assets/img/lastlight-pace.jpg" alt="空间决策与战斗节奏分析图：标注起点 START、折返点 PICK&BACK，用颜色区分遭遇与节奏、探索区、安全屋，并标出资源点、瓶颈点与节奏决策点" loading="lazy" />
         <figcaption>
-          图中颜色含义：粉红 — 遭遇与节奏（战斗/威胁区域）、蓝 — 探索区、红 — 安全屋；
-          符号含义：绿 — 资源点、红三角 — 瓶颈点、橙黄圆点 — 节奏决策点。
+          图中颜色含义：粉红 — <b class="kw">遭遇与节奏</b>（战斗/威胁区域）、蓝 — <b class="kw">探索区</b>、红 — <b class="kw">安全屋</b>；
+          符号含义：绿 — <b class="kw">资源点</b>、红三角 — <b class="kw">瓶颈点</b>、橙黄圆点 — <b class="kw">节奏决策点</b>。
           主线为 PICK &amp; BACK 结构：拿取关键物资（燃油），返回 START——
           去程与回程共用同一片空间，玩家的资源状态与警觉性却完全不同。
         </figcaption>
@@ -184,7 +193,7 @@
         <h2>主区白盒布局</h2>
         <p class="section-desc">
           Unity 白盒阶段的俯视全景：住宅组团、镇中心、环路与农场一起构成小镇的骨架。
-          点下面的标记，查看各区域的空间关系说明。
+          标记按<b class="kw">资源</b>与<b class="kw">风险</b>分色，点开可看各区域的空间关系说明。
         </p>
       </header>
 
@@ -192,9 +201,9 @@
         <div data-poi-map="layout"></div>
       </div>
       <p class="section-desc reveal" style="margin-top: 18px;">
-        白盒关注的是空间关系而不是美术表现：建筑体量先按尺度与朝向摆出来，
+        白盒关注的是<b class="kw">空间关系</b>而不是美术表现：建筑体量先按尺度与朝向摆出来，
         验证路网是否成立、体量是否能承担方向感。镇中心的密集街巷与周边的农场
-        形成「密 — 疏」两种空间密度，对应不同的探索节奏。
+        形成「密 — 疏」两种<b class="kw">空间密度</b>，对应不同的探索节奏。
       </p>
     </div>
   </section>
@@ -279,7 +288,7 @@
         <h3 class="sub-head">往返路线的引导设计</h3>
         <p>
           这张图的可走区域比较自由，路线不是唯一走法。我在布局上明确了<strong>两条主路线</strong>，
-          作用是引导玩家去体验不同空间形成的遭遇与氛围：一条把视野打开、把方向讲清楚，
+          作用是<b class="kw">引导玩家去体验不同空间形成的遭遇与氛围</b>：一条把视野打开、把方向讲清楚，
           一条把空间收紧、把压力加上去。
         </p>
       </div>

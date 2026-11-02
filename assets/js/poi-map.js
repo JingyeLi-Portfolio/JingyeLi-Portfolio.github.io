@@ -46,11 +46,79 @@
 
   /* ---------- 详情面板 ---------- */
 
+  /* 一个 POI 可以有多张截图：优先用 imgs 数组，兼容旧的 img 单图 */
+  function poiImages(p) {
+    if (p.imgs && p.imgs.length) return p.imgs;
+    if (p.img) return [p.img];
+    return [];
+  }
+
+  var ARROW_L = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>';
+  var ARROW_R = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>';
+
+  /* 多图翻页：左右箭头 + 页码 + 小圆点，支持键盘左右键 */
+  function bindGallery(box, imgs, name) {
+    if (!box) return;
+    var imgEl = box.querySelector('img');
+    var count = box.querySelector('.poi-g-count');
+    var dots = Array.prototype.slice.call(box.querySelectorAll('.poi-g-dot'));
+
+    function cur() { return parseInt(box.getAttribute('data-i'), 10) || 0; }
+
+    function show(i) {
+      if (i < 0) i = imgs.length - 1;
+      if (i >= imgs.length) i = 0;
+      box.setAttribute('data-i', String(i));
+      imgEl.src = imgs[i];
+      imgEl.alt = name + ' 实景 ' + (i + 1);
+      if (count) count.textContent = (i + 1) + ' / ' + imgs.length;
+      dots.forEach(function (d, k) {
+        if (k === i) d.classList.add('is-on');
+        else d.classList.remove('is-on');
+      });
+    }
+
+    var prev = box.querySelector('.poi-g-prev');
+    var next = box.querySelector('.poi-g-next');
+    if (prev) prev.addEventListener('click', function (e) { e.stopPropagation(); show(cur() - 1); });
+    if (next) next.addEventListener('click', function (e) { e.stopPropagation(); show(cur() + 1); });
+    dots.forEach(function (d) {
+      d.addEventListener('click', function (e) {
+        e.stopPropagation();
+        show(parseInt(d.getAttribute('data-i'), 10) || 0);
+      });
+    });
+    box.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(cur() - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); show(cur() + 1); }
+    });
+  }
+
   function fillDetail(panel, p) {
     var cats = catsOf(p.mapKey);
-    var fig = p.img
-      ? '<div class="poi-detail-fig"><img src="' + esc(p.img) + '" alt="' + esc(p.name) + ' 实景" loading="lazy" /></div>'
-      : '<div class="poi-detail-fig poi-detail-fig-empty mono">POI 实景截图 · 待补充</div>';
+    var imgs = poiImages(p);
+    var multi = imgs.length > 1;
+    var fig = '';
+
+    if (imgs.length) {
+      var dots = '';
+      for (var i = 0; i < imgs.length; i++) {
+        dots += '<button type="button" class="poi-g-dot' + (i === 0 ? ' is-on' : '') +
+                '" data-i="' + i + '" aria-label="第 ' + (i + 1) + ' 张"></button>';
+      }
+      fig =
+        '<div class="poi-gallery" tabindex="0" data-i="0" role="group" aria-label="' + esc(p.name) + ' 实景截图">' +
+          '<div class="poi-g-view">' +
+            '<img src="' + esc(imgs[0]) + '" alt="' + esc(p.name) + ' 实景 1" loading="lazy" />' +
+            (multi ? '<button type="button" class="poi-g-nav poi-g-prev" aria-label="上一张">' + ARROW_L + '</button>' : '') +
+            (multi ? '<button type="button" class="poi-g-nav poi-g-next" aria-label="下一张">' + ARROW_R + '</button>' : '') +
+            (multi ? '<span class="poi-g-count mono">1 / ' + imgs.length + '</span>' : '') +
+          '</div>' +
+          (multi ? '<div class="poi-g-dots">' + dots + '</div>' : '') +
+        '</div>';
+    } else {
+      fig = '<div class="poi-detail-fig poi-detail-fig-empty mono">POI 实景截图 · 待补充</div>';
+    }
 
     panel.innerHTML =
       '<span class="poi-cat poi-cat-' + esc(p.cat) + '">' + esc(labelOf(cats, p.cat)) + '</span>' +
@@ -58,6 +126,8 @@
       '<p class="poi-detail-desc">' + esc(p.desc) + '</p>' +
       fig;
     panel.classList.add('is-filled');
+
+    if (multi) bindGallery(panel.querySelector('.poi-gallery'), imgs, p.name);
 
     /* 小屏（面板在图下方）时自动滚过去，保证一屏内看到详情 */
     if (window.innerWidth <= 1000 && !prefersReduced) {
@@ -84,13 +154,22 @@
   function serializeMap(map) {
     var out = '';
     map.pois.forEach(function (p) {
+      var imgs = poiImages(p);
+      var imgBlock;
+      if (imgs.length > 1) {
+        imgBlock = '          imgs: [\n' +
+          imgs.map(function (s) { return "            '" + jsStr(s) + "'"; }).join(',\n') +
+          '\n          ],\n';
+      } else {
+        imgBlock = "          imgs: ['" + jsStr(imgs[0] || '') + "'],\n";
+      }
       out +=
         '        {\n' +
         "          cat: '" + p.cat + "',\n" +
         '          x: ' + p.x + ', y: ' + p.y + ',\n' +
         "          name: '" + jsStr(p.name) + "',\n" +
         "          desc: '" + jsStr(p.desc) + "',\n" +
-        "          img: '" + jsStr(p.img || '') + "',\n" +
+        imgBlock +
         '          home: ' + (p.home === false ? 'false' : 'true') + '\n' +
         '        },\n';
     });

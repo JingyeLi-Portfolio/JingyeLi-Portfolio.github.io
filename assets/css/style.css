@@ -7,22 +7,23 @@
    1. 设计变量（改这里就能整体换肤）
    -------------------------------------------------------------------------- */
 html[data-theme="light"] {
-  --bg:            #ffffff;
-  --bg-soft:       #f7f8fa;
-  --surface:       #ffffff;
-  --text:          #14161a;
-  --text-soft:     #565e6c;
-  --text-faint:    #8a92a0;
-  --border:        #e7e9ee;
-  --border-soft:   #f0f2f5;
-  --border-strong: #d3d7de;
-  --accent:        #2b5cff;
+  /* 暖白底 —— 呼应《Last Light》的黄昏末日基调，比纯白柔和、不刺眼 */
+  --bg:            #fbf8f4;
+  --bg-soft:       #f4efe7;
+  --surface:       #fffdfa;
+  --text:          #211e1a;
+  --text-soft:     #5f584f;
+  --text-faint:    #8d8478;
+  --border:        #e8e0d4;
+  --border-soft:   #f1ebe1;
+  --border-strong: #d6cbbc;
+  --accent:        #c2410c;
   --accent-ink:    #ffffff;
-  --accent-wash:   rgba(43, 92, 255, .07);
-  --shadow-sm:     0 1px 2px rgba(16, 24, 40, .05);
-  --shadow:        0 2px 4px rgba(16, 24, 40, .04), 0 12px 32px -12px rgba(16, 24, 40, .14);
-  --grid-line:     rgba(20, 22, 26, .045);
-  --header-bg:     rgba(255, 255, 255, .8);
+  --accent-wash:   rgba(194, 65, 12, .08);
+  --shadow-sm:     0 1px 2px rgba(72, 52, 32, .06);
+  --shadow:        0 2px 4px rgba(72, 52, 32, .05), 0 12px 32px -12px rgba(72, 52, 32, .18);
+  --grid-line:     rgba(33, 30, 26, .05);
+  --header-bg:     rgba(251, 248, 244, .82);
   color-scheme: light;
 }
 
@@ -1866,3 +1867,121 @@ html[data-theme="dark"] .badge-wip {
 @media (max-width: 640px) {
   .figure-grid { grid-template-columns: 1fr; }
 }
+
+/* ==========================================================================
+   POI 详情面板 · 多图翻页
+   ========================================================================== */
+.poi-gallery { margin-top: 14px; outline: none; }
+.poi-gallery:focus-visible .poi-g-view { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.poi-g-view {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-soft);
+  line-height: 0;
+}
+.poi-g-view img { display: block; width: 100%; height: auto; }
+
+.poi-g-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(12, 16, 24, .58);
+  color: #fff;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .16s var(--ease), background .16s var(--ease);
+}
+.poi-g-nav svg { width: 17px; height: 17px; }
+.poi-g-nav:hover { background: rgba(12, 16, 24, .8); }
+.poi-gallery:hover .poi-g-nav,
+.poi-gallery:focus-within .poi-g-nav { opacity: 1; }
+.poi-g-prev { left: 10px; }
+.poi-g-next { right: 10px; }
+@media (hover: none) { .poi-g-nav { opacity: 1; } }
+
+.poi-g-count {
+  position: absolute;
+  right: 10px; bottom: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .74rem;
+  line-height: 1.4;
+  color: #fff;
+  background: rgba(12, 16, 24, .66);
+}
+
+.poi-g-dots {
+  display: flex; justify-content: center; gap: 7px;
+  margin-top: 10px;
+}
+.poi-g-dot {
+  width: 8px; height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--border-strong);
+  cursor: pointer;
+  transition: background .16s var(--ease), transform .16s var(--ease);
+}
+.poi-g-dot:hover { background: var(--text-soft); }
+.poi-g-dot.is-on { background: var(--accent); transform: scale(1.35); }
+
+/* ==========================================================================
+   文字重点：关键词色块 + 强调框
+   ========================================================================== */
+/* 正文加粗：直接用暖色，和主题一致 */
+.prose strong,
+.lead strong,
+.section-desc strong,
+.poi-detail-desc strong {
+  color: var(--accent);
+  font-weight: 650;
+}
+
+/* 行内关键词色块：<b class="kw">空间节奏</b> */
+.kw {
+  display: inline;
+  padding: 2px 7px;
+  border-radius: 5px;
+  color: var(--accent);
+  background: var(--accent-wash);
+  font-weight: 600;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* 整句强调框：<p class="kw-box">…</p> */
+.kw-box {
+  margin: 16px 0 0;
+  padding: 13px 16px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--accent-wash);
+  color: var(--text);
+  font-size: .9rem;
+  line-height: 1.8;
+}
+.kw-box strong { color: var(--accent); font-weight: 650; }
+
+/* 中性提示框（不想用暖色时用） */
+.soft-box {
+  margin: 16px 0 0;
+  padding: 13px 16px;
+  border-left: 3px solid var(--border-strong);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--bg-soft);
+  color: var(--text-soft);
+  font-size: .88rem;
+  line-height: 1.8;
+}
+
+/* 能力迁移：右侧「关卡设计应用」一侧更醒目 */
+.map-to p { color: var(--accent); font-weight: 650; }

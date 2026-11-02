@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN" data-theme="light">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -16,7 +16,7 @@
   (function () {
     try {
       var saved = localStorage.getItem('theme');
-      document.documentElement.setAttribute('data-theme', saved || 'dark');
+      document.documentElement.setAttribute('data-theme', saved || 'light');
     } catch (e) {
       document.documentElement.setAttribute('data-theme', 'dark');
     }
