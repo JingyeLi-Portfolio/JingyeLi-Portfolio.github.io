@@ -12,8 +12,8 @@ html[data-theme="light"] {
   --bg-soft:       #f4efe7;
   --surface:       #fffdfa;
   --text:          #211e1a;
-  --text-soft:     #5f584f;
-  --text-faint:    #8d8478;
+  --text-soft:     #544d43;
+  --text-faint:    #766d5f;
   --border:        #e8e0d4;
   --border-soft:   #f1ebe1;
   --border-strong: #d6cbbc;
@@ -238,6 +238,17 @@ html[data-theme="dark"] .theme-toggle .i-moon { display: block; }
   position: relative;
   padding: 172px 0 104px;
   overflow: hidden;
+  background:
+    radial-gradient(1100px 520px at 82% -8%, rgba(194, 65, 12, .09), transparent 62%),
+    radial-gradient(760px 420px at 8% 4%, rgba(217, 119, 6, .07), transparent 58%),
+    linear-gradient(180deg, rgba(244, 239, 231, .9) 0%, rgba(251, 248, 244, 0) 46%),
+    var(--bg);
+}
+html[data-theme="dark"] .hero {
+  background:
+    radial-gradient(1100px 520px at 82% -8%, rgba(107, 140, 255, .08), transparent 62%),
+    radial-gradient(760px 420px at 8% 4%, rgba(107, 140, 255, .05), transparent 58%),
+    var(--bg);
 }
 .hero::before {
   content: "";
@@ -391,7 +402,17 @@ html[data-theme="dark"] .theme-toggle .i-moon { display: block; }
    6. 通用区块
    -------------------------------------------------------------------------- */
 .section { padding: 96px 0; }
-.section-alt { background: var(--bg-soft); border-block: 1px solid var(--border-soft); }
+.section-alt {
+  background:
+    radial-gradient(900px 360px at 12% 0%, rgba(194, 65, 12, .05), transparent 60%),
+    var(--bg-soft);
+  border-block: 1px solid var(--border-soft);
+}
+html[data-theme="dark"] .section-alt {
+  background:
+    radial-gradient(900px 360px at 12% 0%, rgba(107, 140, 255, .05), transparent 60%),
+    var(--bg-soft);
+}
 
 .section-head { margin-bottom: 44px; }
 .section-index {
@@ -818,6 +839,31 @@ html[data-theme="dark"] .facts dd.ok { color: #4ade80; }
 .more svg { width: 15px; height: 15px; transition: transform .22s var(--ease); }
 .work-link:hover .more svg { transform: translateX(4px); }
 
+/* 作品卡/精选卡底部的进入入口：实底按钮，一眼可见 */
+.work-body .more,
+.feature-body .more {
+  align-self: flex-start;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 560;
+  box-shadow: var(--shadow-sm);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), filter .18s var(--ease);
+}
+.feature-body .more { margin-top: auto; }
+.work-body .more { margin-top: 24px; }
+.work-link:hover .more,
+.feature:hover .more,
+.feature-body .more:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+  filter: brightness(.97);
+}
+.work-body .more svg,
+.feature-body .more svg { width: 14px; height: 14px; }
+.feature-body .more:hover svg { transform: translateX(3px); }
+
 /* --- 建筑作品画廊 --- */
 .gallery {
   display: grid;
@@ -1129,7 +1175,10 @@ html[data-theme="dark"] .mono.warn { color: #fbbf24; }
 .next-work .mono { color: var(--text-faint); font-size: .68rem; }
 .next-work h2 { margin-top: 6px; font-size: 1.3rem; }
 .next-arrow { margin-left: auto; color: var(--accent); display: flex; }
-.next-arrow svg { width: 22px; height: 22px; transition: transform .22s var(--ease); }
+.next-arrow svg { width: 22px; height: 22px; flex: none; transition: transform .22s var(--ease); }
+/* 兜底：SVG 若没包在 .next-arrow 里，也不会撑成巨型箭头 */
+.next-work > svg { width: 22px; height: 22px; flex: none; margin-left: auto; color: var(--accent); }
+.next-work > svg path { stroke: currentColor; }
 .next-work:hover .next-arrow svg { transform: translateX(4px); }
 
 @media (max-width: 900px) {
@@ -1384,7 +1433,33 @@ html[data-theme="dark"] .mono.warn { color: #fbbf24; }
   display: flex;
   flex-direction: column;
 }
-.feature-map svg { display: block; width: 100%; height: auto; margin-top: 26px; }
+/* 顶部一行：类型胶囊 + 互动提示，走文档流，不再压在地图上 */
+.feature-map-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.feature-map .cover-pill { position: static; flex: none; }
+.map-hint { color: var(--text-soft); font-size: .7rem; letter-spacing: .04em; }
+.feature-map .poi-stage { margin-top: 14px; }
+.feature-map svg { display: block; width: 100%; height: auto; }
+
+/* 点击圆点后的说明面板：实底 + 左侧强调线，看起来是结果而不是输入框 */
+.feature-map > .map-info {
+  margin-top: auto;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text-soft);
+  font-size: .84rem;
+  line-height: 1.75;
+  min-height: 4.2em;
+  box-shadow: var(--shadow-sm);
+}
 
 .hp { cursor: pointer; outline: none; }
 .hp-hit { fill: transparent; }
@@ -1413,7 +1488,7 @@ html[data-theme="dark"] .mono.warn { color: #fbbf24; }
 .feature-body { padding: 26px 28px; display: flex; flex-direction: column; }
 .feature-body h3 { font-size: 1.25rem; }
 .feature-body .work-goal { margin-top: 18px; }
-.feature-body .more { margin-top: auto; padding-top: 20px; text-decoration: none; }
+.feature-body .more { margin-top: auto; padding-top: 10px; text-decoration: none; }
 
 @media (max-width: 900px) {
   .feature { grid-template-columns: 1fr; }
@@ -1601,10 +1676,9 @@ html[data-theme="dark"] .badge-wip {
 }
 
 /* ---- 首页精选卡片里的 POI 地图 ---- */
-.feature-map .poi-stage { margin-top: 18px; }
 .feature-map .poi-btn { width: 19px; height: 19px; }
 .feature-map .poi-btn i { width: 5px; height: 5px; }
-.feature-map .map-info { margin-top: 14px; }
+.feature-map .poi-map { margin-top: 16px; margin-bottom: 20px; }
 
 @media (max-width: 720px) {
   .poi-detail.is-filled { grid-template-columns: 1fr; }
