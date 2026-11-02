@@ -57,6 +57,7 @@ window.LL_POI = {
     /* ============ 图一：关卡总览（标注版） ============ */
     overview: {
       image: 'assets/img/lastlight-overview.jpg',
+      ratio: '1800 / 1375',
       alt: 'Last Light 小镇关卡总览俯视图：标注了住宅巷、学校、教堂、加油站等 POI 与主线行进路线',
 
       pois: [
@@ -216,6 +217,7 @@ window.LL_POI = {
     /* ============ 图二：主区白盒布局（干净俯视） ============ */
     layout: {
       image: 'assets/img/lastlight-layout.jpg',
+      ratio: '1800 / 1400',
       alt: 'Last Light 主区白盒布局俯视图：住宅组团、镇中心、环岛、仓库、农场与水塔构成小镇骨架',
 
       // 这张图只区分四类，图例自动只显示用到的：资源 / 风险 / 节点 / 目标

@@ -1506,6 +1506,7 @@ html[data-theme="dark"] .mono.warn { color: #fbbf24; }
   border-radius: var(--radius);
   overflow: hidden;
   line-height: 0;
+  background: var(--bg-soft); /* 图片加载中也有一个干净的底色 */
 }
 .poi-stage img { width: 100%; height: auto; display: block; }
 

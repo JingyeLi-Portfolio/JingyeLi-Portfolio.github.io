@@ -277,11 +277,15 @@
 
     var stage = document.createElement('div');
     stage.className = 'poi-stage';
+    /* 按图片真实宽高比预留空间：图还没加载出来时地图也不会塌成一条缝，
+       圆点坐标（百分比）因此始终落在正确位置上 */
+    if (map.ratio) stage.style.aspectRatio = map.ratio;
 
     var img = document.createElement('img');
     img.src = map.image;
     img.alt = map.alt || '';
     img.loading = 'lazy';
+    img.decoding = 'async';
     stage.appendChild(img);
 
     var btns = [];
