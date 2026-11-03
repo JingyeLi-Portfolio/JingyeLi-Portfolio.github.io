@@ -73,6 +73,68 @@
         <div><dt>关键词</dt><dd>POI · 探索动线 · 风险与收益</dd></div>
       </dl>
 
+      <figure class="case-aerial reveal">
+        <div class="poi-gallery case-aerial-gallery" data-i="0" tabindex="0" aria-label="小镇鸟瞰截图，可翻页">
+          <div class="poi-g-view">
+            <img src="assets/img/lastlight-aerial-1.jpg"
+                 alt="Last Light 小镇鸟瞰：山谷中的小镇全貌，教堂、农田、温室与远处山脉">
+            <button type="button" class="poi-g-nav poi-g-prev" aria-label="上一张"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg></button>
+            <button type="button" class="poi-g-nav poi-g-next" aria-label="下一张"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg></button>
+            <span class="poi-g-count mono">1 / 4</span>
+          </div>
+          <div class="poi-g-dots">
+            <button type="button" class="poi-g-dot is-on" aria-label="第 1 张"></button>
+            <button type="button" class="poi-g-dot" aria-label="第 2 张"></button>
+            <button type="button" class="poi-g-dot" aria-label="第 3 张"></button>
+            <button type="button" class="poi-g-dot" aria-label="第 4 张"></button>
+          </div>
+        </div>
+        <figcaption>
+          <span class="mono case-aerial-tag">鸟瞰 · AERIAL</span>
+          <span class="case-aerial-cap">山谷中的小镇全貌——住宅组团、教堂、农田与远处山脉</span>
+        </figcaption>
+      </figure>
+
+      <script>
+      (function () {
+        var box = document.querySelector('.case-aerial-gallery');
+        if (!box) return;
+        var view = box.querySelector('.poi-g-view');
+        var img = box.querySelector('img');
+        var count = box.querySelector('.poi-g-count');
+        var cap = document.querySelector('.case-aerial-cap');
+        var dots = Array.prototype.slice.call(box.querySelectorAll('.poi-g-dot'));
+        var imgs = [
+          { src: 'assets/img/lastlight-aerial-1.jpg', alt: '山谷中的小镇全貌：住宅组团、教堂、农田与远处山脉', cap: '山谷中的小镇全貌——住宅组团、教堂、农田与远处山脉' },
+          { src: 'assets/img/lastlight-aerial-2.jpg', alt: '镇中心高空俯视：十字路口与教堂方向', cap: '镇中心高空俯视——十字路口、教堂与沿街建筑' },
+          { src: 'assets/img/lastlight-aerial-3.jpg', alt: '街区中景鸟瞰：住宅组团、环岛与公共建筑', cap: '街区中景鸟瞰——住宅组团、环岛与学校/教堂一带' },
+          { src: 'assets/img/lastlight-aerial-4.jpg', alt: '加油站近景鸟瞰：任务目标 Miller\'s Fuel 一带', cap: '加油站近景鸟瞰——任务目标 Miller\'s Fuel 一带' }
+        ];
+        /* 预载全部，翻页即切 */
+        imgs.forEach(function (it) { var pre = new Image(); pre.src = it.src; });
+        function show(i) {
+          i = (i + imgs.length) % imgs.length;
+          box.setAttribute('data-i', String(i));
+          if (img.src.indexOf(it0(i)) === -1) view.classList.add('is-loading');
+          img.onload = function () { view.classList.remove('is-loading'); };
+          img.src = it0(i);
+          img.alt = imgs[i].alt;
+          count.textContent = (i + 1) + ' / ' + imgs.length;
+          if (cap) cap.textContent = imgs[i].cap;
+          dots.forEach(function (d, k) { d.classList.toggle('is-on', k === i); });
+        }
+        function it0(i) { return imgs[i].src; }
+        function cur() { return parseInt(box.getAttribute('data-i'), 10) || 0; }
+        box.querySelector('.poi-g-prev').addEventListener('click', function () { show(cur() - 1); });
+        box.querySelector('.poi-g-next').addEventListener('click', function () { show(cur() + 1); });
+        dots.forEach(function (d, k) { d.addEventListener('click', function () { show(k); }); });
+        box.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowLeft') { show(cur() - 1); e.preventDefault(); }
+          if (e.key === 'ArrowRight') { show(cur() + 1); e.preventDefault(); }
+        });
+      })();
+      </script>
+
       <div class="mission reveal">
         <p class="mission-tag mono">任务目标 · Objective</p>
         <h2 class="mission-title">Restore Power — 恢复供电</h2>

@@ -1758,6 +1758,20 @@ html[data-theme="dark"] .badge-wip {
 }
 .mission-text + .mission-text { margin-top: 10px; }
 
+/* Hero 鸟瞰图组（复用 poi-gallery 翻页交互） */
+.case-aerial { margin: 46px 0 0; }
+.case-aerial .poi-gallery { margin-top: 0; }
+.case-aerial-gallery { outline: none; }
+.case-aerial figcaption {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 12px;
+  font-size: .82rem;
+  color: var(--text-soft);
+}
+.case-aerial-tag { color: var(--accent); letter-spacing: .05em; font-size: .72rem; }
+
 /* 设计重点四卡 */
 .focus-grid {
   margin-top: 30px;
