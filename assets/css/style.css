@@ -1199,11 +1199,17 @@ html[data-theme="dark"] .mono.warn { color: #fbbf24; }
 /* --------------------------------------------------------------------------
    16. 打印
    -------------------------------------------------------------------------- */
+.print-only-video-note { display: none; }
+
 @media print {
   .site-header, .progress, .socials, .hero-actions, .site-footer { display: none !important; }
   body { background: #fff; color: #000; }
   .section { padding: 20px 0; break-inside: avoid; }
   .reveal { opacity: 1; transform: none; }
+  .video-frame { display: none; }
+  .video-figure .print-only-video-note { display: inline; }
+  .poi-detail { display: none; }
+  .poi-layout { grid-template-columns: 1fr; }
 }
 
 /* ==========================================================================
