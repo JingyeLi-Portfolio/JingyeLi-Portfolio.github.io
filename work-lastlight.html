@@ -293,13 +293,55 @@
         <div class="scope-col">
           <h3 class="scope-head"><span class="tick" aria-hidden="true"></span>设计设想 · 计划验证</h3>
           <ul class="scope-list">
-            <li>感染者行为：巡逻路线、感知与追击（计划实现后验证威胁梯度）</li>
+            <li>探索流程架构：主岛任务链 → 断桥修理 → 外岛军事基地（见下方拆解）</li>
+            <li>难度递进与昼夜循环：丧尸压力随游戏进程、昼夜时段变化</li>
+            <li>仓库：跨区域零距离物资迁移机制（白盒迭代验证中得出）</li>
             <li>多路线取舍的实际选择率与通行体验测试</li>
-            <li>资源价值与危险程度的数值平衡</li>
             <li>完整路线演示视频与测试结论</li>
           </ul>
         </div>
       </div>
+
+      <div class="prose reveal" style="margin-top: 34px;">
+        <h3 class="sub-head">核心设计设想</h3>
+        <p>
+          以下是项目的<b class="kw">设计规划</b>，用于指导后续白盒迭代方向；
+          当前尚未全部实现，落地后会随测试补充结论。
+        </p>
+      </div>
+
+      <div class="focus-grid">
+        <div class="focus-card reveal">
+          <span class="mono focus-idx">A</span>
+          <h3>探索流程架构 · 主岛</h3>
+          <p>先恢复必要设施的<b class="kw">供电与运作</b>，再从住宅区往返超市持续探索，
+            之后推进到工业区——形成主岛上探索、建造、生存与 PVE 遭遇的基础循环。</p>
+        </div>
+        <div class="focus-card reveal">
+          <span class="mono focus-idx">B</span>
+          <h3>终局 · 外岛军事基地</h3>
+          <p>主岛任务完成后，修理主岛与外岛之间的<b class="kw">断桥</b>，前往外岛山顶军事基地。
+            修理物资由多个部分组成、分布在主岛各重要 POI，驱动玩家在探索中持续收集。</p>
+        </div>
+        <div class="focus-card reveal">
+          <span class="mono focus-idx">C</span>
+          <h3>难度递进与昼夜循环</h3>
+          <p>各 POI 与路径上的丧尸数量和攻击性随游戏时间推移逐步增强，但<b class="kw">非线性增长</b>——
+            难度随游戏进程与玩家物资储备递进。夜晚丧尸更多、更强，探索成本随之上升。</p>
+        </div>
+        <div class="focus-card reveal">
+          <span class="mono focus-idx">D</span>
+          <h3>仓库 · 物资迁移机制</h3>
+          <p>白盒迭代验证中发现：区域推进后物资难以随进程大规模迁移。设定<b class="kw">仓库</b>
+            可在不同区域间零距离传输物品，以此引导玩家的建造与收集行为。</p>
+        </div>
+      </div>
+
+      <p class="kw-box reveal" style="margin-top: 22px;">
+        <strong>探索阶段链</strong>
+        恢复设施供电 → 住宅区 ↔ 超市（主区白盒布局图右上角白色体块）→ 工业区 →
+        收集断桥修理物资 → 修理断桥 → 外岛军事基地（终局探索）
+      </p>
 
       <div class="prose reveal" style="margin-top: 28px;">
         <h3 class="sub-head">往返路线的引导设计</h3>
@@ -424,7 +466,7 @@
       <div class="callout reveal" style="margin-top: 24px;">
         <div class="callout-item">
           <span class="mono">下一步</span>
-          <p>实现感染者行为与巡逻逻辑，用实际试走验证威胁梯度与多路线取舍，补充测试结论与演示视频。</p>
+          <p>落地探索流程链与难度递进、昼夜循环设定，用实际试走验证多路线取舍与探索节奏，补充测试结论与演示视频。</p>
         </div>
       </div>
     </div>
