@@ -7,8 +7,6 @@
      <div data-poi-map="home"></div>      首页精选卡片（只显示 home:true 的按钮）
    桌面端：地图在左、详情面板在右侧 sticky，点按钮一屏内即可看到详情。
    移动端：面板在图下方，点击后自动滚动到面板。
-   编辑模式：网址加 #poi-edit，可拖动按钮；拖完点「复制这张图的配置」，
-   整段 pois 配置代码进入剪贴板，发给 AI 或自己粘贴进 lastlight-poi.js 即可。
    ========================================================================== */
 (function () {
   'use strict';
@@ -19,7 +17,6 @@
   var roots = Array.prototype.slice.call(document.querySelectorAll('[data-poi-map]'));
   if (!roots.length) return;
 
-  var isEditing = location.hash.indexOf('poi-edit') !== -1;
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- 工具 ---------- */
@@ -142,7 +139,7 @@
           (multi ? '<div class="poi-g-dots">' + dots + '</div>' : '') +
         '</div>';
     } else {
-      fig = '<div class="poi-detail-fig poi-detail-fig-empty mono">POI 实景截图 · 待补充</div>';
+      fig = '<div class="poi-detail-fig poi-detail-fig-empty mono">POI 实景截图</div>';
     }
 
     panel.innerHTML =
@@ -166,101 +163,6 @@
     info.innerHTML = '<strong>' + esc(p.name) + '</strong>' + esc(p.desc);
   }
 
-  /* ---------- 编辑模式 ---------- */
-
-  /* 把运行中的配置序列化成 lastlight-poi.js 同款格式，可直接粘贴回去 */
-  function jsStr(s) {
-    return String(s == null ? '' : s)
-      .replace(/\\/g, '\\\\')
-      .replace(/'/g, "\\'")
-      .replace(/\r?\n/g, '\\n');
-  }
-
-  function serializeMap(map) {
-    var out = '';
-    map.pois.forEach(function (p) {
-      var imgs = poiImages(p);
-      var imgBlock;
-      if (imgs.length > 1) {
-        imgBlock = '          imgs: [\n' +
-          imgs.map(function (s) { return "            '" + jsStr(s) + "'"; }).join(',\n') +
-          '\n          ],\n';
-      } else {
-        imgBlock = "          imgs: ['" + jsStr(imgs[0] || '') + "'],\n";
-      }
-      out +=
-        '        {\n' +
-        "          cat: '" + p.cat + "',\n" +
-        '          x: ' + p.x + ', y: ' + p.y + ',\n' +
-        "          name: '" + jsStr(p.name) + "',\n" +
-        "          desc: '" + jsStr(p.desc) + "',\n" +
-        imgBlock +
-        '          home: ' + (p.home === false ? 'false' : 'true') + '\n' +
-        '        },\n';
-    });
-    return out;
-  }
-
-  function copyText(text, btn) {
-    var orig = btn.textContent;
-    function done() {
-      btn.textContent = '已复制 ✓';
-      btn.classList.add('is-copied');
-      setTimeout(function () {
-        btn.textContent = orig;
-        btn.classList.remove('is-copied');
-      }, 2200);
-    }
-    function fallback() {
-      var ta = document.createElement('textarea');
-      ta.value = text;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      try { document.execCommand('copy'); done(); } catch (err) {
-        btn.textContent = '复制失败，请重试';
-      }
-      document.body.removeChild(ta);
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(done, fallback);
-    } else {
-      fallback();
-    }
-  }
-
-  function makeEditable(stage, btn, p) {
-    btn.addEventListener('pointerdown', function (e) {
-      e.preventDefault();
-      btn.setPointerCapture(e.pointerId);
-      btn.classList.add('is-dragging');
-
-      function onMove(ev) {
-        var r = stage.getBoundingClientRect();
-        var x = Math.min(100, Math.max(0, (ev.clientX - r.left) / r.width * 100));
-        var y = Math.min(100, Math.max(0, (ev.clientY - r.top) / r.height * 100));
-        p.x = Math.round(x * 10) / 10;
-        p.y = Math.round(y * 10) / 10;
-        btn.style.left = p.x + '%';
-        btn.style.top = p.y + '%';
-        var pos = document.getElementById('poiEditPos-' + p.mapKey);
-        if (pos) {
-          pos.textContent = p.name + '  →  x: ' + p.x + ' / y: ' + p.y;
-        }
-      }
-
-      function onUp() {
-        btn.classList.remove('is-dragging');
-        btn.removeEventListener('pointermove', onMove);
-        btn.removeEventListener('pointerup', onUp);
-      }
-
-      btn.addEventListener('pointermove', onMove);
-      btn.addEventListener('pointerup', onUp);
-    });
-  }
-
   /* ---------- 主流程 ---------- */
 
   roots.forEach(function (root) {
@@ -274,24 +176,6 @@
     });
 
     root.classList.add('poi-map');
-
-    if (isEditing && mode !== 'home') {
-      var bar = document.createElement('div');
-      bar.className = 'poi-edit-bar';
-      bar.id = 'poiEditBar-' + mapKey;
-      bar.innerHTML =
-        '<div class="poi-edit-row">' +
-        '<span class="poi-edit-tip">编辑模式：按住任意按钮拖到想要的位置，两张图都可以调。调完点右边按钮复制配置。</span>' +
-        '<button type="button" class="poi-edit-copy">复制这张图的配置</button>' +
-        '</div>' +
-        '<div class="poi-edit-pos mono" id="poiEditPos-' + mapKey + '">拖动按钮后，这里显示实时坐标。</div>';
-      root.appendChild(bar);
-
-      var copyBtn = bar.querySelector('.poi-edit-copy');
-      copyBtn.addEventListener('click', function () {
-        copyText(serializeMap(map), copyBtn);
-      });
-    }
 
     /* 桌面端左图右栏布局 */
     var layout = document.createElement('div');
@@ -337,7 +221,6 @@
         }
       });
 
-      if (isEditing && mode !== 'home') makeEditable(stage, btn, p);
       stage.appendChild(btn);
       btns.push(btn);
     });
